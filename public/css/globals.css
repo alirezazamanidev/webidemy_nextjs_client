@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.player-wrapper {
+}
+
+.react-player {
+  width: 1500px;
+
+  top: 0;
+  left: 0;
+}
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+.slick-list {
+  margin: 0 -10px;
+}
+
+.hideSB {
+  /* overf */
+}
+
+.hideSB::-webkit-scrollbar {
+  width: 0em;
+  display: none;
+}
+.spin-button-none::-webkit-outer-spin-button,
+.spin-button-none::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+.selectbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+}
+
+.hideSB::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 1em;
+}
+.dir-ltr {
+  direction: ltr;
+}
+.dir-rtl {
+  direction: rtl;
+}
