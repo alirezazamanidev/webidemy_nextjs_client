@@ -4,6 +4,10 @@
 
 .player-wrapper {
 }
+.MuiPaginationItem-root {
+  color: white !important;
+  direction: ltr !important;
+}
 
 .react-player {
   width: 1500px;
