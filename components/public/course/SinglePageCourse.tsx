@@ -1,7 +1,7 @@
 "use client";
 import useAuth from "@/libs/hooks/useAuth";
 import { Course } from "@/libs/model/course";
-import separateWithComma from "@/libs/utility/tools";
+import separateWithComma from "@/libs/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -55,7 +55,7 @@ export default function SingleCourseHeaderPage({ course }: props) {
                 </span>
               </Link>
             </div>
-            <p className="text-sm md:text-base xl:text-lg text-gray-400 transition-colors mt-4 text-center lg:text-right">
+            <p className="text-sm md:text-base xl:text-lg text-gray-400 transition-colors mt-4 text-center lg:text-right max-w-lg">
               {course?.body}
             </p>
           </div>

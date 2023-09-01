@@ -4,7 +4,12 @@ import {
   Link as LinkScroll,
 } from "react-scroll";
 import CommentLayout from "../comments/CommentLayout";
-export default function ContantSinglePageLayout() {
+import { Course } from "@/libs/model/course";
+
+interface props {
+  course:Course
+}
+export default function ContantSinglePageLayout({course}:props) {
   const [activeSection, setActiveSection] = useState("aboutCourseButton");
   const handleSetActive = (to: any) => {
     setActiveSection(to);
@@ -142,12 +147,9 @@ export default function ContantSinglePageLayout() {
                 <h2 className=" text-2xl text-blue-500 mr-2">توضیحات</h2>
               </div>
               <p className=" text-gray-200 text-lg  mr-4">
-                در حالی که Express.js هنوز یک فریمورک محبوب و پر کاربرد برای
-                ساخت برنامه های وب با Node.js است، NestJS طیف وسیعی از مزایا و
-                ویژگی های اضافی را ارائه میدهد که میتواند به شما در ساخت برنامه
-                های مقیاس پذیر، قابل توسعه و مطمئن تر کمک کند. چه در حال ساخت
-                یک پروژه کوچک چه درحال توسعه ی یک برنامه سازمانی در مقیاس بزرگ
-                باشید، NestJS قطعا ارزش بررسی و استفاده را دار
+                {
+                  course?.description
+                }
               </p>
             </div>
           </div>
@@ -237,7 +239,7 @@ export default function ContantSinglePageLayout() {
                 ></path>
               </svg>
               <p className="text-sm md:text-base text-center transition-colors text-gray-50">
-                ..:۰۰ ساعت
+                {course?.time} ساعت
               </p>
             </div>
             <div className="flex justify-center items-center flex-col gap-3  bg-dark-600 transition-colors rounded-2xl px-4 lg:px-7 py-6 xl:py-12">
