@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { FaUserGraduate, FaUsers } from "react-icons/fa";
-import { ImBooks } from "react-icons/im";
 import Link from "next/link";
 import headerImageLeft from "@/public/images/header/darkTopSectionLeft.webp";
 import JsPhotoPath from "@/public/images/photo/LJj1XTD4xWmeyAWSrTo8NDAIm3fIcoQvFwCCDZGe.webp";
@@ -40,7 +38,7 @@ export default function HeadersMainPage() {
               <button className=" bg-gradient-to-r from-blue-750 to-blue-250 w-1/2  py-3 lg:py-4 rounded-lg  text-gray-50 md:text-lg lg:text-2xl font-bold">
                 چی یاد بگیرم ؟
               </button>
-              <Link href='login' className=" bg-gradient-to-r from-orange-750 to-orange-250 w-1/2 py-3 lg:py-4  rounded-lg hover:shadow-xl hover:shadow-inherit   text-gray-50 md:text-lg lg:text-2xl font-bold">
+              <Link href='login' className=" bg-gradient-to-r from-orange-750 to-orange-250 w-1/2 py-3 lg:py-4  rounded-lg hover:shadow-xl hover:shadow-inherit  text-center  text-gray-50 md:text-lg lg:text-2xl font-bold">
                 ثبت نام
               </Link>
             </div>
@@ -57,9 +55,9 @@ export default function HeadersMainPage() {
         </div>
       </header>
 
-      <nav className=" bg-hero-photo bg-bottom  mt-24 w-full select-none   ">
+      <nav className=" bg-hero-photo bg-bottom  mt-24 w-full select-none px-5   ">
         <div className=" container mx-auto  flex  justify-between items-center  space-x-5   space-x-reverse   ">
-          <div className="   group cursor-pointer flex flex-col  items-center space-y-14 ml-4 lg:ml-0 ">
+          <div className="   group cursor-pointer flex flex-col  items-center space-y-14 ">
             <div className=" filter  rounded-md   transition duration-200 transform  group-hover:-translate-y-5">
               <Image
                 src={JsPhotoPath}

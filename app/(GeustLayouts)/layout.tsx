@@ -1,13 +1,20 @@
-'use client'
-import ToastContainerComponnent from "@/components/shared/ToastContainer";
+"use client";
+
+import useAuth from "@/libs/hooks/useAuth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function GuestLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-
-  return <>
-  <ToastContainerComponnent position="top-center" theme="dark"/>
-  {children}</>;
+  const router = useRouter();
+  const { user } = useAuth();
+ useEffect(()=>{
+  if(user){
+    router.push('/');
+  }
+ },[user])
+  return <>{children}</>;
 }

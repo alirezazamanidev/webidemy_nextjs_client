@@ -23,7 +23,7 @@ export default function NavbarLayouts() {
         <div className=" flex items-center justify-between">
           <AiOutlineMenu
             className=" w-6 h-6 cursor-pointer text-white  block lg:hidden"
-            onClick={(e) => setOpenSidebar(true)}
+            onClick={(e:any) => setOpenSidebar(true)}
           />
           <h2 className=" text-4xl font-bold tracking-tighter text-gray-50 hover:bg-gray-400 duration-200">
             Webidemy
@@ -56,7 +56,6 @@ export default function NavbarLayouts() {
           ) : !user ? (
             <section className="flex gap-5">
               <Link
-
                 className="justify-center items-center w-9 min-w-9 lg:w-12 lg:min-w-12 min-h-9 h-9 lg:min-h-12 lg:h-12 rounded-full transition-colors bg-dark-600 flex"
                 href="/login"
               >
@@ -77,16 +76,27 @@ export default function NavbarLayouts() {
               </Link>
             </section>
           ) : (
-            <div className=" flex  items-center space-x-5 space-x-reverse">
-              <Link
-                href="/panel"
-                className=" hidden lg:flex bg-indigo-800 px-8 py-3 rounded-xl  text-white items-center"
+            <section className="flex gap-5">
+            <Link
+              className="justify-center items-center w-9 min-w-9 lg:w-12 lg:min-w-12 min-h-9 h-9 lg:min-h-12 lg:h-12 rounded-full transition-colors bg-dark-600 flex"
+              href="/login"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-5 lg:w-7 h-5 lg:h-7 text-gray-100 transition-colors"
               >
-                <FaUser className=" text-xl ml-3" />
-                <span>{user?.username}</span>
-              </Link>
-           
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                ></path>
+              </svg>
+            </Link>
+          </section>
           )}
         </div>
       </nav>

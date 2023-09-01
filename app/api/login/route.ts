@@ -2,8 +2,6 @@ import { NextApiRequest } from "next";
 import { NextRequest } from "next/server";
 export async function POST(request: NextRequest) {
   const res = await request.json();
-  console.log(res.token);
-  
   
   const headers = new Headers();
  
