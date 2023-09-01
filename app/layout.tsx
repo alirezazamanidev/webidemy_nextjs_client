@@ -1,4 +1,5 @@
 "use client";
+import LoadingLayout from "@/components/shared/Loading";
 import ToastContainerComponnent from "@/components/shared/ToastContainer";
 import "@/config/global/enviorment.config";
 import useAuth from "@/libs/hooks/useAuth";
@@ -26,11 +27,7 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" className={myfont.className}>
       <Provider store={store}>
         <body className=" bg-dark-700">
-          {loading ? (
-            <div className=" w-full  h-screen bg-dark-700 flex justify-center items-center">
-              <Loading type="balls" color="#fff" width={100} />
-            </div>
-          ) : (
+          {loading ? <LoadingLayout/>: (
             <>
               <ToastContainerComponnent position="top-center" theme="dark" />
               {children}
