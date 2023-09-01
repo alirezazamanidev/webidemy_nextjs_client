@@ -2,8 +2,6 @@
 import { useState } from "react";
 import {
   Link as LinkScroll,
-  animateScroll as scroll,
-  scroller,
 } from "react-scroll";
 import CommentLayout from "../comments/CommentLayout";
 export default function ContantSinglePageLayout() {

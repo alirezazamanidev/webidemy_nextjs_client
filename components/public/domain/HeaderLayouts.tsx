@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 import headerImageLeft from "@/public/images/header/darkTopSectionLeft.webp";
@@ -5,12 +6,12 @@ import JsPhotoPath from "@/public/images/photo/LJj1XTD4xWmeyAWSrTo8NDAIm3fIcoQvF
 import headerImageRight from "@/public/images/header/darkTopSectionRight.webp";
 import webphotoPath from "@/public/images/photo/web.webp";
 import laravelPhotoPath from "@/public/images/photo/laravel.webp";
-import phpPhotoPath from "@/public/images/photo/php.webp";
 import reactPhotoPath from "@/public/images/photo/react.webp";
 import nodePhotoPath from "@/public/images/photo/node.webp";
 import vuePhotoPath from "@/public/images/photo/vue.webp";
 import wordPressPhotoPath from "@/public/images/photo/wordpress.webp";
 import fluterPhotoPathj from "@/public/images/photo/fluter.webp";
+import { Link as LinkScroll } from "react-scroll";
 export default function HeadersMainPage() {
   return (
     <>
@@ -18,7 +19,7 @@ export default function HeadersMainPage() {
         <div className="  w-full flex  flex-col-reverse  md:flex-row  justify-between items-center ">
           <div className=" w-3/12 hidden lg:block">
             <Image
-              width={700 }
+              width={700}
               height={400}
               src={headerImageRight}
               className=" object-cover "
@@ -38,7 +39,10 @@ export default function HeadersMainPage() {
               <button className=" bg-gradient-to-r from-blue-750 to-blue-250 w-1/2  py-3 lg:py-4 rounded-lg  text-gray-50 md:text-lg lg:text-2xl font-bold">
                 چی یاد بگیرم ؟
               </button>
-              <Link href='login' className=" bg-gradient-to-r from-orange-750 to-orange-250 w-1/2 py-3 lg:py-4  rounded-lg hover:shadow-xl hover:shadow-inherit  text-center  text-gray-50 md:text-lg lg:text-2xl font-bold">
+              <Link
+                href="login"
+                className=" bg-gradient-to-r from-orange-750 to-orange-250 w-1/2 py-3 lg:py-4  rounded-lg hover:shadow-xl hover:shadow-inherit  text-center  text-gray-50 md:text-lg lg:text-2xl font-bold"
+              >
                 ثبت نام
               </Link>
             </div>
@@ -59,12 +63,7 @@ export default function HeadersMainPage() {
         <div className=" container mx-auto  flex  justify-between items-center  space-x-5   space-x-reverse   ">
           <div className="   group cursor-pointer flex flex-col  items-center space-y-14 ">
             <div className=" filter  rounded-md   transition duration-200 transform  group-hover:-translate-y-5">
-              <Image
-                src={JsPhotoPath}
-                alt="js"
-              
-                className=" w-14 "
-              />
+              <Image src={JsPhotoPath} alt="js" className=" w-14 " />
             </div>
             <span className=" absolute hidden md:block text-gray-100  text-2xl  text-center  opacity-0 group-hover:opacity-100 duration-200 ">
               آموزش جاوااسکریپت
@@ -171,7 +170,16 @@ export default function HeadersMainPage() {
           </div>
         </div>
 
-        <Link href="#courses" className=" w-full flex justify-center mt-20">
+        <LinkScroll
+          to="showNewCourses"
+          activeClass="active"
+          smooth={true}
+          offset={-120}
+          duration={1000}
+          spy={true}
+          href="#courses"
+          className=" w-full flex justify-center mt-20"
+        >
           <svg
             viewBox="0 0 30 52"
             fill="none"
@@ -210,7 +218,7 @@ export default function HeadersMainPage() {
               fill="#39CEFD"
             ></path>
           </svg>
-        </Link>
+        </LinkScroll>
       </nav>
     </>
   );

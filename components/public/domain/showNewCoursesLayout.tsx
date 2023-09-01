@@ -13,7 +13,6 @@ interface props {
 export default function ShowNewCourseLayout({ courses }: props) {
   const settings = {
     autoplay: true,
-    rtl: true,
     autoplaySpeed: 4000,
     slidesToShow:4,
     arrows: false,
@@ -46,7 +45,7 @@ export default function ShowNewCourseLayout({ courses }: props) {
   return (
     <>
 
-      <div className=" container  mx-auto select-none">
+      <div id="showNewCourses" className=" container  mx-auto select-none">
         <div className=" flex items-center mt-36 mb-10">
           <Image
             src={titleCircleRed}
@@ -58,17 +57,14 @@ export default function ShowNewCourseLayout({ courses }: props) {
             جدید ترین دوره های وبیدمی
           </h2>
         </div>
-        {/* <Slider {...settings}>
-            <CardCourse key={courses[0]?._id} course={courses[0]}/>
-            <CardCourse key={courses[0]?._id} course={courses[0]}/>
-            <CardCourse key={courses[0]?._id} course={courses[0]}/>
-            <CardCourse key={courses[0]?._id} course={courses[0]}/>
-            <CardCourse key={courses[0]?._id} course={courses[0]}/>
-            <CardCourse key={courses[0]?._id} course={courses[0]}/>
-
-
+        <Slider {...settings}>
+         {
+          courses.map(course=>(
+            <CardCourse key={course?._id} course={course}/>
+          ))
+         }  
          
-        </Slider> */}
+        </Slider>
       </div>
     </>
   );
