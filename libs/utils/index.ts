@@ -18,7 +18,7 @@ export const TypeConditioncourseToFarsi = (condition: string) => {
     case "presell":
       return "پیش فروش";
     case "stopـselling":
-      return "نوقف فروش";
+      return "توقف فروش";
     case "on_performing":
       return "در حال برگزاری";
     case "completion_of_recording":
