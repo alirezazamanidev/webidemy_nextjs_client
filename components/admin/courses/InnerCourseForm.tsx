@@ -1,6 +1,6 @@
 "use client";
 import { ErrorMessage, Form, FormikProps, FormikValues } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../shared/forms/Input";
 import Selectbox from "@/components/shared/forms/Selectbox";
 import Textarea from "@/components/shared/forms/Textarea";
@@ -19,7 +19,7 @@ const InnerCourseForm = ({
   setFieldValue,
   isSubmitting,
   errors,
-
+  getFieldMeta,
   course,
 }: courseFormProps) => {
   const [disabled, setDisabled] = useState(false);
@@ -30,9 +30,10 @@ const InnerCourseForm = ({
   const [conditionCourseCard, setConditionCourseCard] = useState("");
   const [ImageUrlCard, setImageUrlCard] = useState("");
   const [typeCourseCard, setTypeCoursecard] = useState("");
-
+  const [imageFile1, setImageFile] = useState(null);
   const handleGetUrlImage = (e: any) => {
     const imageFile = e.target.files[0];
+    setImageFile(imageFile);
     setFieldValue("photo", imageFile);
     const urlImage = URL.createObjectURL(imageFile);
     setImageUrlCard(urlImage);
@@ -46,6 +47,21 @@ const InnerCourseForm = ({
       setDisabled(false);
     }
   };
+
+  useEffect(() => {
+    if (course) {
+      setTitleCard(course?.title);
+      setTypeCoursecard(course?.type);
+      setFromColorCard(course?.gradientColorCard?.fromColor);
+      setToColorCard(course?.gradientColorCard?.toColor);
+      if (!imageFile1) {
+        setImageUrlCard(`http://localhost:8000${course?.photos["720"]}`);
+      }
+
+      setPriceCard(course?.price);
+      setConditionCourseCard(course?.condition);
+    }
+  }, [course]);
 
   return (
     <>
@@ -63,6 +79,7 @@ const InnerCourseForm = ({
                       از رنگ :
                     </label>
                     <input
+                      defaultValue={course?.gradientColorCard?.fromColor}
                       type="color"
                       className=" w-8/12 lg:w-16 h-8 lg:h-10  outline-none"
                       onChange={(e) => {
@@ -77,6 +94,7 @@ const InnerCourseForm = ({
                     </label>
                     <input
                       type="color"
+                      defaultValue={course?.gradientColorCard?.toColor}
                       className="w-8/12 lg:w-16 h-8 lg:h-10  outline-none"
                       onChange={(e) => {
                         setToColorCard(e.target.value);
@@ -90,9 +108,10 @@ const InnerCourseForm = ({
             <div className=" flex flex-col xl:flex-row items-center ">
               <div className=" w-full xl:w-8/12">
                 <input
-                  onChange={(e: any) => {
+                  defaultValue={course?.title}
+                  onChange={(e) => {
+                    setFieldValue("title", e.target.value);
                     setTitleCard(e.target.value);
-                    setFieldValue("title", e.target?.value);
                   }}
                   placeholder="عنوان دوره را وارد کنید"
                   name="title"
@@ -135,13 +154,14 @@ const InnerCourseForm = ({
             <div className=" flex flex-col xl:flex-row items-center   mt-4">
               <div className=" w-full xl:w-6/12">
                 <input
+                  defaultValue={course?.price}
                   onChange={(e) => {
                     setPriceCard(e.target.value);
                     setFieldValue("price", e.target.value);
                   }}
                   placeholder="قیمت دوره را به تومان وارد کنید"
                   name="price"
-                  className="  w-full py-4  rounded-md  px-3 bg-gray-600 text-gray-500 outline-none "
+                  className="  w-full py-4  rounded-md  px-3 bg-gray-600 text-gray-100 outline-none "
                 />
               </div>
 

@@ -55,7 +55,7 @@ export default function SingleCourseHeaderPage({ course }: props) {
                 </span>
               </Link>
             </div>
-            <p className="text-sm md:text-base xl:text-lg text-gray-400 transition-colors mt-4 text-center lg:text-right max-w-lg">
+            <p className="text-sm md:text-base xl:text-lg text-gray-400 transition-colors mt-4 text-center lg:text-right">
               {course?.body}
             </p>
           </div>

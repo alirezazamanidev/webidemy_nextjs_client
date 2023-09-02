@@ -14,6 +14,7 @@ export const GetOneCourseForEdit = async ({
 }: {
   courseId: string;
 }) => {
+  
   return await CallApi().get(`/admin/courses/edit/${courseId}`);
 };
 export const getCourses = async ({ page = 1, pre_page = 10 }) => {
