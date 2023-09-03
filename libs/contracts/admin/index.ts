@@ -1,12 +1,18 @@
 export interface CourseFormValuseInterface {
-    title: string;
-    body: string;
-    price?: string;
-    photo?: {};
-    description: string;
-    condition: string;
-    fromColor: string;
-    toColor: string;
-    type: string;
-    tags: string;
-  }
+  title: string;
+  body: string;
+  price?: string;
+  photo?: {};
+  description: string;
+  condition: string;
+  fromColor: string;
+  toColor: string;
+  type: string;
+  tags: string;
+}
+
+export interface SeasonFormValuseInterface {
+  title: string;
+  number: number;
+  course: string;
+}

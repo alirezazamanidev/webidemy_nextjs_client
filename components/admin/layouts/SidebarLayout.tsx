@@ -20,6 +20,10 @@ let courseList = [
   { label: "نمایش دوره ها", href: "/admin/courses" },
   { label: "ایجاد دوره", href: "/admin/courses/create" },
 ];
+let seasonList = [
+  { label: "نمایش   فصل دوره ها", href: "/admin/seasons" },
+  { label: "ایجاد  فصل جدید ", href: "/admin/seasons/create" },
+];
 let videoList = [
   { label: "نمابش  جلسات", href: "/admin/episodes" },
   { label: "ایجاد جلسه جدید ", href: "/admin/episodes/create" },
@@ -110,6 +114,13 @@ const SideBarLayout = ({ open, setOpen }: props) => {
                   Icon={MdOutlineGolfCourse}
                 />
               </div>
+              <div>
+                <DisclosureList
+                  title="فصل ها"
+                  list={seasonList}
+                  Icon={MdOutlineGolfCourse}
+                />
+              </div>
 
               <div>
                 <DisclosureList
@@ -189,7 +200,13 @@ const SideBarLayout = ({ open, setOpen }: props) => {
               Icon={MdOutlineGolfCourse}
             />
           </div>
-
+          <div>
+                <DisclosureList
+                  title="فصل ها"
+                  list={seasonList}
+                  Icon={MdOutlineGolfCourse}
+                />
+              </div>
           <div>
             <DisclosureList title=" جلسات" list={videoList} Icon={FaVideo} />
           </div>
