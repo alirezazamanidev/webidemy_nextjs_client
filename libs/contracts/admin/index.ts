@@ -16,3 +16,13 @@ export interface SeasonFormValuseInterface {
   number: number;
   course: string;
 }
+
+export interface EpisodeFormValuesInterface {
+  season:string
+  title: string;
+  body: string;
+  type: string;
+  time: number;
+  video: {};
+  number: number;
+}

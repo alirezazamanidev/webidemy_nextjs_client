@@ -1,5 +1,4 @@
-import CallApi from "@/libs/helpers/callApi";
-import { fileURLToPath } from "url";
+import { CallApi } from "@/libs/helpers/callApi";
 
 export const GetEpisodes = async ({ page = 1, pre_page = 10 }) => {
   const res = await CallApi().get(
@@ -8,8 +7,8 @@ export const GetEpisodes = async ({ page = 1, pre_page = 10 }) => {
 
   return res?.data?.data;
 };
-export const getCoursesForCreateEpisode = async () => {
-  const res = await CallApi().get("admin/episodes/create");
+export const getSeasonsForCreateEpisode = async ({url}:{url:string}) => {
+  const res = await CallApi().get(url);
 
   return res.data;
 };

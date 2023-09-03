@@ -1,5 +1,4 @@
-import { Course } from "./course";
-import { userType } from "./user";
+import { Season } from "./seasson";
 
 export interface Episode {
   _id: string;
@@ -9,8 +8,8 @@ export interface Episode {
   body: string;
   type: string;
   time: string;
-  course: Course;
-  Download: (user: userType) => string;
+  season: Season;
+
   downloadCount: number;
   commentCount: number;
   videoUrl: string;
