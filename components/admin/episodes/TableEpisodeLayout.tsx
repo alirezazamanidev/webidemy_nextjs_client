@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import CourseItemLayout from "./CourseItemLayout";
+import CourseItemLayout from "./EpisodeItemLayout";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import { getCourses } from "@/libs/services/admin/course";
@@ -9,15 +9,19 @@ import Loading from "react-loading";
 import { Course } from "@/libs/model/course";
 import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
+import { GetEpisodes } from "@/libs/services/admin/episode";
+import { Episode } from "@/libs/model/episode";
 
-export default function TableCoursesLayout() {
+export default function TableEpisodesLayout() {
   const [page, setPage] = useState<number>(1);
   const searchParams = useSearchParams();
 
   const { data, isLoading, mutate } = useSWR(
-    { url: "/admin/courses", page },
-    getCourses
+    { url: "/admin/episodes", page },
+    GetEpisodes
   );
+  console.log(data);
+  
 
   const querypage = searchParams.get("page");
   useEffect(() => {
@@ -45,7 +49,7 @@ export default function TableCoursesLayout() {
               ) : data?.data?.length === 0 ? (
                 <div className=" w-full flex flex-col border border-dashed rounded-lg border-gray-600 p-3 justify-center items-center">
                   <h2 className=" text-3xl text-gray-500 mb-4">
-                    دوره ای جهت نمایش وجود ندارد
+                    جلسه ای جهت نمایش وجود ندارد
                   </h2>
                   <EmptyIcon className=" w-80" />
                 </div>
@@ -54,35 +58,23 @@ export default function TableCoursesLayout() {
                   <thead className="border-b  bg-gradient-to-r from-blue-750 to-blue-800 font-medium text-white border-neutral-500">
                     <tr>
                       <th scope="col" className=" px-6 py-4">
-                        تصویر دوره
+                         شماره جلسه
                       </th>
                       <th scope="col" className=" px-6 py-4">
                         {" "}
-                        عنوان دوره
+                        عنوان جلسه
                       </th>
                       <th scope="col" className=" px-6 py-4">
                         {" "}
-                        مدرس دوره
+                        فصل جلسه
                       </th>
                       <th scope="col" className=" px-6 py-4">
-                        وضعیت دوره
+                        زمان جلسه
                       </th>
                       <th scope="col" className=" px-6 py-4">
-                        زمان دوره
+                         نوع جلسه
                       </th>
-                      <th scope="col" className=" px-6 py-4">
-                        تعداد فصل ها
-                      </th>
-                      <th scope="col" className=" px-6 py-4">
-                        تعداد جلسات دوره
-                      </th>
-                      <th scope="col" className=" px-6 py-4">
-                        نوع دوره
-                      </th>
-                      <th scope="col" className=" px-6 py-4">
-                        {" "}
-                        قیمت دوره
-                      </th>
+                    
                       <th scope="col" className=" px-6 py-4">
                         {" "}
                         تنظیمات
@@ -91,11 +83,11 @@ export default function TableCoursesLayout() {
                   </thead>
 
                   <tbody>
-                    {data?.data?.map((course: Course) => (
+                    {data?.data?.map((episode: Episode) => (
                       <CourseItemLayout
-                        key={course._id}
-                        course={course}
-                        courseMuted={mutate}
+                        key={episode._id}
+                        episode={episode}
+                        episodeMuted={mutate}
                       />
                     ))}
                   </tbody>

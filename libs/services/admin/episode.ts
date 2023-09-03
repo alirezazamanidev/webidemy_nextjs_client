@@ -5,7 +5,7 @@ export const GetEpisodes = async ({ page = 1, pre_page = 10 }) => {
     `/admin/episodes?page=${page}&item_count=${pre_page}`
   );
 
-  return res?.data?.data;
+  return res?.data;
 };
 export const getSeasonsForCreateEpisode = async ({url}:{url:string}) => {
   const res = await CallApi().get(url);

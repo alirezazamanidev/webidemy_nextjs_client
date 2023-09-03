@@ -12,19 +12,20 @@ import { DeleteCourse } from "@/libs/services/admin/course";
 import { KeyedMutator } from "swr";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { Episode } from "@/libs/model/episode";
 interface props {
-  course: Course;
-  courseMuted: KeyedMutator<any>;
+  episode: Episode;
+  episodeMuted: KeyedMutator<any>;
 }
-export default function CourseItemLayout({ course, courseMuted }: props) {
+export default function EpisodeItemLayout({ episode,episodeMuted }: props) {
   const [showDeleteConfrimation, setShowDeleteConfrimation] =
     useState<boolean>(false);
   const deleteHandle = async () => {
     try {
-      await DeleteCourse(course._id);
-      await courseMuted();
+      await DeleteCourse(episode._id);
+      await episodeMuted();
       setShowDeleteConfrimation(false);
-      toast.success("دوره مورد نظر با موفقیت حذف شد!");
+      toast.success("جلسه مورد نظر با موفقیت حذف شد!");
     } catch (err) {
       console.log(err);
     }
@@ -36,54 +37,40 @@ export default function CourseItemLayout({ course, courseMuted }: props) {
       <td className=" hidden">
           {showDeleteConfrimation && (
             <DeleteConfreamation
-              title={`حذف دوره ${course?.title}`}
-              descreaption="آیا از حذف دوره مورد نظر اطمینان دارید .در صورت تایید اطلاعات دوره باز نخواهد گشت"
+              title={`حذف جلسه ${episode?.title}`}
+              descreaption="آیا از حذف جلسه مورد نظر اطمینان دارید .در صورت تایید اطلاعات دوره باز نخواهد گشت"
               handleTrue={deleteHandle}
               handleCancel={() => setShowDeleteConfrimation(false)}
             />
           )}
         </td>
         <td className="whitespace-nowrap  px-6 py-4 font-medium">
-          <Image
-            src={`http://localhost:8000${course?.photos["360"]}`}
-            width={130}
-            height={60}
-            alt={course?.title}
-            className=" object-cover"
-          />
+        {episode.number}
         </td>
-        <td className="whitespace-nowrap   py-4 ">{course?.title}</td>
+        <td className="whitespace-nowrap   py-4 ">{episode?.title}</td>
         <td className="whitespace-nowrap  py-4">
-          {course?.teacher?.fullname}
+          {episode?.season?.title} / {episode?.season?.course?.title}
         </td>
         <td className="whitespace-nowrap  py-4">
-          {TypeConditioncourseToFarsi(course?.condition)}
-        </td>
-        <td className="whitespace-nowrap   py-4">{course?.time}</td>
-        <td className="whitespace-nowrap   py-4">5</td>
-        <td className="whitespace-nowrap   py-4">40</td>
-        <td className="whitespace-nowrap   py-4">{TypeItemInFarsi(course?.type)}</td>
-        <td className="whitespace-nowrap   py-4 ">
-        <span className=" flex items-center justify-center">
-        {separateWithComma(course?.price)}
-          <span className=" text-gray-300 text-sm mr-2">تومان</span>
-        </span>
-        </td>
-        <td className="whitespace-nowrap   py-4 flex ">
-      <div className=" flex items-center pt-4">
-      <Link
-              href={`/admin/courses/edit/${course._id}`}
+         {episode?.time}
+        </td>        
+        <td className="whitespace-nowrap   py-4">{TypeItemInFarsi(episode?.type)}</td>
+        
+        <td className="whitespace-nowrap   py-4  ">
+          <div className=" pt-4 flex items-center justify-center">
+            <Link
+              href={`/admin/courses/edit/${episode?._id}`}
               className=" bg-indigo-600 p-3 rounded-full ml-3"
             >
-              <FiEdit2 className=" text-white  text-base " />
+              <FiEdit2 className=" text-white  text-sm " />
             </Link>
             <button
               className=" bg-red-600 p-3  rounded-full"
               onClick={() => setShowDeleteConfrimation(true)}
             >
-              <MdDeleteOutline className=" text-white  text-base" />
+              <MdDeleteOutline className=" text-white  text-sm" />
             </button>
-      </div>
+          </div>
         </td>
        
       </tr>
