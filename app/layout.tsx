@@ -21,18 +21,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { loading } = useAuth();
-
+  
   return (
     <html lang="fa" dir="rtl" className={myfont.className}>
       <Provider store={store}>
         <body className=" bg-dark-700">
-          {loading ? <LoadingLayout/>: (
-            <>
+           
+            
               <ToastContainerComponnent position="top-center" theme="dark" />
               {children}
-            </>
-          )}
+          
+          
         </body>
       </Provider>
     </html>
