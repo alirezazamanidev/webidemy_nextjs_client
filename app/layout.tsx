@@ -1,7 +1,8 @@
 "use client";
 import ToastContainerComponnent from "@/components/shared/ToastContainer";
 import { store } from "@/libs/store";
-
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import "@/public/css/globals.css";
 
 import localFont from "next/font/local";
@@ -17,18 +18,32 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime:10000,
+        cacheTime: 5000000,
+        retry:false,
+        retryOnMount:false,
+        // refetchOnWindowFocus:false,
 
-  
+
+        onError: (err) => {
+          console.log(err);
+        },
+      },
+    },
+  });
+
   return (
     <html lang="fa" dir="rtl" className={myfont.className}>
       <Provider store={store}>
         <body className=" bg-dark-700">
-           
-            
-              <ToastContainerComponnent position="top-center" theme="dark" />
-              {children}
-          
-          
+          <QueryClientProvider client={queryClient}>
+            <ToastContainerComponnent position="top-center" theme="dark" />
+            {children}
+            <ReactQueryDevtools initialIsOpen={true} position="top-left" />
+          </QueryClientProvider>
         </body>
       </Provider>
     </html>
