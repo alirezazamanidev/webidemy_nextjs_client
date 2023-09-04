@@ -1,9 +1,12 @@
 
 import HeadersMainPage from "@/components/public/domain/HeaderLayouts";
 import ShowNewCourseLayout from "@/components/public/domain/showNewCoursesLayout";
-import { Course } from "@/libs/model/course";
+import { Metadata } from "next";
 
-
+ 
+export const metadata: Metadata = {
+  title: 'وبسایت آموزش برنامه نویسی وبیدمی',
+}
 async function GetCourses() {
   const res = await fetch("http://localhost:8000/api/v1/courses", {
     method: "GET",
