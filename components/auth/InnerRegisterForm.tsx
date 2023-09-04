@@ -5,7 +5,7 @@ import Loading from "react-loading";
 
 export default function InnerRegisterForm({
   isSubmitting,
-}: FormikProps<FormikValues>) {
+}: FormikProps<any>) {
   return (
     <>
       <Form className=" w-full pb-11 sm:pb-200">

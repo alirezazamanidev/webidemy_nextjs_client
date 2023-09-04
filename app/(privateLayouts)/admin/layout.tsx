@@ -21,7 +21,7 @@ export default function AdminLayout({
     if (user.admin) {
       router.push("/");
     }
-  }, [user, error]);
+  }, [user, error,router]);
 
   return (
     <div className="lg:mr-[250px] h-screen ">

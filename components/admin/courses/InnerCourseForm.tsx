@@ -1,6 +1,6 @@
 "use client";
 import { ErrorMessage, Form, FormikProps, FormikValues } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import Input from "../../shared/forms/Input";
 import Selectbox from "@/components/shared/forms/Selectbox";
 import Textarea from "@/components/shared/forms/Textarea";
@@ -12,14 +12,14 @@ import separateWithComma from "@/libs/utils";
 import { MdAddAPhoto, MdOutlinePhotoCamera } from "react-icons/md";
 import { TypeConditioncourseToFarsi } from "@/libs/utils";
 import { AiTwotoneDelete } from "react-icons/ai";
-type courseFormProps = FormikProps<FormikValues> & {
+import { CourseFormValuseInterface } from "@/libs/contracts/admin";
+type courseFormProps = FormikProps<any> & {
   course?: Course;
 };
 const InnerCourseForm = ({
   setFieldValue,
   isSubmitting,
   errors,
-  getFieldMeta,
   course,
 }: courseFormProps) => {
   const [disabled, setDisabled] = useState(false);
@@ -61,7 +61,7 @@ const InnerCourseForm = ({
       setPriceCard(course?.price);
       setConditionCourseCard(course?.condition);
     }
-  }, [course]);
+  }, [course,imageFile1]);
 
   return (
     <>

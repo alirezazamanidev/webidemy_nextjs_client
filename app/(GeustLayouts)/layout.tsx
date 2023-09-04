@@ -15,6 +15,6 @@ export default function GuestLayout({
   if(user){
     router.push('/');
   }
- },[user])
+ },[user,router])
   return <>{children}</>;
 }

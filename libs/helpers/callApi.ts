@@ -3,10 +3,9 @@ import { BadRequestException } from "../exceptions/BadRequestException";
 import { NotAcceptableExceptions } from "../exceptions/NotAcceptableExceptions";
 import { NotFoundException } from "../exceptions/NotFoundException";
 
-const BASE_URL = process.env.SERVER_BASE_URL;
 export const CallApi = () => {
   const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api/v1',
+    baseURL: 'https://api.webidemyyy.ir/api/v1',
   });
 
   axiosInstance.interceptors.request.use(

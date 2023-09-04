@@ -4,7 +4,7 @@ import { ErrorMessage, Form, FormikProps, FormikValues } from "formik"
 import Loading from "react-loading"
 
 
-type props= FormikProps<FormikValues> & {
+type props= FormikProps<any> & {
     courses:Course[]
     
 }

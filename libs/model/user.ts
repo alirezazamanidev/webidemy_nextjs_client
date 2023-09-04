@@ -1,5 +1,4 @@
 import { Course } from "./course";
-import { Order } from "./order";
 
 export interface userType {
   _id: string;
@@ -10,7 +9,6 @@ export interface userType {
   isVip: boolean;
   vipTime: Date;
   admin: boolean;
-  orders: Order[];
   learning: Course[];
   createdAt: string;
   updatedAt: string;

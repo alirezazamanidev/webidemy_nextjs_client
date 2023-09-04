@@ -2,7 +2,7 @@
 import localFont from "next/font/local";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastPosition, Theme } from "react-toastify/dist/types";
+import { ToastPosition,Theme } from "react-toastify";
 interface props {
   position: ToastPosition;
   theme: Theme;

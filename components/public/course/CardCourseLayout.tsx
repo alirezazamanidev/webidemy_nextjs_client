@@ -1,11 +1,9 @@
 import Image from "next/image";
-import courseImage from "@/public/images/nodeJs-min-247x139.jpg";
 import separateWithComma, { TypeConditioncourseToFarsi } from "@/libs/utils";
-import { CiClock1 } from "react-icons/ci";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+
 import { Course } from "@/libs/model/course";
 import Link from "next/link";
-import image from "@/public/images/1692193971111.webp";
+
 import mePhoto from "@/public/images/me.jpeg";
 interface props {
   course:Course
@@ -30,7 +28,7 @@ export default function CardCourse({course}:props) {
             <div className=" w-full flex justify-center relative -mt-14">
               <div className=" relative">
                 <Image
-                  src={`http://localhost:8000${course?.photos["720"]}`}
+                      src={`https://api.webidemyyy.ir${course?.photos["720"]}`}
                   width={650}
                   height={450}
                   className=" aspect-video flex justify-center w-full object-cover rounded-xl transition-all duration-500 "

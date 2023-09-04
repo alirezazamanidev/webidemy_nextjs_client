@@ -11,7 +11,7 @@ import useSWR from "swr";
 import { getSeasonsForCreateEpisode } from "@/libs/services/admin/episode";
 import { Season } from "@/libs/model/seasson";
 
-type EpisodeFormProps = FormikProps<FormikValues> & {
+type EpisodeFormProps = FormikProps<any> & {
   episode?: Episode;
 };
 const InnerEpisodeForm = ({

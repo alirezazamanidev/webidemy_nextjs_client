@@ -3,8 +3,6 @@ import separateWithComma from "@/libs/utils";
 import Image from "next/image";
 import { FiEdit2 } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
-import fluterPhoto from "@/public/images/fluter.webp";
-import mePhoto from "@/public/images/me.jpeg";
 import { TypeConditioncourseToFarsi, TypeItemInFarsi } from "@/libs/utils";
 import { useState } from "react";
 import DeleteConfreamation from "@/components/shared/confreamtions/DeleteConfreamation";
@@ -45,7 +43,7 @@ export default function CourseItemLayout({ course, courseMuted }: props) {
         </td>
         <td className="whitespace-nowrap  px-6 py-4 font-medium">
           <Image
-            src={`http://localhost:8000${course?.photos["360"]}`}
+            src={`https://api.webidemyyy.ir${course?.photos["360"]}`}
             width={130}
             height={60}
             alt={course?.title}

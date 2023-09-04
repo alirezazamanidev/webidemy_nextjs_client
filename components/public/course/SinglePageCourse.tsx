@@ -1,38 +1,21 @@
 "use client";
-import useAuth from "@/libs/hooks/useAuth";
 import { Course } from "@/libs/model/course";
 import separateWithComma from "@/libs/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+
 interface props {
   course: Course;
 }
 export default function SingleCourseHeaderPage({ course }: props) {
-  const { user, loading: loadingUser } = useAuth();
 
-  const [doneStatusOrder, setDoneStatusOrder] = useState<boolean>(false);
-
-  
-  // const hasorder = orderList?.filter(
-  //   (order) => order.product._id === course._id
-  // );
-
-  // const ShowcheckLearning = checkLearning(user, course);
-  // const handlerAddOrder = async (e: any) => {
-  //   e.preventDefault();
-  //   await StoreCart(course._id);
-  //   toast.success("محصول شمابه سبد خرید اضافه شد");
-  //   setDoneStatusOrder(true);
-  //   await mutate();
-  // };
 
   return (
     <>
       <div className=" bg-dark-600   grid  grid-cols-1 lg:grid-cols-2 rounded-2xl select-none p-4 lg:p-7 ">
         <div className=" ">
           <Image
-            src={`http://localhost:8000${course?.photos['720']}`}
+                src={`https://api.webidemyyy.ir${course?.photos["720"]}`}
             alt={course?.title}
             width={700}
             height={500}
