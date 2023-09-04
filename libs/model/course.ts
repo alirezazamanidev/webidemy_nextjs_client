@@ -1,4 +1,5 @@
-import { Episode } from "./episode";
+
+import { Season } from "./seasson";
 import { userType } from "./user";
 export interface Course {
   images: any;
@@ -18,7 +19,7 @@ export interface Course {
   }
   time: string;
   type: string;
-  episodes: Episode[];
+  seasons: Season[];
   viewCount: number;
   commentCount: number;
 
