@@ -5,10 +5,11 @@ import { Course } from "@/libs/model/course";
 import Link from "next/link";
 
 import mePhoto from "@/public/images/me.jpeg";
+import ImageComponent from "@/components/shared/ImageComponent";
 interface props {
-  course:Course
+  course: Course;
 }
-export default function CardCourse({course}:props) {
+export default function CardCourse({ course }: props) {
   return (
     <>
       <div className=" w-full h-full pt-14 pb-5 lg:pb-7  select-none  ">
@@ -24,15 +25,18 @@ export default function CardCourse({course}:props) {
               background: `linear-gradient(to left top, ${course?.gradientColorCard?.toColor}, ${course?.gradientColorCard?.fromColor}`,
             }}
           ></div>
-          <Link href={`courses/${course?.slug}`} className=" w-full h-full  px-4 lg:px-5 relative flex flex-col">
+          <Link
+            href={`courses/${course?.slug}`}
+            className=" w-full h-full  px-4 lg:px-5 relative flex flex-col"
+          >
             <div className=" w-full flex justify-center relative -mt-14">
               <div className=" relative">
-                <Image
-                      src={`https://api.webidemyyy.ir${course?.photos["720"]}`}
+                <ImageComponent
+                  url={course?.photos["720"]}
                   width={650}
                   height={450}
                   className=" aspect-video flex justify-center w-full object-cover rounded-xl transition-all duration-500 "
-                  alt="imgr"
+                  alt={course?.title}
                 />
               </div>
             </div>

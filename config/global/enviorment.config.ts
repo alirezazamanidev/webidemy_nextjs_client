@@ -1,7 +1,5 @@
-import { config as dotEnvConfig } from 'dotenv';
-import { join } from 'path';
 
-dotEnvConfig();
-dotEnvConfig({
-  path: join(process.cwd(), `.env.${process.env.NODE_ENV}`),
-});
+
+export const config={
+  api_url:process.env.SERVER_BASE_API_URL
+}

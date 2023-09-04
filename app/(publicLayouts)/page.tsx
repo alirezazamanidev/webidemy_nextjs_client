@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'وبسایت آموزش برنامه نویسی وبیدمی',
 }
 async function GetCourses() {
-  const res = await fetch("http://localhost:8000/api/v1/courses", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/courses`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

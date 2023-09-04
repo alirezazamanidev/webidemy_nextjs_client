@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import SingleCourseHeaderPage from "@/components/public/course/SinglePageCourse";
 import ContantSinglePageLayout from "@/components/public/course/ContantSinglePageLayout";
 const GetSingleCourse= async(courseSlug: string)=> {
-  const res = await fetch(`http://localhost:8000/api/v1/courses/${courseSlug}`,{
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/courses/${courseSlug}`,{
     method: "GET",
     headers: {
       "Content-Type": "application/json",

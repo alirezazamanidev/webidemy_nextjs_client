@@ -1,21 +1,19 @@
 "use client";
+import ImageComponent from "@/components/shared/ImageComponent";
 import { Course } from "@/libs/model/course";
 import separateWithComma from "@/libs/utils";
-import Image from "next/image";
 import Link from "next/link";
 
 interface props {
   course: Course;
 }
 export default function SingleCourseHeaderPage({ course }: props) {
-
-
   return (
     <>
       <div className=" bg-dark-600   grid  grid-cols-1 lg:grid-cols-2 rounded-2xl select-none p-4 lg:p-7 ">
         <div className=" ">
-          <Image
-                src={`https://api.webidemyyy.ir${course?.photos["720"]}`}
+          <ImageComponent
+            url={course?.photos["720"]}
             alt={course?.title}
             width={700}
             height={500}
@@ -28,11 +26,7 @@ export default function SingleCourseHeaderPage({ course }: props) {
               {course?.title}
             </h1>
             <div className="mt-4 flex justify-center lg:justify-start items-center">
-              <Link
-                className="inline-block"
-                
-                href="#"
-              >
+              <Link className="inline-block" href="#">
                 <span className="inline-block select-none bg-gray-900 rounded-lg p-2 text-xs text-white text-center transition-colors dark:bg-dark-700">
                   بک اند
                 </span>
@@ -43,12 +37,15 @@ export default function SingleCourseHeaderPage({ course }: props) {
             </p>
           </div>
           <div className=" mt-4 lg:mt-0 flex flex-col sm:flex-row  justify-between items-center">
-            <button className=" mb-3 sm:mb-0  inline-block text-xl lg:text-2xl  bg-gradient-to-r from-blue-750 to-blue-250 px-8 py-4 rounded-lg text-gray-50">خرید دوره</button>
+            <button className=" mb-3 sm:mb-0  inline-block text-xl lg:text-2xl  bg-gradient-to-r from-blue-750 to-blue-250 px-8 py-4 rounded-lg text-gray-50">
+              خرید دوره
+            </button>
             <span className=" flex items-center">
-              <span className=" text-white text-xl">{separateWithComma(course?.price)}</span>
+              <span className=" text-white text-xl">
+                {separateWithComma(course?.price)}
+              </span>
               <span className="  text-base text-gray-300 mr-2">تومان</span>
             </span>
-
           </div>
         </div>
       </div>

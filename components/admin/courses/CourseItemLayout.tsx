@@ -1,6 +1,5 @@
 import { Course } from "@/libs/model/course";
 import separateWithComma from "@/libs/utils";
-import Image from "next/image";
 import { FiEdit2 } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { TypeConditioncourseToFarsi, TypeItemInFarsi } from "@/libs/utils";
@@ -10,6 +9,7 @@ import { DeleteCourse } from "@/libs/services/admin/course";
 import { KeyedMutator } from "swr";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import ImageComponent from "@/components/shared/ImageComponent";
 interface props {
   course: Course;
   courseMuted: KeyedMutator<any>;
@@ -42,8 +42,8 @@ export default function CourseItemLayout({ course, courseMuted }: props) {
           )}
         </td>
         <td className="whitespace-nowrap  px-6 py-4 font-medium">
-          <Image
-            src={`https://api.webidemyyy.ir${course?.photos["360"]}`}
+          <ImageComponent
+            url={course?.photos['360']}
             width={130}
             height={60}
             alt={course?.title}

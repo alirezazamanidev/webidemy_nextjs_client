@@ -1,14 +1,10 @@
 "use client";
-import LoadingLayout from "@/components/shared/Loading";
 import ToastContainerComponnent from "@/components/shared/ToastContainer";
-import "@/config/global/enviorment.config";
-import useAuth from "@/libs/hooks/useAuth";
 import { store } from "@/libs/store";
 
 import "@/public/css/globals.css";
 
 import localFont from "next/font/local";
-import Loading from "react-loading";
 import { Provider } from "react-redux";
 const myfont = localFont({
   src: "./../public/fonts/yekan/Yekan.woff2",
@@ -21,6 +17,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   
   return (
     <html lang="fa" dir="rtl" className={myfont.className}>

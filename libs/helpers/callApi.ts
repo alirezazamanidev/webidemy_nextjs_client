@@ -1,11 +1,14 @@
+
 import axios from "axios";
 import { BadRequestException } from "../exceptions/BadRequestException";
 import { NotAcceptableExceptions } from "../exceptions/NotAcceptableExceptions";
 import { NotFoundException } from "../exceptions/NotFoundException";
 
 export const CallApi = () => {
+  console.log(process.env.NEXT_PUBLIC_SERVER_BASE_API_URL);
+  
   const axiosInstance = axios.create({
-    baseURL: 'https://api.webidemyyy.ir/api/v1',
+    baseURL: process.env.NEXT_PUBLIC_SERVER_BASE_API_URL,
   });
 
   axiosInstance.interceptors.request.use(

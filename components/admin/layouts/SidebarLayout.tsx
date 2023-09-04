@@ -9,7 +9,6 @@ import { MdOutlineGolfCourse } from "react-icons/md";
 import { FaVideo } from "react-icons/fa";
 import { FaCommentAlt, FaUsers } from "react-icons/fa";
 import { MdPermContactCalendar } from "react-icons/md";
-// import { selectUser } from "@/libs/store/slices/auth.slice";/
 import mePhoto from "@/public/images/me.jpeg";
 import { useAppSelector } from "@/libs/hooks";
 let list = [
