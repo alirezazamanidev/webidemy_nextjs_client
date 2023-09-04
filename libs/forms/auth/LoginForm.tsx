@@ -30,7 +30,7 @@ const LoginForm = withFormik<LoginFormProps, LoginFormValuesInterFace>({
       const res = await CallApi().post("auth/local/signIn", valuse);
    
       if (res.status === 200) {
-        await StoreCookieForLogin(res?.data?.webidemy_user_token);
+        
         await props.router.push("/");
         toast.success(" ورود با موفقیت انجام شد");
         return;

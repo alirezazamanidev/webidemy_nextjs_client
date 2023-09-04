@@ -23,14 +23,8 @@ export default function RootLayout({
       queries: {
         staleTime:10000,
         cacheTime: 5000000,
-        retry:false,
-        retryOnMount:false,
-        // refetchOnWindowFocus:false,
+       
 
-
-        onError: (err) => {
-          console.log(err);
-        },
       },
     },
   });

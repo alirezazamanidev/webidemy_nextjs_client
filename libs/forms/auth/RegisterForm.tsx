@@ -1,7 +1,6 @@
 import InnerRegisterForm from "@/components/auth/InnerRegisterForm";
 import { RegisterFormValuesInterFace } from "@/libs/contracts/auth";
 import { BadRequestException } from "@/libs/exceptions/BadRequestException";
-import { StoreCookieForLogin } from "@/libs/helpers/auth";
 import { CallApi } from "@/libs/helpers/callApi";
 import { withFormik } from "formik";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
@@ -34,7 +33,7 @@ const RegisterForm = withFormik<RegisterFormProps, RegisterFormValuesInterFace>(
         const res = await CallApi().post("auth/local/signUp", valuse);
         
         if (res.status === 201) {
-          await StoreCookieForLogin(res?.data?.webidemy_user_token);
+    
           await props.router.push("/");
           toast.success("ثبت نام با موفقیت انجام شد");
           return;
