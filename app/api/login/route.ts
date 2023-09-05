@@ -6,10 +6,10 @@ export async function POST(request: NextRequest) {
   const headers = new Headers();
  
   headers.append(
-    "Set-Cookie",`x-access-token=${res?.at}; Path=/; HttpOnly;  Max-Age=300; SameSite=Lax;`
+    "Set-Cookie",`x-access-token=${res?.at}; Path=/; HttpOnly;  Max-Age=300; SameSite=Lax; Domain=.webidemyyy.ir;`
   );
   headers.append(
-    "Set-Cookie",`x-refresh-token=${res?.rt}; Path=/;  Max-Age=64000000; SameSite=Lax;`
+    "Set-Cookie",`x-refresh-token=${res?.rt}; Path=/;  Max-Age=64000000; SameSite=Lax; Domain=example.com Domain=.webidemyyy.ir;`
   );
 
 
