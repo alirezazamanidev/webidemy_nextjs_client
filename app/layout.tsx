@@ -22,7 +22,7 @@ export default function RootLayout({
     defaultOptions: {
       queries: {
         staleTime:10000,
-        cacheTime: 5000000,
+        cacheTime: 0,
        
 
       },
@@ -31,7 +31,6 @@ export default function RootLayout({
 
   return (
     <html lang="fa" dir="rtl" className={myfont.className}>
-      <Provider store={store}>
         <body className=" bg-dark-700">
           <QueryClientProvider client={queryClient}>
             <ToastContainerComponnent position="top-center" theme="dark" />
@@ -39,7 +38,6 @@ export default function RootLayout({
             <ReactQueryDevtools initialIsOpen={true} position="top-left" />
           </QueryClientProvider>
         </body>
-      </Provider>
     </html>
   );
 }

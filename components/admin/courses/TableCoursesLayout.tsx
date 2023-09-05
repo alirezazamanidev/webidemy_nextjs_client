@@ -2,21 +2,30 @@
 
 import { useSearchParams } from "next/navigation";
 import CourseItemLayout from "./CourseItemLayout";
-import useSWR from "swr";
 import { useEffect, useState } from "react";
-import { getCourses } from "@/libs/services/admin/course";
 import Loading from "react-loading";
 import { Course } from "@/libs/model/course";
 import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
-
+import { useQuery } from "react-query";
+import { CallApi } from "@/libs/helpers/callApi";
 export default function TableCoursesLayout() {
   const [page, setPage] = useState<number>(1);
   const searchParams = useSearchParams();
 
-  const { data, isLoading, mutate } = useSWR(
-    { url: "/admin/courses", page },
-    getCourses
+  const { data, isLoading,refetch } = useQuery(
+    ["Show_courses_adminPanel", page],
+    async () => {
+      const pre_page = 2;
+      const res = await CallApi().get(
+        `/admin/courses?page=${page}&item_count=${pre_page}`
+      );
+
+      return res?.data;
+    },
+    {
+      cacheTime: 1000 * 60 * 5,
+    }
   );
 
   const querypage = searchParams.get("page");
@@ -95,14 +104,18 @@ export default function TableCoursesLayout() {
                       <CourseItemLayout
                         key={course._id}
                         course={course}
-                        courseMuted={mutate}
+                        courseRefeach={refetch}
                       />
                     ))}
                   </tbody>
                 </table>
               )}
             </div>
-              <PaginateItem page={data?.page} pages={data?.pages} url="/admin/courses" />
+            <PaginateItem
+              page={data?.page}
+              pages={data?.pages}
+              url="/admin/courses"
+            />
           </div>
         </div>
       </div>

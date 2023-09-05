@@ -63,6 +63,11 @@ const InnerCourseForm = ({
     }
   }, [course,imageFile1]);
 
+
+  let errorStatus=Object.values(errors).length ===0 ? true : false;
+  
+  
+
   return (
     <>
       <div className=" w-full flex flex-col-reverse md:flex-row p-4 lg:p-7">
@@ -103,6 +108,7 @@ const InnerCourseForm = ({
                     />
                   </div>
                 </div>
+              
               </div>
             </div>
             <div className=" flex flex-col xl:flex-row items-center ">
@@ -213,7 +219,7 @@ const InnerCourseForm = ({
             </div>
           </Form>
         </div>
-        <div className=" w-full md:w-7/12 lg:w-5/12 xl:w-4/12">
+        <div className=" w-full md:w-7/12 lg:w-5/12 xl:w-4/12 mb-10">
           <div className=" w-full  px-0 md:px-4   pt-14 pb-5 lg:pb-7  select-none  ">
             <div
               className={` transition-all   bg-gray-800   rounded-xl h-full  flex flex-col relative group`}
@@ -307,48 +313,57 @@ const InnerCourseForm = ({
               </div>
             </div>
           </div>
+          {
+            errors && (
+              <div
+              className={`bg-dark-600 space-y-3  select-none ${!errorStatus ? 'py-4 px-6' :""}   mx-6 rounded-xl  my-6 mt-20 lg:my-0`}
+            >
+              <ErrorMessage
+                name="title"
+                component="div"
+                className=" text-xl text-red-700 "
+              />
+              <ErrorMessage
+                name="photo"
+                component="div"
+                className=" text-xl text-red-700"
+              />
+                <ErrorMessage
+                name="fromColor"
+                component="div"
+                className=" text-xl text-red-700"
+              />
+              <ErrorMessage
+                name="type"
+                component="div"
+                className=" text-xl text-red-700"
+              />
+              <ErrorMessage
+                name="condition"
+                component="div"
+                className=" text-xl text-red-700"
+              />
+              <ErrorMessage
+                name="tags"
+                component="div"
+                className=" text-xl text-red-700 "
+              />
+              <ErrorMessage
+                name="description"
+                component="div"
+                className=" text-xl text-red-700"
+              />
+              <ErrorMessage
+                name="body"
+                component="div"
+                className=" text-xl text-red-700"
+              />
+            </div>
 
-          <div
-            className={` ${
-              !errors ? "hidden" : "block"
-            } bg-dark-600 space-y-3 px-6 select-none py-4  mx-6 rounded-xl  my-6 lg:my-0 `}
-          >
-            <ErrorMessage
-              name="title"
-              component="div"
-              className=" text-xl text-red-700 "
-            />
-            <ErrorMessage
-              name="photo"
-              component="div"
-              className=" text-xl text-red-700"
-            />
-            <ErrorMessage
-              name="type"
-              component="div"
-              className=" text-xl text-red-700"
-            />
-            <ErrorMessage
-              name="condition"
-              component="div"
-              className=" text-xl text-red-700"
-            />
-            <ErrorMessage
-              name="tags"
-              component="div"
-              className=" text-xl text-red-700 "
-            />
-            <ErrorMessage
-              name="description"
-              component="div"
-              className=" text-xl text-red-700"
-            />
-            <ErrorMessage
-              name="body"
-              component="div"
-              className=" text-xl text-red-700"
-            />
-          </div>
+            )
+          }
+
+   
         </div>
       </div>
     </>

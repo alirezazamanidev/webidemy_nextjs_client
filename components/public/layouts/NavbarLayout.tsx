@@ -8,6 +8,7 @@ import useAuth from "@/libs/hooks/useAuth";
 import { FaUser } from "react-icons/fa";
 import Badge from "@mui/material/Badge";
 import { usePathname } from "next/navigation";
+import { HiShoppingCart } from "react-icons/hi";
 
 export default function NavbarLayouts() {
   const [openSideBar, setOpenSidebar] = useState<boolean>(false);
@@ -25,7 +26,7 @@ export default function NavbarLayouts() {
             className=" w-6 h-6 cursor-pointer text-white  block lg:hidden"
             onClick={(e:any) => setOpenSidebar(true)}
           />
-          <h2 className=" text-4xl font-bold tracking-tighter text-gray-50 hover:bg-gray-400 duration-200">
+          <h2 className=" text-3xl lg:text-4xl  font-bold tracking-tighter text-gray-50 hover:bg-gray-400 duration-200">
             Webidemy
           </h2>
           <ul className="  hidden lg:flex items-center  space-x-10 space-x-reverse  text-2xl lg:text-3xl  text-gray-300   cursor-pointer">
@@ -96,6 +97,13 @@ export default function NavbarLayouts() {
                 ></path>
               </svg>
             </Link>
+            <Link
+              className="justify-center items-center w-9 min-w-9 lg:w-12 lg:min-w-12 min-h-9 h-9 lg:min-h-12 lg:h-12 rounded-full transition-colors bg-dark-600 flex text-3xl p-2 text-gray-300"
+              href="/login"
+            >
+          <HiShoppingCart />
+            </Link>
+            
           </section>
           )}
         </div>

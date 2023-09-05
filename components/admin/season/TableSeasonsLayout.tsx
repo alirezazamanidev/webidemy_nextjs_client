@@ -1,31 +1,29 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-
-import useSWR from "swr";
 import { useEffect, useState } from "react";
-import { getCourses } from "@/libs/services/admin/course";
 import Loading from "react-loading";
-import { Course } from "@/libs/model/course";
 import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
-import { GetSeasons } from "@/libs/services/admin/season";
 import SeasonItemLayout from "./seasonItemLayout";
 import { Season } from "@/libs/model/seasson";
+import { useQuery } from "react-query";
+import { CallApi } from "@/libs/helpers/callApi";
 
 export default function TableSeasonsLayout() {
   const [page, setPage] = useState<number>(1);
   const searchParams = useSearchParams();
 
-  const { data, isLoading, mutate } = useSWR(
-    { url: "/admin/seasons", page },
-    GetSeasons
+  const { data, isLoading,refetch } = useQuery(
+    ["Show-seasons-admin-panel", page],
+    async () => {
+      const pre_page = 12;
+      const res = await CallApi().get(
+        `/admin/seasons?page=${page}&item_count=${pre_page}`
+      );
+      return res?.data;
+    }
   );
-  console.log(data);
-  
-
- 
-  
 
   const querypage = searchParams.get("page");
   useEffect(() => {
@@ -61,7 +59,6 @@ export default function TableSeasonsLayout() {
                 <table className="min-w-full text-center text-sm font-light">
                   <thead className="border-b  bg-gradient-to-r from-blue-750 to-blue-800 font-medium text-white border-neutral-500">
                     <tr>
-                  
                       <th scope="col" className=" px-6 py-4">
                         {" "}
                         شماره فصل
@@ -71,12 +68,12 @@ export default function TableSeasonsLayout() {
                         عنوان فصل
                       </th>
                       <th scope="col" className=" px-6 py-4">
-                         دوره مربوطه
+                        دوره مربوطه
                       </th>
                       <th scope="col" className=" px-6 py-4">
-                       تعداد جلسات فصل
+                        تعداد جلسات فصل
                       </th>
-                     
+
                       <th scope="col" className=" px-6 py-4">
                         {" "}
                         تنظیمات
@@ -89,14 +86,18 @@ export default function TableSeasonsLayout() {
                       <SeasonItemLayout
                         key={season._id}
                         season={season}
-                        seasonMuted={mutate}
+                        seasonRefeash={refetch}
                       />
                     ))}
                   </tbody>
                 </table>
               )}
             </div>
-              <PaginateItem page={data?.data?.page} pages={data?.data?.pages} url="/admin/seasons" />
+            <PaginateItem
+              page={data?.data?.page}
+              pages={data?.data?.pages}
+              url="/admin/seasons"
+            />
           </div>
         </div>
       </div>

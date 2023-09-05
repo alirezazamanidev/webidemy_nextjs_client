@@ -30,7 +30,26 @@ const EditCourseFormValidationSchema = yup.object().shape({
     .required("وارد کردن فیلد توضیجات الزامیست")
     .min(50, "فیلد توضیحات نمی تواند کمتر از 50 کارکتر باشد"),
   condition: yup.string().required("وارد کردن فیلد وضعیت دوره الزامیست"),
+  photo: yup
+  .mixed()
   
+  .test(
+    "fileFormat",
+    "پسوند تصویر از پسوند های تصاویر نیست!",
+    (value: any) => {
+      if (value) {
+        const allowedFormats = [
+          'image/png',
+          'image/jpg',
+          'image/jpeg',
+          'image/svg',
+          'image/webp',
+        ];
+        return allowedFormats.includes(value.type);
+      }
+      return true;
+    }
+  ),
   type: yup.string().required("فیلد نوع دوره نمی تواند خالی بماند"),
   tags: yup.string().required("وارد کردن فیلد تگ الزامیست "),
 });

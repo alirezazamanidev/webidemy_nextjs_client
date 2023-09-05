@@ -48,6 +48,9 @@ const CreateCourseFormValidationSchema = yup.object().shape({
         );
       }
     ),
+  fromColor: yup.string().required("وارد کردن رنگ کارت الزامییست"),
+  toColor: yup.string().required("وارد کردن رنگ کارت الزامییست"),
+
   type: yup.string().required("فیلد نوع دوره نمی تواند خالی بماند"),
   tags: yup.string().required("وارد کردن فیلد تگ الزامیست "),
 });
@@ -62,7 +65,7 @@ const CreateCourseForm = withFormik<
     description: "",
     photo: {},
     price: "",
-    toColor: "",
+    toColor: "#000",
     fromColor: "",
     condition: "",
     tags: "",

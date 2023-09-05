@@ -6,21 +6,27 @@ import { TypeConditioncourseToFarsi, TypeItemInFarsi } from "@/libs/utils";
 import { useState } from "react";
 import DeleteConfreamation from "@/components/shared/confreamtions/DeleteConfreamation";
 import { DeleteCourse } from "@/libs/services/admin/course";
-import { KeyedMutator } from "swr";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import ImageComponent from "@/components/shared/ImageComponent";
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from "react-query";
 interface props {
   course: Course;
-  courseMuted: KeyedMutator<any>;
+  courseRefeach: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<any, unknown>>;
 }
-export default function CourseItemLayout({ course, courseMuted }: props) {
+export default function CourseItemLayout({ course, courseRefeach }: props) {
   const [showDeleteConfrimation, setShowDeleteConfrimation] =
     useState<boolean>(false);
   const deleteHandle = async () => {
     try {
       await DeleteCourse(course._id);
-      await courseMuted();
+      await courseRefeach();
       setShowDeleteConfrimation(false);
       toast.success("دوره مورد نظر با موفقیت حذف شد!");
     } catch (err) {
@@ -31,7 +37,7 @@ export default function CourseItemLayout({ course, courseMuted }: props) {
   return (
     <>
       <tr className="border border-neutral-500  text-white">
-      <td className=" hidden">
+        <td className=" hidden">
           {showDeleteConfrimation && (
             <DeleteConfreamation
               title={`حذف دوره ${course?.title}`}
@@ -43,33 +49,34 @@ export default function CourseItemLayout({ course, courseMuted }: props) {
         </td>
         <td className="whitespace-nowrap  px-6 py-4 font-medium">
           <ImageComponent
-            url={course?.photos['360']}
+            url={course?.photos["360"]}
             width={130}
             height={60}
+
             alt={course?.title}
-            className=" object-cover"
+            className=" object-fill"
           />
         </td>
         <td className="whitespace-nowrap   py-4 ">{course?.title}</td>
-        <td className="whitespace-nowrap  py-4">
-          {course?.teacher?.fullname}
-        </td>
+        <td className="whitespace-nowrap  py-4">{course?.teacher?.fullname}</td>
         <td className="whitespace-nowrap  py-4">
           {TypeConditioncourseToFarsi(course?.condition)}
         </td>
         <td className="whitespace-nowrap   py-4">{course?.time}</td>
         <td className="whitespace-nowrap   py-4">5</td>
         <td className="whitespace-nowrap   py-4">40</td>
-        <td className="whitespace-nowrap   py-4">{TypeItemInFarsi(course?.type)}</td>
+        <td className="whitespace-nowrap   py-4">
+          {TypeItemInFarsi(course?.type)}
+        </td>
         <td className="whitespace-nowrap   py-4 ">
-        <span className=" flex items-center justify-center">
-        {separateWithComma(course?.price)}
-          <span className=" text-gray-300 text-sm mr-2">تومان</span>
-        </span>
+          <span className=" flex items-center justify-center">
+            {separateWithComma(course?.price)}
+            <span className=" text-gray-300 text-sm mr-2">تومان</span>
+          </span>
         </td>
         <td className="whitespace-nowrap   py-4 flex ">
-      <div className=" flex items-center pt-4">
-      <Link
+          <div className=" flex items-center pt-4">
+            <Link
               href={`/admin/courses/edit/${course._id}`}
               className=" bg-indigo-600 p-3 rounded-full ml-3"
             >
@@ -81,11 +88,9 @@ export default function CourseItemLayout({ course, courseMuted }: props) {
             >
               <MdDeleteOutline className=" text-white  text-base" />
             </button>
-      </div>
+          </div>
         </td>
-       
       </tr>
-  
     </>
   );
 }

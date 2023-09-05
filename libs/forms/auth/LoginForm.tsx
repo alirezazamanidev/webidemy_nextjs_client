@@ -34,7 +34,8 @@ const LoginForm = withFormik<LoginFormProps, LoginFormValuesInterFace>({
           res.data?.access_token,
           res?.data?.refresh_token
         );
-        toast.success(" ورود با موفقیت انجام شد");
+        toast.success(" ورود با موفقیت انجام شد :))");
+        props.router.refresh();
         return;
       }
     } catch (err) {
