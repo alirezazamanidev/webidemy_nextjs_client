@@ -6,8 +6,7 @@ const nextConfig = {
           {
             protocol: "https",
             hostname: "api.webidemyyy.ir",
-            port: '',
-            pathname: '',
+         
 
           },
         ],
