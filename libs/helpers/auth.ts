@@ -1,9 +1,9 @@
-export const StoreCookieForLogin = async (token: string) => {
+export const StoreCookieForLogin = async (at: string,rt:string) => {
   await fetch(`${process.env.NEXT_PUBLIC_URL_CLIENT}/api/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ token }),
+    body: JSON.stringify({ at,rt }),
   });
 };

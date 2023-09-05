@@ -28,14 +28,15 @@ const LoginForm = withFormik<LoginFormProps, LoginFormValuesInterFace>({
   handleSubmit: async (valuse, { props }) => {
     try {
       const res = await CallApi().post("auth/local/signIn", valuse);
-   
       if (res.status === 200) {
-        
         await props.router.push("/");
+        await StoreCookieForLogin(
+          res.data?.access_token,
+          res?.data?.refresh_token
+        );
         toast.success(" ورود با موفقیت انجام شد");
         return;
       }
-
     } catch (err) {
       if (err instanceof BadRequestException) {
         toast.error(err?.message);
