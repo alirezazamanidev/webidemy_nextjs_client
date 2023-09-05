@@ -34,6 +34,11 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
     }
   };
 
+  let episodeLength=0;
+  course?.seasons.forEach((seasn) => {
+    episodeLength += seasn.episodes.length;
+  });
+
   return (
     <>
       <tr className="border border-neutral-500  text-white">
@@ -52,7 +57,6 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
             url={course?.photos["360"]}
             width={130}
             height={60}
-
             alt={course?.title}
             className=" object-fill"
           />
@@ -63,8 +67,8 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
           {TypeConditioncourseToFarsi(course?.condition)}
         </td>
         <td className="whitespace-nowrap   py-4">{course?.time}</td>
-        <td className="whitespace-nowrap   py-4">5</td>
-        <td className="whitespace-nowrap   py-4">40</td>
+        <td className="whitespace-nowrap   py-4">{course?.seasons?.length}</td>
+        <td className="whitespace-nowrap   py-4">{episodeLength}</td>
         <td className="whitespace-nowrap   py-4">
           {TypeItemInFarsi(course?.type)}
         </td>

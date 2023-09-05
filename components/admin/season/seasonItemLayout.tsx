@@ -43,7 +43,7 @@ export default function SeasonItemLayout({ season, seasonRefeash }: props) {
           {showDeleteConfrimation && (
             <DeleteConfreamation
               title={`حذف فصل ${season?.title}`}
-              descreaption="آیا از حذف دوره مورد نظر اطمینان دارید .در صورت تایید اطلاعات دوره باز نخواهد گشت"
+              descreaption="آیا از حذف فصل مورد نظر اطمینان دارید .در صورت تایید اطلاعات فصل باز نخواهد گشت"
               handleTrue={deleteHandle}
               handleCancel={() => setShowDeleteConfrimation(false)}
             />
@@ -57,12 +57,14 @@ export default function SeasonItemLayout({ season, seasonRefeash }: props) {
         </td>
 
         <td className="whitespace-nowrap   py-4 ">
-          <span className=" flex items-center justify-center">6</span>
+          <span className=" flex items-center justify-center">
+            {season?.episodes?.length}
+          </span>
         </td>
         <td className="whitespace-nowrap   py-4  ">
-          <div className=" pt-4 flex items-center justify-center">
+          <div className="  flex items-center justify-center">
             <Link
-              href={`/admin/courses/edit/${season._id}`}
+              href={`/admin/seasons/edit/${season?._id}`}
               className=" bg-indigo-600 p-3 rounded-full ml-3"
             >
               <FiEdit2 className=" text-white  text-sm " />

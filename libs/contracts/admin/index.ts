@@ -12,9 +12,9 @@ export interface CourseFormValuseInterface {
 }
 
 export interface SeasonFormValuseInterface {
-  title: string;
-  number: number;
-  course: string;
+  title?: string;
+  number?: number;
+  course?: string;
 }
 
 export interface EpisodeFormValuesInterface {
