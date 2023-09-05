@@ -14,20 +14,21 @@ export default function useAuth() {
       retryOnMount: false,
       refetchOnMount: false,
       onError: async (err: any) => {
-        let refreshToken = cookieStore.get("x-refresh-token");
-        if (refreshToken) {
-          const res = await CallApi().get("/auth/refresh", {
-            headers: {
-              "Content-Type": "application/json",
-              refresh_token: refreshToken,
-            },
-          });
-          if (res.status === 200) {
-            await StoreCookieForLogin(
-              res?.data?.access_token,
-              res?.data?.refresh_token
-            );
-          }
+        
+        if(err.response.status===401){
+          let refreshToken = cookieStore.get("x-refresh-token");
+          if (refreshToken) {
+            const res = await CallApi().post("/auth/refresh", {
+              refreshToken,
+            });
+            if (res.status === 200) {
+              await StoreCookieForLogin(
+                res?.data?.access_token,
+                res?.data?.refresh_token
+              );
+            }
+        }
+    
         }
       },
     }
