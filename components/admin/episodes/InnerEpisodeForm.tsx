@@ -1,15 +1,16 @@
 "use client";
 import { ErrorMessage, Form, FormikProps, FormikValues } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Selectbox from "@/components/shared/forms/Selectbox";
 import Textarea from "@/components/shared/forms/Textarea";
 import Loading from "react-loading";
 import { Episode } from "@/libs/model/episode";
 import { BiVideoPlus } from "react-icons/bi";
-import useSWR from "swr";
-import { getSeasonsForCreateEpisode } from "@/libs/services/admin/episode";
 import { Season } from "@/libs/model/seasson";
+import { useQuery } from "react-query";
+import { CallApi } from "@/libs/helpers/callApi";
+import Input from "@/components/shared/forms/Input";
 
 type EpisodeFormProps = FormikProps<any> & {
   episode?: Episode;
@@ -19,28 +20,49 @@ const InnerEpisodeForm = ({
   isSubmitting,
   episode,
 }: EpisodeFormProps) => {
-  const { data, isLoading } = useSWR(
-    { url: "/admin/episodes/create/getseason" },
-    getSeasonsForCreateEpisode
+  const { data, isLoading } = useQuery(
+    "getSeasonForCreateEpisode",
+    async () => {
+      return (await CallApi().get("/admin/episodes/create")).data;
+    }
   );
-
   if (isLoading) return <></>;
+
+  // Handle file input change
+  const handleFileChange = (event: any) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFieldValue("video", file);
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const videoElement = document.createElement("video");
+        videoElement.src = e.target.result;
+
+        videoElement.onloadedmetadata = () => {
+          
+          setFieldValue('time',Math.round(videoElement.duration))
+        };
+      };
+
+      reader.readAsDataURL(file);
+    } 
+  };
+
   return (
     <>
       <div className=" w-full flex flex-col-reverse md:flex-row p-4 lg:p-7">
         <div className=" w-full md:w-5/12 lg:w-7/12 xl:w-8/12  ">
           <Form className=" bg-dark-600 px-5 py-7 rounded-lg  shadow-sm">
-            <div className=" inline w-2/12">
-              <label htmlFor="video" className=" cursor- inline w-2/12">
+            <div className="  w-full sm:w-5/12 md:w-2/12">
+              <label htmlFor="video" className="  cursor-pointer">
                 <label className=" text-2xl text-gray-200">ویدعو جلسه</label>
                 <input
                   name="video"
                   type="file"
                   className=" hidden"
                   id="video"
-                  onChange={(e: any) =>
-                    setFieldValue("video", e.target.files[0])
-                  }
+                  onChange={handleFileChange}
                 />
                 <BiVideoPlus className=" text-8xl text-white" />
               </label>
@@ -53,10 +75,8 @@ const InnerEpisodeForm = ({
 
             <div className=" flex flex-col xl:flex-row items-center ">
               <div className=" w-full xl:w-8/12">
-                <input
-                  onChange={(e) => {
-                    setFieldValue("title", e.target.value);
-                  }}
+                <Input
+                  
                   placeholder="عنوان جلسه را وارد کنید"
                   name="title"
                   className="  w-full py-4  rounded-md  px-3 bg-gray-600 text-gray-100 outline-none "
@@ -70,7 +90,7 @@ const InnerEpisodeForm = ({
 
               <div className=" w-full xl:w-4/12 mr-0 xl:mr-4 mt-4 xl:mt-0">
                 <Selectbox
-                  onChange={(e: any) => setFieldValue("type", e.target.value)}
+                  
                   inputClassName="bg-gray-100  outline-none selectbox  w-full flex justify-center  rounded-lg bg-gray-600 text-gray-100  py-4 pr-5 "
                   name="type"
                   options={[
@@ -88,7 +108,8 @@ const InnerEpisodeForm = ({
             </div>
             <div className=" my-5">
               <select
-              onChange={(e)=>setFieldValue('season',e.target.value)}
+              defaultValue={episode?.season._id}
+                onChange={(e) => setFieldValue("season", e.target.value)}
                 name=""
                 id=""
                 className=" text-white bg-gray-600  w-full px-4 py-2 rounded-lg"
@@ -122,10 +143,7 @@ const InnerEpisodeForm = ({
               />
             </div>
             <div className=" w-full  mt-4">
-              <input
-                onChange={(e) => {
-                  setFieldValue("number", e.target.value);
-                }}
+              <Input
                 placeholder="شماره جلسه را وارد کنید"
                 name="number"
                 type="number"

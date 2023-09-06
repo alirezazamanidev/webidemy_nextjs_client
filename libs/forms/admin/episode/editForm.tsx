@@ -1,8 +1,8 @@
 import InnerEpisodeForm from "@/components/admin/episodes/InnerEpisodeForm";
 import { EpisodeFormValuesInterface } from "@/libs/contracts/admin";
-
 import { BadRequestException } from "@/libs/exceptions/BadRequestException";
-import { createEpisode } from "@/libs/services/admin/episode";
+import { Episode } from "@/libs/model/episode";
+import { updateEpisode } from "@/libs/services/admin/episode";
 
 import { withFormik } from "formik";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
@@ -10,11 +10,12 @@ import { toast } from "react-toastify";
 
 import * as yup from "yup";
 
-interface CreateEpisodeFormProps {
+interface EditEpisodeFormProps {
   router: AppRouterInstance;
+  episode: Episode;
 }
 
-const CreateEpisodeFormValidationSchema = yup.object().shape({
+const EditEpisodeFormValidationSchema = yup.object().shape({
   title: yup
     .string()
     .required("وارد کردن فیلد عنوان الزامیست")
@@ -26,12 +27,20 @@ const CreateEpisodeFormValidationSchema = yup.object().shape({
     .min(20, "فیلد متن نمی تواند کمتر از 20 کارکتر باشد"),
   video: yup
     .mixed()
-    .required("وارد کردن ویدعو برای دوره الزامیست")
     .test(
       "fileFormat",
       "پسوند ویدعو از پسوند های ویدعو نیست!",
       (value: any) => {
-        return value && ["video/mp4", "video/mp3"].includes(value.type);
+
+        if (value) {
+          const allowedFormats = [
+            'video/mp4',
+            'video/mp3',
+        
+          ];
+          return allowedFormats.includes(value.type);
+        }
+        return true;
       }
     ),
   type: yup.string().required("فیلد نوع جلسه نمی تواند خالی بماند"),
@@ -39,26 +48,24 @@ const CreateEpisodeFormValidationSchema = yup.object().shape({
   number: yup.number().required("فیلد شماره جلسه نمی تواند خالی بماند"),
 });
 
-const CreateEpisodeForm = withFormik<
-  CreateEpisodeFormProps,
+const EditEpisodeForm = withFormik<
+  EditEpisodeFormProps,
   EpisodeFormValuesInterface
 >({
   mapPropsToValues: (props) => ({
-    title: "",
-    body: "",
-    type: "",
-    season: "",
-
+    title: props.episode.title,
+    body: props.episode.body,
+    type: props.episode.type,
+    season: props.episode.season._id,
     time: 0,
-    video: {},
-    number: undefined,
+    number: props.episode.number,
   }),
-  validationSchema: CreateEpisodeFormValidationSchema,
-  handleSubmit: async (valuse, { setFieldError, props }) => {
+  validationSchema: EditEpisodeFormValidationSchema,
+  handleSubmit: async (values, { setFieldError, props }) => {
     try {
-      await createEpisode(valuse);
+      await updateEpisode(props.episode._id, values);
       props.router.push("/admin/episodes");
-      toast.success("جلسه مورد نظر با موفقیت در سایت قرار گرفت.");
+      toast.success("تغییرات مورد  نظر با موفقیت ارسال شد!");
     } catch (err) {
       if (err instanceof BadRequestException) {
         setFieldError("title", err.message);
@@ -68,4 +75,4 @@ const CreateEpisodeForm = withFormik<
   },
 })(InnerEpisodeForm);
 
-export default CreateEpisodeForm;
+export default EditEpisodeForm;

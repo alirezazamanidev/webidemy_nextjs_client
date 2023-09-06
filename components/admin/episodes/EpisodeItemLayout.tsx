@@ -11,17 +11,19 @@ import { KeyedMutator } from "swr";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { Episode } from "@/libs/model/episode";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
+import { DeleteEpisode } from "@/libs/services/admin/episode";
 interface props {
   episode: Episode;
-  episodeMuted: KeyedMutator<any>;
+  episodeRefeach: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }
-export default function EpisodeItemLayout({ episode,episodeMuted }: props) {
+export default function EpisodeItemLayout({ episode,episodeRefeach }: props) {
   const [showDeleteConfrimation, setShowDeleteConfrimation] =
     useState<boolean>(false);
   const deleteHandle = async () => {
     try {
-      await DeleteCourse(episode._id);
-      await episodeMuted();
+      await DeleteEpisode(episode._id);
+      await episodeRefeach();
       setShowDeleteConfrimation(false);
       toast.success("جلسه مورد نظر با موفقیت حذف شد!");
     } catch (err) {
@@ -36,7 +38,7 @@ export default function EpisodeItemLayout({ episode,episodeMuted }: props) {
           {showDeleteConfrimation && (
             <DeleteConfreamation
               title={`حذف جلسه ${episode?.title}`}
-              descreaption="آیا از حذف جلسه مورد نظر اطمینان دارید .در صورت تایید اطلاعات دوره باز نخواهد گشت"
+              descreaption="آیا از حذف جلسه مورد نظر اطمینان دارید .در صورت تایید اطلاعات جلسه باز نخواهد گشت"
               handleTrue={deleteHandle}
               handleCancel={() => setShowDeleteConfrimation(false)}
             />
@@ -57,7 +59,7 @@ export default function EpisodeItemLayout({ episode,episodeMuted }: props) {
         <td className="whitespace-nowrap   py-4  ">
           <div className=" pt-4 flex items-center justify-center">
             <Link
-              href={`/admin/courses/edit/${episode?._id}`}
+              href={`/admin/episodes/edit/${episode?._id}`}
               className=" bg-indigo-600 p-3 rounded-full ml-3"
             >
               <FiEdit2 className=" text-white  text-sm " />

@@ -23,6 +23,6 @@ export interface EpisodeFormValuesInterface {
   body: string;
   type: string;
   time: number;
-  video: {};
-  number: number;
+  video?: {};
+  number?: number;
 }

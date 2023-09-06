@@ -2,25 +2,26 @@
 
 import { useSearchParams } from "next/navigation";
 import CourseItemLayout from "./EpisodeItemLayout";
-import useSWR from "swr";
 import { useEffect, useState } from "react";
-import { getCourses } from "@/libs/services/admin/course";
 import Loading from "react-loading";
-import { Course } from "@/libs/model/course";
 import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
-import { GetEpisodes } from "@/libs/services/admin/episode";
 import { Episode } from "@/libs/model/episode";
+import { useQuery } from "react-query";
+import { CallApi } from "@/libs/helpers/callApi";
 
 export default function TableEpisodesLayout() {
   const [page, setPage] = useState<number>(1);
   const searchParams = useSearchParams();
 
-  const { data, isLoading, mutate } = useSWR(
-    { url: "/admin/episodes", page },
-    GetEpisodes
-  );
-  console.log(data);
+  const {data,isLoading,refetch}=useQuery(['show-episodes-adminpanel',page],async()=>{
+    const pre_page=12;
+    const res = await CallApi().get(
+      `/admin/episodes?page=${page}&item_count=${pre_page}`
+    );
+  
+    return res?.data;
+  })
   
 
   const querypage = searchParams.get("page");
@@ -87,7 +88,7 @@ export default function TableEpisodesLayout() {
                       <CourseItemLayout
                         key={episode._id}
                         episode={episode}
-                        episodeMuted={mutate}
+                        episodeRefeach={refetch}
                       />
                     ))}
                   </tbody>

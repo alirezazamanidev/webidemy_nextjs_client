@@ -41,7 +41,8 @@ const EditSeasonForm = withFormik<
     try {
       await UpdateSeason(valuse, props.season?._id);
       props.router.push("/admin/seasons");
-      toast.success("فصل مورد نظر با موفقیت ویرایش شد.");
+      toast.success("تغییرات مورد  نظر با موفقیت ارسال شد!");
+
     } catch (err) {
       if (err instanceof BadRequestException) {
         setFieldError("title", err.message);
