@@ -16,7 +16,7 @@ const GetSingleCourse= async(courseSlug: string)=> {
   });
 
   
-  if (res.status === 400) redirect("/");
+  if (res.status === 400) redirect("/not-found");
   return res.json();
 }
 

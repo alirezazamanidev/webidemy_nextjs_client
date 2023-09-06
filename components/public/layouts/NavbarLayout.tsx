@@ -31,17 +31,17 @@ export default function NavbarLayouts() {
           </h2>
           <ul className="  hidden lg:flex items-center  space-x-10 space-x-reverse  text-2xl lg:text-3xl  text-gray-300   cursor-pointer">
             <Link href="/" className=" group">
-              <span className="p-2 text-center relative after:h-0.5 after:absolute after:bottom-0  after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-gray-300  after:opacity-0  after:w-0 after:transition-all  group-hover:after:w-1/2 group-hover:after:opacity-100 ">
+              <span className={`p-2 text-center relative after:h-0.5 after:absolute after:bottom-0  after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-gray-300    after:w-0 after:transition-all  group-hover:after:w-1/2 group-hover:after:opacity-100 ${pathname==='/' ?' after:opacity-100 after:w-1/2' :' after:opacity-0'}`}>
                 خانه
               </span>
             </Link>
-            <li className=" group">
-              <span className="p-2 text-center relative after:h-0.5 after:absolute after:bottom-0  after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-gray-300  after:opacity-0  after:w-0 after:transition-all  group-hover:after:w-1/2 group-hover:after:opacity-100">
+            <Link href='/courses' className=" group">
+              <span className={`p-2 text-center relative after:h-0.5 after:absolute after:bottom-0  after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-gray-300    after:w-0 after:transition-all  group-hover:after:w-1/2 group-hover:after:opacity-100 ${pathname==='/courses' ?' after:opacity-100 after:w-1/2' :' after:opacity-0'}`}>
                 دوره ها
               </span>
-            </li>
+            </Link>
             <li className=" group">
-              <span className="p-2 text-center relative after:h-0.5 after:absolute after:bottom-0  after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-gray-300  after:opacity-0  after:w-0 after:transition-all  group-hover:after:w-1/2 group-hover:after:opacity-100 ">
+              <span className={`p-2 text-center relative after:h-0.5 after:absolute after:bottom-0  after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-gray-300    after:w-0 after:transition-all  group-hover:after:w-1/2 group-hover:after:opacity-100 ${pathname==='/blogs' ?' after:opacity-100 after:w-1/2' :' after:opacity-0'}`}>
                 مقالات
               </span>
             </li>

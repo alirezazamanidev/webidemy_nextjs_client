@@ -21,23 +21,27 @@ export default function RootLayout({
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime:10000,
+        staleTime: 10000,
         cacheTime: 0,
-       
-
       },
     },
   });
 
   return (
     <html lang="fa" dir="rtl" className={myfont.className}>
-        <body className=" bg-dark-700">
-          <QueryClientProvider client={queryClient}>
-            <ToastContainerComponnent position="top-center" theme="dark" />
-            {children}
-            <ReactQueryDevtools initialIsOpen={true} position="top-left" />
-          </QueryClientProvider>
-        </body>
+      <link
+        rel="icon"
+        href="/webidemyLogo"
+        type="image/jpeg"
+        sizes="any"
+      />
+      <body className=" bg-dark-700">
+        <QueryClientProvider client={queryClient}>
+          <ToastContainerComponnent position="top-center" theme="dark" />
+          {children}
+          <ReactQueryDevtools initialIsOpen={true} position="top-left" />
+        </QueryClientProvider>
+      </body>
     </html>
   );
 }

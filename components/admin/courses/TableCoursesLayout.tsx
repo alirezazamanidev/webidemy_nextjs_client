@@ -16,7 +16,7 @@ export default function TableCoursesLayout() {
   const { data, isLoading,refetch } = useQuery(
     ["Show_courses_adminPanel", page],
     async () => {
-      const pre_page = 2;
+      const pre_page = 12;
       const res = await CallApi().get(
         `/admin/courses?page=${page}&item_count=${pre_page}`
       );
