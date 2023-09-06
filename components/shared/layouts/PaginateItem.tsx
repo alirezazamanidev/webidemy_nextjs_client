@@ -13,7 +13,6 @@ export default function PaginateItem({
   pages: number;
   url: string;
 }) {
-  console.log(page);
   
   const router = useRouter();
 
