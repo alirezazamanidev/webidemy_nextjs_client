@@ -3,14 +3,14 @@ import DisclosureList from "../../shared/layouts/DisclosureList";
 import Image from "next/image";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { AiFillDashboard } from "react-icons/ai";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Transition } from "@headlessui/react";
 import { MdOutlineGolfCourse } from "react-icons/md";
 import { FaVideo } from "react-icons/fa";
 import { FaCommentAlt, FaUsers } from "react-icons/fa";
 import { MdPermContactCalendar } from "react-icons/md";
 import mePhoto from "@/public/images/me.jpeg";
-import { useAppSelector } from "@/libs/hooks";
+
 import { BiSolidCategoryAlt } from "react-icons/bi";
 let list = [
   { label: "داشبرد اول", href: "/admin/dashboard_1" },

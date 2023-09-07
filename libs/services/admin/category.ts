@@ -42,5 +42,5 @@ export default async function UpdateCategory(
   cateId: string,
   value: categoryFormValuesInterface
 ) {
-  await CallApi().put(`/admin/categories/${cateId}`, value);
+  await CallApi().put(`/admin/categories/edit/${cateId}`, value);
 }

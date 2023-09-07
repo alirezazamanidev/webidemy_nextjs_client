@@ -2,7 +2,7 @@ import InnerCourseForm from "@/components/admin/courses/InnerCourseForm";
 import { CourseFormValuseInterface } from "@/libs/contracts/admin";
 import { BadRequestException } from "@/libs/exceptions/BadRequestException";
 import { Course } from "@/libs/model/course";
-import { UpdateCourse, createCourse } from "@/libs/services/admin/course";
+import { UpdateCourse } from "@/libs/services/admin/course";
 
 import { withFormik } from "formik";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";

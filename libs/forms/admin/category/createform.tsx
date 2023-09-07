@@ -3,16 +3,14 @@ import { categoryFormValuesInterface } from "@/libs/contracts/admin";
 import { BadRequestException } from "@/libs/exceptions/BadRequestException";
 import { CallApi } from "@/libs/helpers/callApi";
 import { withFormik } from "formik";
-import { Dispatch, SetStateAction } from "react";
 import { toast } from "react-toastify";
-import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query'
+
 
 import * as yup from "yup";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 interface CreateCategoryFormProps {
-  handleCancel: () => void;
-  setshowform: Dispatch<SetStateAction<boolean>>;
-  categoryRefech:<TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
+  router: AppRouterInstance;
 }
 
 const CreateCategoryFormValidationSchema = yup.object().shape({
@@ -36,9 +34,8 @@ const CreateCategoryForm = withFormik<
       const res = await CallApi().post("/admin/categories/create", valuse);
 
       if (res.status === 201) {
-        await props.categoryRefech();
-        props.setshowform(false);
-        
+      await props.router.push('/admin/categories');
+
         toast.success("دسته بندی با موفقیت ایجاد شد!");
       }
     } catch (err) {

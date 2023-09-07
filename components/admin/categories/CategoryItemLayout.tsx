@@ -57,7 +57,7 @@ export default function CategoryItemLayout({ category, categoryRefeach }: props)
         <td className="whitespace-nowrap   py-4 ">
           <div className="  pt-4 flex justify-center">
             <Link
-              href={`/admin/categories?edit=${category._id}`}
+              href={`/admin/categories/edit/${category._id}`}
               className=" bg-indigo-600 p-3 rounded-full ml-3"
             >
               <FiEdit2 className=" text-white  text-base " />
