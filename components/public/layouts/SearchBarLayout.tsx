@@ -1,13 +1,11 @@
 "use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Listbox } from "@headlessui/react";
-import { useSearch, useSearchInfinite } from "@/libs/hooks/useSearch";
+import {  useSearchInfinite } from "@/libs/hooks/useSearch";
 import Loading from "react-loading";
 import { Course } from "@/libs/model/course";
 import CardCourseSearchLayout from "../course/CardCourseForSearchLayout";
-import EmptyIcon from "@/components/shared/EmptyIcon";
-
 const filterItem = [
   { value: "default", name: "پیش فرض", unavailable: false },
   { value: "newest", name: "جدید ترین", unavailable: false },

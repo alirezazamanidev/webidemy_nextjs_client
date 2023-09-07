@@ -2,18 +2,46 @@
 import TableCategoriesLayout from "@/components/admin/categories/TableCategoriesLayout";
 import TableCoursesLayout from "@/components/admin/courses/TableCoursesLayout";
 import CreateCategoryForm from "@/libs/forms/admin/category/createform";
-import { GetCategories } from "@/libs/services/admin/category";
+import EditCategoryForm from "@/libs/forms/admin/category/editform";
+import {
+  GetCategories,
+  GetSingleCategory,
+} from "@/libs/services/admin/category";
 import Link from "next/link";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 
 const CategoriesPage = () => {
   const [showInnercategoryForm, setShowInnercategoryForm] =
     useState<boolean>(false);
+  const [cateId, setCateId] = useState<string>("");
+  const searchParams = useSearchParams();
 
+  const queryeditCateId = searchParams.get("edit");
+
+  const { data, isError, isLoading } = GetSingleCategory(cateId);
+  useEffect(() => {
+    if (queryeditCateId) {
+      setCateId(queryeditCateId);
+    }
+  }, [queryeditCateId]);
   const { refetch } = GetCategories(1, 12);
   return (
     <>
+      {cateId && (
+        <>
+          {isLoading ? (
+            <h2>loading ...</h2>
+          ) : (
+            <EditCategoryForm
+              categoryRefech={refetch}
+              cate={data}
+              handleCancel={() => setCateId("")}
+            />
+          )}
+        </>
+      )}
       {showInnercategoryForm && (
         <CreateCategoryForm
           categoryRefech={refetch}

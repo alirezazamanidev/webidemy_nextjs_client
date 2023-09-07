@@ -1,5 +1,6 @@
 export interface CourseFormValuseInterface {
   title: string;
+  category: string;
   body: string;
   price?: string;
   photo?: {};

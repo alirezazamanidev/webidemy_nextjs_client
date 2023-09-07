@@ -13,6 +13,9 @@ import { MdAddAPhoto, MdOutlinePhotoCamera } from "react-icons/md";
 import { TypeConditioncourseToFarsi } from "@/libs/utils";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { CourseFormValuseInterface } from "@/libs/contracts/admin";
+import { useQuery } from "react-query";
+import { CallApi } from "@/libs/helpers/callApi";
+import { Category } from "@/libs/model/category";
 type courseFormProps = FormikProps<any> & {
   course?: Course;
 };
@@ -47,6 +50,9 @@ const InnerCourseForm = ({
       setDisabled(false);
     }
   };
+  const {data,isLoading} = useQuery(["get-all-category"], async () => {
+    return (await CallApi().get("/admin/courses/create")).data
+  });
 
   useEffect(() => {
     if (course) {
@@ -61,13 +67,14 @@ const InnerCourseForm = ({
       setPriceCard(course?.price);
       setConditionCourseCard(course?.condition);
     }
-  }, [course,imageFile1]);
+  }, [course, imageFile1]);
 
+  let errorStatus = Object.values(errors).length === 0 ? true : false;
 
-  let errorStatus=Object.values(errors).length ===0 ? true : false;
-  
-  
-
+  if(isLoading) return <></>
+  const cateList=data.map((cate:Category)=>{
+     return { label: cate.title, value: cate._id };
+  })
   return (
     <>
       <div className=" w-full flex flex-col-reverse md:flex-row p-4 lg:p-7">
@@ -108,7 +115,6 @@ const InnerCourseForm = ({
                     />
                   </div>
                 </div>
-              
               </div>
             </div>
             <div className=" flex flex-col xl:flex-row items-center ">
@@ -124,7 +130,6 @@ const InnerCourseForm = ({
                   className="  w-full py-4  rounded-md  px-3 bg-gray-600 text-gray-100 outline-none "
                 />
               </div>
-
               <div className=" w-full xl:w-4/12 mr-0 xl:mr-4 mt-4 xl:mt-0">
                 <Selectbox
                   onChange={SelectboxHandle}
@@ -137,7 +142,16 @@ const InnerCourseForm = ({
                   ]}
                 />
               </div>
+              </div>
+            
+              <div className="  mt-4">
+              <Selectbox
+                inputClassName="bg-gray-100  outline-none selectbox  w-full flex justify-center  rounded-lg bg-gray-600 text-gray-100  py-4 pr-5 "
+                name="category"
+                options={cateList}
+              />
             </div>
+        
             <div className="  mt-4">
               <Selectbox
                 onChange={(e: any) => {
@@ -157,6 +171,7 @@ const InnerCourseForm = ({
                 ]}
               />
             </div>
+
             <div className=" flex flex-col xl:flex-row items-center   mt-4">
               <div className=" w-full xl:w-6/12">
                 <input
@@ -313,10 +328,11 @@ const InnerCourseForm = ({
               </div>
             </div>
           </div>
-          {
-            errors && (
-              <div
-              className={`bg-dark-600 space-y-3  select-none ${!errorStatus ? 'py-4 px-6' :""}   mx-6 rounded-xl  my-6 mt-20 lg:my-0`}
+          {errors && (
+            <div
+              className={`bg-dark-600 space-y-3  select-none ${
+                !errorStatus ? "py-4 px-6" : ""
+              }   mx-6 rounded-xl  my-6 mt-20 lg:my-0`}
             >
               <ErrorMessage
                 name="title"
@@ -328,7 +344,12 @@ const InnerCourseForm = ({
                 component="div"
                 className=" text-xl text-red-700"
               />
-                <ErrorMessage
+              <ErrorMessage
+              name="category"
+              component='div'
+              className=" text-lg text-red-700"
+              />
+              <ErrorMessage
                 name="fromColor"
                 component="div"
                 className=" text-xl text-red-700"
@@ -359,11 +380,7 @@ const InnerCourseForm = ({
                 className=" text-xl text-red-700"
               />
             </div>
-
-            )
-          }
-
-   
+          )}
         </div>
       </div>
     </>

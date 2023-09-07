@@ -13,7 +13,7 @@ export default function CoursesPage({}) {
   const searchParams = useSearchParams();
   const querySort = searchParams.get("sort");
 
-  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
+  const { data, isLoading, fetchNextPage, hasNextPage } =
     useSearchInfinite({
       key: "filter-courses",
       url: "/courses/filter",
@@ -44,8 +44,6 @@ export default function CoursesPage({}) {
     };
   }, [querySort, hasNextPage, fetchNextPage]);
 
-  console.log(data?.pages);
-  
 
 
   return (

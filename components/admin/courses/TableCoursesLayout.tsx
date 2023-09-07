@@ -18,6 +18,8 @@ export default function TableCoursesLayout() {
   useEffect(() => {
     if (querypage) setPage(parseInt(querypage));
   }, [querypage]);
+
+  
   return (
     <>
       <div className="flex flex-col">
@@ -54,6 +56,10 @@ export default function TableCoursesLayout() {
                       <th scope="col" className=" px-6 py-4">
                         {" "}
                         عنوان دوره
+                      </th>
+                      <th scope="col" className=" px-6 py-4">
+                        {" "}
+                         دسته بندی
                       </th>
                       <th scope="col" className=" px-6 py-4">
                         {" "}

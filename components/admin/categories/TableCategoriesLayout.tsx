@@ -42,7 +42,7 @@ export default function TableCategoriesLayout() {
               ) : data?.data?.length === 0 ? (
                 <div className=" w-full flex flex-col border border-dashed rounded-lg border-gray-600 p-3 justify-center items-center">
                   <h2 className=" text-3xl text-gray-500 mb-4">
-                    دوره ای جهت نمایش وجود ندارد
+                    دسته بندی ای جهت نمایش وجود ندارد
                   </h2>
                   <EmptyIcon className=" w-80" />
                 </div>

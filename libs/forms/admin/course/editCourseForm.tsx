@@ -31,25 +31,25 @@ const EditCourseFormValidationSchema = yup.object().shape({
     .min(50, "فیلد توضیحات نمی تواند کمتر از 50 کارکتر باشد"),
   condition: yup.string().required("وارد کردن فیلد وضعیت دوره الزامیست"),
   photo: yup
-  .mixed()
-  
-  .test(
-    "fileFormat",
-    "پسوند تصویر از پسوند های تصاویر نیست!",
-    (value: any) => {
-      if (value) {
-        const allowedFormats = [
-          'image/png',
-          'image/jpg',
-          'image/jpeg',
-          'image/svg',
-          'image/webp',
-        ];
-        return allowedFormats.includes(value.type);
+    .mixed()
+
+    .test(
+      "fileFormat",
+      "پسوند تصویر از پسوند های تصاویر نیست!",
+      (value: any) => {
+        if (value) {
+          const allowedFormats = [
+            "image/png",
+            "image/jpg",
+            "image/jpeg",
+            "image/svg",
+            "image/webp",
+          ];
+          return allowedFormats.includes(value.type);
+        }
+        return true;
       }
-      return true;
-    }
-  ),
+    ),
   type: yup.string().required("فیلد نوع دوره نمی تواند خالی بماند"),
   tags: yup.string().required("وارد کردن فیلد تگ الزامیست "),
 });
@@ -61,6 +61,7 @@ const EditCourseForm = withFormik<
   mapPropsToValues: (props) => ({
     title: props?.course?.title,
     body: props?.course?.body,
+    category: props.course?.category._id,
     description: props?.course?.description,
     price: props?.course?.price,
     tags: props?.course?.tags,
@@ -72,8 +73,6 @@ const EditCourseForm = withFormik<
   validationSchema: EditCourseFormValidationSchema,
   handleSubmit: async (values, { setFieldError, props }) => {
     try {
-
-      
       await UpdateCourse(props.course._id, values);
       props.router.push("/admin/courses");
       toast.success("تغییرات مورد  نظر با موفقیت ارسال شد!");

@@ -12,6 +12,7 @@ import {
   RefetchQueryFilters,
 } from "react-query";
 import { Category } from "@/libs/model/category";
+import { DeleteCate } from "@/libs/services/admin/category";
 interface props {
   category: Category;
   categoryRefeach: <TPageData>(
@@ -23,7 +24,7 @@ export default function CategoryItemLayout({ category, categoryRefeach }: props)
     useState<boolean>(false);
   const deleteHandle = async () => {
     try {
-      await DeleteCourse(category._id);
+      await DeleteCate(category._id);
       await categoryRefeach();
       setShowDeleteConfrimation(false);
       toast.success("دسته بندی مورد نظر با موفقیت حذف شد!");
@@ -56,7 +57,7 @@ export default function CategoryItemLayout({ category, categoryRefeach }: props)
         <td className="whitespace-nowrap   py-4 ">
           <div className="  pt-4 flex justify-center">
             <Link
-              href={`/admin/courses/edit/${category._id}`}
+              href={`/admin/categories?edit=${category._id}`}
               className=" bg-indigo-600 p-3 rounded-full ml-3"
             >
               <FiEdit2 className=" text-white  text-base " />

@@ -62,6 +62,8 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
           />
         </td>
         <td className="whitespace-nowrap   py-4 ">{course?.title}</td>
+        <td className="whitespace-nowrap   py-4 ">{course?.category?.title}</td>
+
         <td className="whitespace-nowrap  py-4">{course?.teacher?.fullname}</td>
         <td className="whitespace-nowrap  py-4">
           {TypeConditioncourseToFarsi(course?.condition)}
@@ -78,8 +80,8 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
             <span className=" text-gray-300 text-sm mr-2">تومان</span>
           </span>
         </td>
-        <td className="whitespace-nowrap   py-4 flex ">
-          <div className=" flex items-center pt-4">
+        <td className="whitespace-nowrap   py-4  ">
+          <div className=" flex items-center ">
             <Link
               href={`/admin/courses/edit/${course._id}`}
               className=" bg-indigo-600 p-3 rounded-full ml-3"

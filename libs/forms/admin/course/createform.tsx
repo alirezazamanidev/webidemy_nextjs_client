@@ -29,6 +29,7 @@ const CreateCourseFormValidationSchema = yup.object().shape({
     .required("وارد کردن فیلد توضیجات الزامیست")
     .min(50, "فیلد توضیحات نمی تواند کمتر از 50 کارکتر باشد"),
   condition: yup.string().required("وارد کردن فیلد وضعیت دوره الزامیست"),
+  category: yup.string().required("وارد کردن فیلد دسته بندی الزامیست"),
   photo: yup
     .mixed()
     .required("وارد کردن تصویر برای دوره الزامیست")
@@ -61,6 +62,7 @@ const CreateCourseForm = withFormik<
 >({
   mapPropsToValues: (props) => ({
     title: "",
+    category: "",
     body: "",
     description: "",
     photo: {},
