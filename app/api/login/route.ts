@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   const headers = new Headers();
  
   headers.append(
-    "Set-Cookie",`x-access-token=${res?.at}; Path=/; HttpOnly;  Max-Age=300۰۰0 Domain=.webidemyyy.ir; SameSite=Lax;`
+    "Set-Cookie",`x-access-token=${res?.at}; Path=/; HttpOnly;  Max-Age=30000 Domain=.webidemyyy.ir; SameSite=Lax;`
   );
   headers.append(
     "Set-Cookie",`x-refresh-token=${res?.rt}; Path=/;  Max-Age=64000000; SameSite=Lax; 
