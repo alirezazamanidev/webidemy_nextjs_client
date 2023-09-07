@@ -7,8 +7,6 @@ import Loading from "react-loading";
 import { Course } from "@/libs/model/course";
 import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
-import { useQuery } from "react-query";
-import { CallApi } from "@/libs/helpers/callApi";
 import { Category } from "@/libs/model/category";
 import CategoryItemLayout from "./CategoryItemLayout";
 import { GetCategories } from "@/libs/services/admin/category";

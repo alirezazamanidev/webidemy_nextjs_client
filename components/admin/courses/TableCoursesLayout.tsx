@@ -7,26 +7,12 @@ import Loading from "react-loading";
 import { Course } from "@/libs/model/course";
 import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
-import { useQuery } from "react-query";
-import { CallApi } from "@/libs/helpers/callApi";
+import { GetCourses } from "@/libs/services/admin/course";
 export default function TableCoursesLayout() {
   const [page, setPage] = useState<number>(1);
   const searchParams = useSearchParams();
 
-  const { data, isLoading,refetch } = useQuery(
-    ["Show_courses_adminPanel", page],
-    async () => {
-      const pre_page = 12;
-      const res = await CallApi().get(
-        `/admin/courses?page=${page}&item_count=${pre_page}`
-      );
-
-      return res?.data;
-    },
-    {
-      cacheTime: 1000 * 60 * 5,
-    }
-  );
+  const {isLoading,data,refetch} = GetCourses(page, 12);
 
   const querypage = searchParams.get("page");
   useEffect(() => {

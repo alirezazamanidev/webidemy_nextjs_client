@@ -7,28 +7,16 @@ import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
 import SeasonItemLayout from "./seasonItemLayout";
 import { Season } from "@/libs/model/seasson";
-import { useQuery } from "react-query";
-import { CallApi } from "@/libs/helpers/callApi";
+import { GetSeasons } from "@/libs/services/admin/season";
 
 export default function TableSeasonsLayout() {
   const [page, setPage] = useState<number>(1);
   const searchParams = useSearchParams();
-
-  const { data, isLoading,refetch } = useQuery(
-    ["Show-seasons-admin-panel", page],
-    async () => {
-      const pre_page = 12;
-      const res = await CallApi().get(
-        `/admin/seasons?page=${page}&item_count=${pre_page}`
-      );
-      return res?.data;
-    }
-  );
-
   const querypage = searchParams.get("page");
   useEffect(() => {
     if (querypage) setPage(parseInt(querypage));
   }, [querypage]);
+  const { data, isLoading, refetch } = GetSeasons(page, 12);
   return (
     <>
       <div className="flex flex-col">

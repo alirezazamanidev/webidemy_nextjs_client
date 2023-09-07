@@ -1,6 +1,23 @@
 import { CallApi } from "@/libs/helpers/callApi";
+import { useQuery } from "react-query";
 
+export const GetEpisodes = (page: number, limit: number) => {
+  const { data, isLoading, refetch } = useQuery(
+    ["Show_episodes_adminPanel", page],
+    async () => {
+      const pre_page = 12;
+      const res = await CallApi().get(
+        `/admin/episodes?page=${page}&item_count=${pre_page}`
+      );
 
+      return res?.data;
+    },
+    {
+      cacheTime: 1000 * 60 * 5,
+    }
+  );
+  return { data, isLoading, refetch };
+};
 export const createEpisode = async (values: any) => {
   const formData = new FormData();
   for (let value in values) {
@@ -9,12 +26,12 @@ export const createEpisode = async (values: any) => {
   await CallApi().post("/admin/episodes/create", formData);
 };
 export const updateEpisode = async (episodeId: string, values: any) => {
-    const formData = new FormData();
-    
-    for (let value in values) {
-      formData.append(value, values[value]);
-    }
-    await CallApi().put(`/admin/episodes/edit/${episodeId}`, formData);
+  const formData = new FormData();
+
+  for (let value in values) {
+    formData.append(value, values[value]);
+  }
+  await CallApi().put(`/admin/episodes/edit/${episodeId}`, formData);
 };
 
 export const DeleteEpisode = async (episodeId: string) => {

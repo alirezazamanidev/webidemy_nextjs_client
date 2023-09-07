@@ -7,36 +7,20 @@ import Loading from "react-loading";
 import { Course } from "@/libs/model/course";
 import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
-import { useQuery } from "react-query";
-import { CallApi } from "@/libs/helpers/callApi";
 import UserItemLayout from "./userItemLayout";
 import { userType } from "@/libs/model/user";
+import { GetUsers } from "@/libs/services/admin/user";
 export default function TableUsersLayout() {
   const [page, setPage] = useState<number>(1);
   const searchParams = useSearchParams();
-
-  const { data, isLoading, refetch } = useQuery(
-    ["Show_users_adminPanel", page],
-    async () => {
-      const pre_page = 2;
-      const res = await CallApi().get(
-        `/admin/users?page=${page}&item_count=${pre_page}`
-      );
-
-      return res?.data;
-    },
-    {
-      cacheTime: 1000 * 60 * 5,
-    }
-  );
 
   const querypage = searchParams.get("page");
   useEffect(() => {
     if (querypage) setPage(parseInt(querypage));
   }, [querypage]);
 
+  const { data, isLoading, refetch } = GetUsers(page,12);
 
-  
   return (
     <>
       <div className="flex flex-col">

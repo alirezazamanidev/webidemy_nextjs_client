@@ -7,22 +7,13 @@ import Loading from "react-loading";
 import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
 import { Episode } from "@/libs/model/episode";
-import { useQuery } from "react-query";
-import { CallApi } from "@/libs/helpers/callApi";
+import { GetEpisodes } from "@/libs/services/admin/episode";
 
 export default function TableEpisodesLayout() {
   const [page, setPage] = useState<number>(1);
   const searchParams = useSearchParams();
 
-  const {data,isLoading,refetch}=useQuery(['show-episodes-adminpanel',page],async()=>{
-    const pre_page=12;
-    const res = await CallApi().get(
-      `/admin/episodes?page=${page}&item_count=${pre_page}`
-    );
-  
-    return res?.data;
-  })
-  
+  const {data,isLoading,refetch} = GetEpisodes(page, 12);
 
   const querypage = searchParams.get("page");
   useEffect(() => {
@@ -59,7 +50,7 @@ export default function TableEpisodesLayout() {
                   <thead className="border-b  bg-gradient-to-r from-blue-750 to-blue-800 font-medium text-white border-neutral-500">
                     <tr>
                       <th scope="col" className=" px-6 py-4">
-                         شماره جلسه
+                        شماره جلسه
                       </th>
                       <th scope="col" className=" px-6 py-4">
                         {" "}
@@ -73,9 +64,9 @@ export default function TableEpisodesLayout() {
                         زمان جلسه
                       </th>
                       <th scope="col" className=" px-6 py-4">
-                         نوع جلسه
+                        نوع جلسه
                       </th>
-                    
+
                       <th scope="col" className=" px-6 py-4">
                         {" "}
                         تنظیمات
@@ -95,7 +86,11 @@ export default function TableEpisodesLayout() {
                 </table>
               )}
             </div>
-              <PaginateItem page={data?.page} pages={data?.pages} url="/admin/episodes" />
+            <PaginateItem
+              page={data?.page}
+              pages={data?.pages}
+              url="/admin/episodes"
+            />
           </div>
         </div>
       </div>
