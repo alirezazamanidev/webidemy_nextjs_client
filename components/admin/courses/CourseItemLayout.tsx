@@ -55,10 +55,10 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
         <td className="whitespace-nowrap  px-6 py-4 font-medium">
           <ImageComponent
             url={course?.photos["360"]}
-            width={130}
-            height={60}
+            width={60}
+            height={20}
             alt={course?.title}
-            className=" object-fill"
+            className=" object-cover"
           />
         </td>
         <td className="whitespace-nowrap   py-4 ">{course?.title}</td>

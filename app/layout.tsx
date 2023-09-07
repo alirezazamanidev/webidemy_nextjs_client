@@ -21,7 +21,7 @@ export default function RootLayout({
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 10000,
+        staleTime: 0,
         cacheTime: 0,
       },
     },

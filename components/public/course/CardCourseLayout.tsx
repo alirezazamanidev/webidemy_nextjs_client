@@ -29,13 +29,13 @@ export default function CardCourse({ course }: props) {
             href={`courses/${course?.slug}`}
             className=" w-full h-full  px-4 lg:px-5 relative flex flex-col"
           >
-            <div className=" w-full flex justify-center relative -mt-14">
-              <div className=" relative">
+            <div className=" w-full flex relative -mt-14">
+              <div className=" relative w-full">
                 <ImageComponent
                   url={course?.photos["720"]}
-                  width={650}
+                  width={640}
                   height={450}
-                  className=" aspect-video flex justify-center w-full object-cover rounded-xl transition-all duration-500 "
+                  className=" aspect-video flex w-full justify-center object-cover rounded-xl transition-all duration-500  "
                   alt={course?.title}
                 />
               </div>
