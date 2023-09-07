@@ -13,9 +13,10 @@ export default function useAuth() {
       retry: false,
       retryOnMount: false,
       refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchIntervalInBackground: false,
       onError: async (err: any) => {
-        
-        if(err.response.status===401){
+        if (err.response.status === 401) {
           let refreshToken = cookieStore.get("x-refresh-token");
           if (refreshToken) {
             const res = await CallApi().post("/auth/refresh", {
@@ -27,8 +28,7 @@ export default function useAuth() {
                 res?.data?.refresh_token
               );
             }
-        }
-    
+          }
         }
       },
     }

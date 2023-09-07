@@ -18,11 +18,15 @@ export interface SeasonFormValuseInterface {
 }
 
 export interface EpisodeFormValuesInterface {
-  season:string
+  season: string;
   title: string;
   body: string;
   type: string;
   time: number;
   video?: {};
   number?: number;
+}
+
+export interface categoryFormValuesInterface {
+  title: string;
 }

@@ -11,9 +11,14 @@ import { FaCommentAlt, FaUsers } from "react-icons/fa";
 import { MdPermContactCalendar } from "react-icons/md";
 import mePhoto from "@/public/images/me.jpeg";
 import { useAppSelector } from "@/libs/hooks";
+import { BiSolidCategoryAlt } from "react-icons/bi";
 let list = [
   { label: "داشبرد اول", href: "/admin/dashboard_1" },
   { label: "داشبرد دوم", href: "/admin/dashboard_2" },
+];
+let categoryList = [
+  { label: "نمایش دسته بندی ها", href: "/admin/categories" },
+  
 ];
 let courseList = [
   { label: "نمایش دوره ها", href: "/admin/courses" },
@@ -105,7 +110,13 @@ const SideBarLayout = ({ open, setOpen }: props) => {
                   Icon={AiFillDashboard}
                 />
               </div>
-
+              <div>
+                <DisclosureList
+                  title="دسته بندی ها"
+                  list={categoryList}
+                  Icon={BiSolidCategoryAlt}
+                />
+              </div>
               <div>
                 <DisclosureList
                   title="دوره ها"
@@ -192,6 +203,13 @@ const SideBarLayout = ({ open, setOpen }: props) => {
               Icon={AiFillDashboard}
             />
           </div>
+          <div>
+                <DisclosureList
+                  title="دسته بندی ها"
+                  list={categoryList}
+                  Icon={BiSolidCategoryAlt}
+                />
+              </div>
           <div>
             <DisclosureList
               title="دوره ها"
