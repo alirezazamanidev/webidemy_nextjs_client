@@ -7,22 +7,24 @@ interface optionProps {
   limit?: number;
   sort?: string;
   text?: string;
+  category?: string;
 }
 export const useSearchInfinite = ({
   url,
-  text = '',
+  text = "",
   limit = 8,
+  category,
   sort,
   key,
 }: optionProps) => {
   const { data, isFetchingNextPage, isLoading, hasNextPage, fetchNextPage } =
     useInfiniteQuery(
-      [key, sort, text],
+      [key, sort, category, text],
       async ({ pageParam }) => {
         console.log(pageParam);
 
         const res = await CallApi().get(
-          `${url}?sort=${sort}&limit=${limit}&page=${pageParam}&search=${text}`
+          `${url}?sort=${sort}&category=${category}&limit=${limit}&page=${pageParam}&search=${text}`
         );
 
         return res?.data;

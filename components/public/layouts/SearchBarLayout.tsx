@@ -2,10 +2,12 @@
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Listbox } from "@headlessui/react";
-import {  useSearchInfinite } from "@/libs/hooks/useSearch";
+import { useSearchInfinite } from "@/libs/hooks/useSearch";
 import Loading from "react-loading";
 import { Course } from "@/libs/model/course";
 import CardCourseSearchLayout from "../course/CardCourseForSearchLayout";
+import { Getcategoryies } from "@/libs/services/home/public";
+import { Category } from "@/libs/model/category";
 const filterItem = [
   { value: "default", name: "پیش فرض", unavailable: false },
   { value: "newest", name: "جدید ترین", unavailable: false },
@@ -13,20 +15,13 @@ const filterItem = [
   { value: "popular", name: "محبوب ترین", unavailable: false },
 ];
 
-const filterItemCategories = [
-  { id: 1, name: "همه", unavailable: false },
-  { id: 2, name: "فرانت اند", unavailable: false },
-  { id: 3, name: " بک اند", unavailable: false },
-  { id: 4, name: " دوآپس", unavailable: false },
-  { id: 5, name: "عمومی", unavailable: false },
-  { id: 6, name: "دیژاین", unavailable: false },
-];
 export default function SearchBarLayout() {
   const [selectedItem, setSelectedItem] = useState(filterItem[0]);
   const [searchText, setSearchText] = useState<string>("");
-  const [selectedItemCategires, setSelectedItemCategories] = useState(
-    filterItemCategories[0]
-  );
+  const [selectedItemCategires, setSelectedItemCategories] = useState({
+    value: "all",
+    name: "همه",
+  });
   const router = useRouter();
 
   const { data, isLoading } = useSearchInfinite({
@@ -34,16 +29,22 @@ export default function SearchBarLayout() {
     url: "/courses/filter",
     text: searchText,
   });
-
+  const { data: categories, isLoading: categoryLoading } = Getcategoryies();
   const searchHandel = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
 
   useEffect(() => {
-    if (selectedItem) {
-      router.push(`/courses?sort=${selectedItem.value}`);
+    if (selectedItem || selectedItemCategires) {
+      router.push(
+        `/courses?sort=${selectedItem.value}&category=${selectedItemCategires.value}`
+      );
     }
-  }, [selectedItem, router]);
+  }, [selectedItem, router, selectedItemCategires]);
+
+  const filterItemCategories = categories?.map((cate: Category) => {
+    return { value: cate.title, name: cate.title };
+  });
 
   return (
     <>
@@ -93,35 +94,48 @@ export default function SearchBarLayout() {
               onChange={setSelectedItemCategories}
             >
               <Listbox.Button className="bg-dark-600  w-full  text-gray-300 transition-all rounded-xl p-3 md:p-3.5 text-lg flex justify-center items-center gap-2 cursor-pointer h-full">
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-5 h-5 md:w-6 md:h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
-                    ></path>
-                  </svg>
-                </span>
-                <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-40">
-                  {selectedItemCategires.id === 1
-                    ? "دسته بندی ها"
-                    : selectedItemCategires.name}
-                </span>
+                {categoryLoading ? (
+                  <>
+                    <Loading type="spin" width={30} />
+                  </>
+                ) : (
+                  <>
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="w-5 h-5 md:w-6 md:h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-40">
+                      {selectedItemCategires.value === "all"
+                        ? "دسته بندی ها"
+                        : selectedItemCategires.name}
+                    </span>
+                  </>
+                )}
               </Listbox.Button>
               <Listbox.Options className="absolute z-50 mt-3 w-full rounded-xl text-gray-400 bg-dark-600  pt-2 z-1 transition-all space-y-3 ">
-                {filterItemCategories.map((item) => (
+                <Listbox.Option
+                  className=" w-full text-center  border-b border-solid border-gray-700 cursor-pointer hover:text-blue-250 items-center justify-center pb-2  text-base"
+                  value={{ value: "all", name: "همه" }}
+                >
+                  همه
+                </Listbox.Option>
+                {filterItemCategories?.map((item: any) => (
                   <Listbox.Option
                     className=" w-full text-center  border-b border-solid border-gray-700 cursor-pointer hover:text-blue-250 items-center justify-center pb-2  text-base"
-                    key={item.id}
+                    key={item.name}
                     value={item}
-                    disabled={item.unavailable}
                   >
                     {item.name}
                   </Listbox.Option>
@@ -179,7 +193,7 @@ export default function SearchBarLayout() {
               </div>
             ) : (
               <div className=" grid grid-cols-1 lg:grid-cols-2 gap-5">
-               {data?.pages.map((page) =>
+                {data?.pages.map((page) =>
                   page?.map((course: Course) => (
                     <CardCourseSearchLayout key={course?._id} course={course} />
                   ))
