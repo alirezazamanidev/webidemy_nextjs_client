@@ -1,7 +1,5 @@
 "use client";
 import { useRouter, useParams } from "next/navigation";
-import EditCourseForm from "@/libs/forms/admin/course/editCourseForm";
-import useSWR from "swr";
 import Loading from "react-loading";
 import { useQuery } from "react-query";
 import { CallApi } from "@/libs/helpers/callApi";

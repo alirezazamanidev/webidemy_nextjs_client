@@ -3,7 +3,6 @@ import { MdDeleteOutline } from "react-icons/md";
 
 import { useState } from "react";
 
-import { KeyedMutator } from "swr";
 
 import Link from "next/link";
 import { Season } from "@/libs/model/seasson";

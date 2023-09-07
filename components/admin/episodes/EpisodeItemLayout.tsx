@@ -1,13 +1,10 @@
-import { Course } from "@/libs/model/course";
-import separateWithComma from "@/libs/utils";
-import Image from "next/image";
+
 import { FiEdit2 } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import {  TypeItemInFarsi } from "@/libs/utils";
 import { useState } from "react";
 import DeleteConfreamation from "@/components/shared/confreamtions/DeleteConfreamation";
-import { DeleteCourse } from "@/libs/services/admin/course";
-import { KeyedMutator } from "swr";
+
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { Episode } from "@/libs/model/episode";
