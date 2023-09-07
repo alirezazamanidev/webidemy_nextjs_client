@@ -110,7 +110,7 @@ export default function TableUsersLayout() {
             <PaginateItem
               page={data?.page}
               pages={data?.pages}
-              url="/admin/courses"
+              url="/admin/users"
             />
           </div>
         </div>

@@ -1,6 +1,8 @@
 "use client";
+import TableCategoriesLayout from "@/components/admin/categories/TableCategoriesLayout";
 import TableCoursesLayout from "@/components/admin/courses/TableCoursesLayout";
 import CreateCategoryForm from "@/libs/forms/admin/category/createform";
+import { GetCategories } from "@/libs/services/admin/category";
 import Link from "next/link";
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
@@ -8,11 +10,14 @@ import { IoMdAdd } from "react-icons/io";
 const CategoriesPage = () => {
   const [showInnercategoryForm, setShowInnercategoryForm] =
     useState<boolean>(false);
+
+  const { refetch } = GetCategories(1, 12);
   return (
     <>
       {showInnercategoryForm && (
         <CreateCategoryForm
-        setshowform={setShowInnercategoryForm}
+          categoryRefech={refetch}
+          setshowform={setShowInnercategoryForm}
           handleCancel={() => setShowInnercategoryForm(false)}
         />
       )}
@@ -27,7 +32,7 @@ const CategoriesPage = () => {
             <span>ایجاد دسنه بندی جدید</span>
           </button>
         </div>
-        {/* <TableCoursesLayout /> */}
+        <TableCategoriesLayout />
       </main>
     </>
   );

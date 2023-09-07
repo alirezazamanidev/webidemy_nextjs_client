@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import CourseItemLayout from "./CourseItemLayout";
+
 import { useEffect, useState } from "react";
 import Loading from "react-loading";
 import { Course } from "@/libs/model/course";
@@ -9,24 +9,14 @@ import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
 import { useQuery } from "react-query";
 import { CallApi } from "@/libs/helpers/callApi";
-export default function TableCoursesLayout() {
+import { Category } from "@/libs/model/category";
+import CategoryItemLayout from "./CategoryItemLayout";
+import { GetCategories } from "@/libs/services/admin/category";
+export default function TableCategoriesLayout() {
   const [page, setPage] = useState<number>(1);
   const searchParams = useSearchParams();
 
-  const { data, isLoading,refetch } = useQuery(
-    ["Show_courses_adminPanel", page],
-    async () => {
-      const pre_page = 12;
-      const res = await CallApi().get(
-        `/admin/courses?page=${page}&item_count=${pre_page}`
-      );
-
-      return res?.data;
-    },
-    {
-      cacheTime: 1000 * 60 * 5,
-    }
-  );
+  const { data, isLoading, refetch } = GetCategories(page, 12);
 
   const querypage = searchParams.get("page");
   useEffect(() => {
@@ -63,35 +53,13 @@ export default function TableCoursesLayout() {
                   <thead className="border-b  bg-gradient-to-r from-blue-750 to-blue-800 font-medium text-white border-neutral-500">
                     <tr>
                       <th scope="col" className=" px-6 py-4">
-                        تصویر دوره
+                        شماره دسته بندی
                       </th>
                       <th scope="col" className=" px-6 py-4">
                         {" "}
-                        عنوان دوره
+                        عنوان دسنه بندی
                       </th>
-                      <th scope="col" className=" px-6 py-4">
-                        {" "}
-                        مدرس دوره
-                      </th>
-                      <th scope="col" className=" px-6 py-4">
-                        وضعیت دوره
-                      </th>
-                      <th scope="col" className=" px-6 py-4">
-                        زمان دوره
-                      </th>
-                      <th scope="col" className=" px-6 py-4">
-                        تعداد فصل ها
-                      </th>
-                      <th scope="col" className=" px-6 py-4">
-                        تعداد جلسات دوره
-                      </th>
-                      <th scope="col" className=" px-6 py-4">
-                        نوع دوره
-                      </th>
-                      <th scope="col" className=" px-6 py-4">
-                        {" "}
-                        قیمت دوره
-                      </th>
+
                       <th scope="col" className=" px-6 py-4">
                         {" "}
                         تنظیمات
@@ -100,11 +68,11 @@ export default function TableCoursesLayout() {
                   </thead>
 
                   <tbody>
-                    {data?.data?.map((course: Course) => (
-                      <CourseItemLayout
-                        key={course._id}
-                        course={course}
-                        courseRefeach={refetch}
+                    {data?.data?.map((cate: Category) => (
+                      <CategoryItemLayout
+                        key={cate._id}
+                        category={cate}
+                        categoryRefeach={refetch}
                       />
                     ))}
                   </tbody>
@@ -114,7 +82,7 @@ export default function TableCoursesLayout() {
             <PaginateItem
               page={data?.page}
               pages={data?.pages}
-              url="/admin/courses"
+              url="/admin/categories"
             />
           </div>
         </div>

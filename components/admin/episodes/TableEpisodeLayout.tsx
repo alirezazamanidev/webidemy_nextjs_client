@@ -95,7 +95,7 @@ export default function TableEpisodesLayout() {
                 </table>
               )}
             </div>
-              <PaginateItem page={data?.page} pages={data?.pages} url="/admin/courses" />
+              <PaginateItem page={data?.page} pages={data?.pages} url="/admin/episodes" />
           </div>
         </div>
       </div>
