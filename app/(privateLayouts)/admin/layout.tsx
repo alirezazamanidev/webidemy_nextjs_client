@@ -13,7 +13,6 @@ export default function AdminLayout({
 }) {
   const { user, error, loading } = useAuth();
   const router = useRouter();
-
   useEffect(() => {
     if (error) {
       router.push("/login");

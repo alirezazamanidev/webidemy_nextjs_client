@@ -14,7 +14,7 @@ export default function GuestLayout({
   const { user,loading } = useAuth();
  useEffect(()=>{
   if(user){
-    router.push('/');
+    router.push(`@${user?.username}`);
   }
  },[user,router])
  if(loading) return <LoadingLayout/>

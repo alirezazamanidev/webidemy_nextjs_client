@@ -58,7 +58,7 @@ export default function NavbarLayouts() {
             <section className="flex gap-5">
               <Link
                 className="justify-center items-center w-9 min-w-9 lg:w-12 lg:min-w-12 min-h-9 h-9 lg:min-h-12 lg:h-12 rounded-full transition-colors bg-dark-600 flex"
-                href="/login"
+                href={user ? `@${user.usename}` :'login'}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -6,11 +6,11 @@ export async function POST(request: NextRequest) {
   const headers = new Headers();
   headers.append(
     "Set-Cookie",
-    `x-access-token=${res?.at}; Path=/; Domain=.webidemyyy.ir; HttpOnly;  Max-Age=64000000 SameSite=Lax;`
+    `x-access-token=${res?.at}; Path=/; HttpOnly;  Max-Age=64000000 SameSite=Lax;`
   );
   headers.append(
     "Set-Cookie",
-    `x-refresh-token=${res?.rt}; Path=/; Domain=.webidemyyy.ir;  Max-Age=64000000; SameSite=Lax; `
+    `x-refresh-token=${res?.rt}; Path=/; Max-Age=64000000; SameSite=Lax; `
   );
 
   return new Response("success login!", {

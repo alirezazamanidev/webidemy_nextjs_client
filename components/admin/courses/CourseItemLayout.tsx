@@ -55,7 +55,7 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
         </td>
         <td className="whitespace-nowrap  px-6 py-4 font-medium">
           <ImageComponent
-            url={course?.photos["320"]}
+            url={course?.photos["360"]}
             width={110}
             height={80}
             alt={course?.title}

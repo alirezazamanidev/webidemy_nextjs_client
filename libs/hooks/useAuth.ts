@@ -12,9 +12,9 @@ export default function useAuth() {
     {
       retry: false,
       retryOnMount: false,
-      refetchOnMount: false,
+      // refetchOnMount: false,
       refetchOnWindowFocus: false,
-      refetchIntervalInBackground: false,
+      refetchIntervalInBackground: true,
       onError: async (err: any) => {
         if (err.response.status === 401) {
           let refreshToken = cookieStore.get("x-refresh-token");
