@@ -14,14 +14,14 @@ export default function AdminLayout({
   const { user, error, loading } = useAuth();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (error) {
-  //     router.push("/login");
-  //   }
-  //   if (user?.admin===false) {
-  //     router.push("/");
-  //   }
-  // }, [user, error,router]);
+  useEffect(() => {
+    if (error) {
+      router.push("/login");
+    }
+    if (user?.admin===false) {
+      router.push("/");
+    }
+  }, [user, error,router]);
 
   return (
     <div className="lg:mr-[250px] h-screen ">

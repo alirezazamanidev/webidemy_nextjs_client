@@ -14,6 +14,7 @@ import {
   RefetchQueryFilters,
 } from "react-query";
 import Image from "next/image";
+import ImageComponent from "@/components/shared/ImageComponent";
 interface props {
   course: Course;
   courseRefeach: <TPageData>(
@@ -53,8 +54,8 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
           )}
         </td>
         <td className="whitespace-nowrap  px-6 py-4 font-medium">
-          <Image
-            src={`https://api.webidemyyy.ir${course?.photos["320"]}`}
+          <ImageComponent
+            url={course?.photos["320"]}
             width={110}
             height={80}
             alt={course?.title}
