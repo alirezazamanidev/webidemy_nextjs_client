@@ -1,8 +1,7 @@
 import { useState } from "react";
 import DeleteConfreamation from "@/components/shared/confreamtions/DeleteConfreamation";
-import { DeleteCourse } from "@/libs/services/admin/course";
+
 import { toast } from "react-toastify";
-import ImageComponent from "@/components/shared/ImageComponent";
 import defaultAvatarUser from "@/public/images/defualtAvatar.png";
 import {
   QueryObserverResult,
@@ -80,11 +79,11 @@ export default function UserItemLayout({ user, userRefeach }: props) {
               alt={user?.username}
             />
           ) : (
-            <ImageComponent
+            <Image
               width={300}
               height={300}
               alt={user?.username}
-              url={user?.avatar}
+              src={'dnfjfjI'}
             />
           )}
         </td>

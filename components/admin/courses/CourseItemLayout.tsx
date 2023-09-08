@@ -8,12 +8,13 @@ import DeleteConfreamation from "@/components/shared/confreamtions/DeleteConfrea
 import { DeleteCourse } from "@/libs/services/admin/course";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import ImageComponent from "@/components/shared/ImageComponent";
+
 import {
   QueryObserverResult,
   RefetchOptions,
   RefetchQueryFilters,
 } from "react-query";
+import Image from "next/image";
 interface props {
   course: Course;
   courseRefeach: <TPageData>(
@@ -34,7 +35,7 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
     }
   };
 
-  let episodeLength=0;
+  let episodeLength = 0;
   course?.seasons.forEach((seasn) => {
     episodeLength += seasn.episodes.length;
   });
@@ -53,8 +54,8 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
           )}
         </td>
         <td className="whitespace-nowrap  px-6 py-4 font-medium">
-          <ImageComponent
-            url={course?.photos["360"]}
+          <Image
+            src={`https://api.webidemyyy.ir${course?.photos["720"]}`}
             width={60}
             height={20}
             alt={course?.title}

@@ -1,7 +1,8 @@
 "use client";
-import ImageComponent from "@/components/shared/ImageComponent";
+
 import { Course } from "@/libs/model/course";
 import separateWithComma from "@/libs/utils";
+import Image from "next/image";
 import Link from "next/link";
 
 interface props {
@@ -12,8 +13,8 @@ export default function SingleCourseHeaderPage({ course }: props) {
     <>
       <div className=" bg-dark-600   grid  grid-cols-1 lg:grid-cols-2 rounded-2xl select-none p-4 lg:p-7 ">
         <div className=" ">
-          <ImageComponent
-            url={course?.photos["720"]}
+          <Image
+            src={`https://api.webidemyyy.ir${course?.photos["720"]}`}
             alt={course?.title}
             width={700}
             height={500}
