@@ -55,7 +55,7 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
         </td>
         <td className="whitespace-nowrap  px-6 py-4 font-medium">
           <Image
-            src={`https://api.webidemyyy.ir${course?.photos["720"]}`}
+            src={`https://api.webidemyyy.ir${course?.photos["320"]}`}
             width={60}
             height={20}
             alt={course?.title}
