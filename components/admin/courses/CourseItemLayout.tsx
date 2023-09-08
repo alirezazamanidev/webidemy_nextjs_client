@@ -8,7 +8,6 @@ import DeleteConfreamation from "@/components/shared/confreamtions/DeleteConfrea
 import { DeleteCourse } from "@/libs/services/admin/course";
 import { toast } from "react-toastify";
 import Link from "next/link";
-
 import {
   QueryObserverResult,
   RefetchOptions,
@@ -56,8 +55,8 @@ export default function CourseItemLayout({ course, courseRefeach }: props) {
         <td className="whitespace-nowrap  px-6 py-4 font-medium">
           <Image
             src={`https://api.webidemyyy.ir${course?.photos["320"]}`}
-            width={60}
-            height={20}
+            width={110}
+            height={80}
             alt={course?.title}
             className=" object-cover"
           />
