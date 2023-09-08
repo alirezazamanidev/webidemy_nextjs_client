@@ -1,5 +1,5 @@
 export const StoreCookieForLogin = async (at: string,rt:string) => {
-  await fetch(`${process.env.NEXT_PUBLIC_URL_CLIENT}/api/login`, {
+  await fetch(`https://webidemyyy.ir/api/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

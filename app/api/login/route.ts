@@ -4,6 +4,8 @@ export async function POST(request: NextRequest) {
   const res = await request.json();
   
   const headers = new Headers();
+  console.log(res?.at,res?.rt);
+  
  
   headers.append(
     "Set-Cookie",`x-access-token=${res?.at}; Path=/; HttpOnly;  Max-Age=3000000  SameSite=Lax;`
