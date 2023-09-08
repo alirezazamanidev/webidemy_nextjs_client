@@ -18,7 +18,7 @@ export default function AdminLayout({
     if (error) {
       router.push("/login");
     }
-    if (user?.admin) {
+    if (!user?.admin) {
       router.push("/");
     }
   }, [user, error,router]);
