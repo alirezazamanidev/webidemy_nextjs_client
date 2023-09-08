@@ -32,7 +32,7 @@ export default function CardCourse({ course }: props) {
             <div className=" w-full flex relative -mt-14">
               <div className=" relative w-full">
                 <ImageComponent
-                  url={course?.photos["720"]}
+                  url={course.photos["720"]}
                   width={640}
                   height={450}
                   className=" aspect-video flex w-full justify-center object-cover rounded-xl transition-all duration-500  "
