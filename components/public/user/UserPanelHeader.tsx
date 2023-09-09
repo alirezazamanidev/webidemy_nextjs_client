@@ -5,22 +5,46 @@ import LogoutConfreamation from "@/components/shared/ShowConfreamationLogout";
 import { useState } from "react";
 import useAuth from "@/libs/hooks/useAuth";
 import { CallApi } from "@/libs/helpers/callApi";
-import { RemoveCookieForLogout } from "@/libs/helpers/auth";
+import {
+  RemoveCookieForLogout,
+  StoreCookieForLogin,
+} from "@/libs/helpers/auth";
 import { useRouter } from "next/navigation";
+import UploadAvatarConfreamation from "@/components/public/user/UploadAvatarConfreamationLogout ";
+import { toast } from "react-toastify";
+import ImageComponent from "@/components/shared/ImageComponent";
+import useRefreshToken from "@/libs/hooks/useRefreshToken";
 export default function UserPanelHeaderLayout() {
   const [showLogoutConfrimation, setshowLogoutConfrimation] =
     useState<boolean>(false);
+  const [showUploadAvatarConfrimation, setShowUploadAvatarConfrimation] =
+    useState<boolean>(false);
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, refetch } = useAuth();
+  const refeachToken = useRefreshToken();
+
   const handleLogout = async () => {
     if (user) {
-      await CallApi().get(`auth/local/signOut/${user?.id}`);
+      await CallApi().get(`auth/local/signOut`);
       await RemoveCookieForLogout();
       setshowLogoutConfrimation(false);
       router.push("/");
     }
   };
-
+  const handleUploadAvatar = async (values: any) => {
+    //send images
+    const formData = new FormData();
+    for (let value in values) {
+      formData.append(value, values[value]);
+    }
+    
+    const res = await CallApi().post("/users/uploadAvatar", formData);
+    await refeachToken();
+    setShowUploadAvatarConfrimation(false);
+    await refetch();
+  
+    toast.success("تصویر پروفایل مورد نظر شما با موفقیت جایگزاری شد :))");
+  };
   return (
     <>
       <div className=" hidden">
@@ -39,7 +63,10 @@ export default function UserPanelHeaderLayout() {
             className="flex absolute top-4 left-4 lg:top-7 lg:left-7"
             dir="ltr"
           >
-            <div className=" shadow-blue-250    bg-gray-800 text-blue-250 relative w-8 h-8 md:w-10 md:h-10 overflow-hidden transition-all flex items-center rounded-full select-none hover:w-full cursor-pointer">
+            <div
+              onClick={() => setShowUploadAvatarConfrimation(true)}
+              className=" shadow-blue-250    bg-gray-800 text-blue-250 relative w-8 h-8 md:w-10 md:h-10 overflow-hidden transition-all flex items-center rounded-full select-none hover:w-full cursor-pointer"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -58,22 +85,42 @@ export default function UserPanelHeaderLayout() {
                 ویرایش عکس زمینه
               </p>
             </div>
+            {showUploadAvatarConfrimation && (
+              <UploadAvatarConfreamation
+                handleTrue={handleUploadAvatar}
+                handleCancel={() => setShowUploadAvatarConfrimation(false)}
+              />
+            )}
           </div>
         </div>
         <div className="px-4 lg:px-7 flex justify-between items-center gap-4 select-none">
           <div className="-mt-16 md:-mt-22 relative z-1">
-            <Image
-              src={defalutAvatar}
-              width={150}
-              height={150}
-              className="aspect-square object-cover rounded-full  duration-500 opacity-100 inline-block w-32 h-32 md:w-44 md:h-44 border-solid border-3 border-white dark:border-cnDarkBlue-27 bg-gray-200 dark:bg-cnDarkBlue-25 transition-all"
-              alt="defaltavatar"
-            />
+            {!user?.avatar ? (
+              <Image
+                src={defalutAvatar}
+                width={150}
+                height={150}
+                className="aspect-square object-cover rounded-full  duration-500 opacity-100 inline-block w-32 h-32 md:w-44 md:h-44 border-solid border-3 border-white dark:border-cnDarkBlue-27 bg-gray-200 dark:bg-cnDarkBlue-25 transition-all"
+                alt="defaltavatar"
+              />
+            ) : (
+              <ImageComponent
+                url={user?.avatar}
+                width={150}
+                height={150}
+                className="aspect-square object-cover rounded-full  duration-500 opacity-100 inline-block w-32 h-32 md:w-44 md:h-44 border border-solid  border-dark-600 bg-dark-700  transition-all"
+                alt={user?.fullname}
+              />
+            )}
+
             <div
               className="flex absolute bottom-0  right-24 md:right-34"
               dir="rtl"
             >
-              <div className=" mr-10 shadow-md shadow-blue-250 bg-gray-800  text-blue-250  relative w-8 h-8 md:w-10 md:h-10 overflow-hidden transition-all flex items-center rounded-full select-none hover:w-full cursor-pointer">
+              <div
+                onClick={() => setShowUploadAvatarConfrimation(true)}
+                className=" mr-10 shadow-md shadow-blue-250 bg-gray-800  text-blue-250  relative w-8 h-8 md:w-10 md:h-10 overflow-hidden transition-all flex items-center rounded-full select-none hover:w-full cursor-pointer"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -122,11 +169,11 @@ export default function UserPanelHeaderLayout() {
                 dir="ltr"
                 className="text-ellipsis overflow-hidden w-fit text-lg md:text-xl lg:text-2xl text-gray-300 transition-all select-none cursor-pointer"
               >
-                @alyrdhazmany-1446
+               <span>@{user?.username}</span>
               </p>
             </div>
             <h1 className="font-bold text-ellipsis overflow-hidden w-fit text-xl md:text-2xl lg:text-3xl text-gray-300 transition-all select-none cursor-pointer mt-1 lg:mt-2.5">
-              علیرضا زمانی
+              {user?.fullname}
             </h1>
           </div>
         </div>
