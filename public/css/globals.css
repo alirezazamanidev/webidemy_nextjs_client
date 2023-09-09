@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.player-wrapper {
+.selected-tab {
+  border: none; /* حذف بوردر */
+  /* سایر تنظیمات دلخواه شما */
 }
+
 .MuiPaginationItem-root {
   color: white !important;
   direction: ltr !important;
@@ -24,9 +27,7 @@
   margin: 0 -10px;
 }
 
-.hideSB {
-  /* overf */
-}
+
 
 .hideSB::-webkit-scrollbar {
   width: 0em;

@@ -7,6 +7,7 @@ export interface userType {
   email: string;
   phone: string;
   avatar: string;
+  biography:string
   active: boolean;
   isVip: boolean;
   vipTime: Date;

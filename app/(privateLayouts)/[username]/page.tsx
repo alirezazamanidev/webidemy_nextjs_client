@@ -1,4 +1,5 @@
 import NavbarLayouts from "@/components/public/layouts/NavbarLayout";
+import ContentUserPanel from "@/components/public/user/ContentUserPanelLayout";
 
 import UserPanelHeaderLayout from "@/components/public/user/UserPanelHeader";
 import { notFound } from "next/navigation";
@@ -26,6 +27,7 @@ export default function UserPanelPage() {
     <>
       <main>
         <UserPanelHeaderLayout />
+        <ContentUserPanel/>
       </main>
     </>
   );
