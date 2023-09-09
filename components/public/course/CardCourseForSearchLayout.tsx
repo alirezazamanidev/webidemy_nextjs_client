@@ -1,3 +1,4 @@
+import ImageComponent from "@/components/shared/ImageComponent";
 import { Course } from "@/libs/model/course";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,8 +15,9 @@ export default function CardCourseSearchLayout({ course }: props) {
         className=" flex bg-gray-1010 items-center gap-6 p-3 rounded-lg"
       >
         <div>
-          <Image
-            src={`https://api.webidemyyy.ir${course?.photos["360"]}`}
+          <ImageComponent
+          url={course?.photos['360']}
+          
             width={70}
             height={50}
             alt={course?.title}

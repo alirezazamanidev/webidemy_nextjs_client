@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import separateWithComma, { TypeConditioncourseToFarsi } from "@/libs/utils";
 

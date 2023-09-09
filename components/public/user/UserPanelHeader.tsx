@@ -169,7 +169,7 @@ export default function UserPanelHeaderLayout() {
                 dir="ltr"
                 className="text-ellipsis overflow-hidden w-fit text-lg md:text-xl lg:text-2xl text-gray-300 transition-all select-none cursor-pointer"
               >
-               <span>@{user?.username}</span>
+               <span>{user?.username}</span>
               </p>
             </div>
             <h1 className="font-bold text-ellipsis overflow-hidden w-fit text-xl md:text-2xl lg:text-3xl text-gray-300 transition-all select-none cursor-pointer mt-1 lg:mt-2.5">

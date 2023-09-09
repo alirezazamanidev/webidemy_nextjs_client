@@ -11,12 +11,12 @@ export default function GuestLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const { user,loading } = useAuth();
- useEffect(()=>{
-  if(user){
-    router.push(`@${user?.username}`);
-  }
- },[user,router])
- if(loading) return <LoadingLayout/>
+  const { user, loading,error} = useAuth();
+  useEffect(() => {
+   
+    if (user) {
+      router.push(user.username);
+    }
+  }, [user, router]);
   return <>{children}</>;
 }

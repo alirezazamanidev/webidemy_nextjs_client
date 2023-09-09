@@ -1,16 +1,10 @@
 import Link from "next/link";
 import NotfoundImage from '@/public/images/photo/not-found-image.webp';
 import Image from "next/image";
-
-import { Metadata } from 'next'
- 
-export const metadata: Metadata = {
-  title:'ارور 404',
-  description: '...',
-}
 export default function NotFound() {
   return (
     <>
+    
     <div className="flex justify-center items-center w-full">
       <div className="bg-white/10 p-7 mt-20 lg:p-9 rounded-2xl shadow-none transition-all w-[41rem] ">
         <div className="flex flex-col justify-center items-center">
