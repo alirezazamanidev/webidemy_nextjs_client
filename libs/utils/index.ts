@@ -1,3 +1,4 @@
+
 export default function separateWithComma(price: string) {
   return price?.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -12,6 +13,7 @@ export const TypeItemInFarsi = (type: string) => {
       return "اعضای ویژه";
   }
 };
+
 
 export const TypeConditioncourseToFarsi = (condition: string) => {
   switch (condition) {

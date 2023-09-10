@@ -3,6 +3,7 @@ import Image from "next/image";
 import meImage from "@/public/images/me.jpeg";
 import { Comment } from "@/libs/model/comment";
 import ImageComponent from "@/components/shared/ImageComponent";
+import { DateFromNow } from "@/libs/utils/date";
 interface props {
   comment:Comment
 }
@@ -25,7 +26,7 @@ export default function UserCommentLayout({ comment }: props) {
         </div>
         <div className=" mr-3 flex flex-col items-center ">
           <span className=" text-base text-gray-100 mb-2">{comment?.user?.fullname}</span>
-          <span className=" text-sm text-gray-300">سه روز پیش</span>
+          <span className=" text-sm text-gray-300">{DateFromNow(comment?.createdAt)}</span>
         </div>
       </div>
       <div>
@@ -52,7 +53,7 @@ export default function UserCommentLayout({ comment }: props) {
               </div>
               <div className=" mr-3 flex flex-col items-center ">
                 <span className=" text-base text-gray-100 mb-2">{comment?.user?.fullname}</span>
-                <span className=" text-sm text-gray-300">سه روز پیش</span>
+                <span className=" text-sm text-gray-300">{DateFromNow(comment?.createdAt)}</span>
               </div>
               
             </div>
