@@ -114,7 +114,7 @@ export default function UserPanelHeaderLayout() {
             )}
 
             <div
-              className="flex absolute bottom-0  right-24 md:right-34"
+              className="flex absolute bottom-0  right-16 md:right-34"
               dir="rtl"
             >
               <div
@@ -175,6 +175,8 @@ export default function UserPanelHeaderLayout() {
             <h1 className="font-bold text-ellipsis overflow-hidden w-fit text-xl md:text-2xl lg:text-3xl text-gray-300 transition-all select-none cursor-pointer mt-1 lg:mt-2.5">
               {user?.fullname}
             </h1>
+            <p className=" text-gray-300  my-3 txet-base md:text-lg   leading-relaxed max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-full ">{user?.biography}</p>
+
           </div>
         </div>
       </div>

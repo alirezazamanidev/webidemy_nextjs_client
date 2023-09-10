@@ -12,7 +12,10 @@ import vuePhotoPath from "@/public/images/photo/vue.webp";
 import wordPressPhotoPath from "@/public/images/photo/wordpress.webp";
 import fluterPhotoPathj from "@/public/images/photo/fluter.webp";
 import { Link as LinkScroll } from "react-scroll";
+import useAuth from "@/libs/hooks/useAuth";
 export default function HeadersMainPage() {
+
+  const {user}=useAuth();
   return (
     <>
       <header className=" container mx-auto px-5 mt-20 xl:mt-24 select-none  w-full">
@@ -40,7 +43,7 @@ export default function HeadersMainPage() {
                 چی یاد بگیرم ؟
               </button>
               <Link
-                href="login"
+                href={user ? `/${user.username}` :'/login'}
                 className=" bg-gradient-to-r from-orange-750 to-orange-250 w-1/2 py-3 lg:py-4  rounded-lg hover:shadow-xl hover:shadow-inherit  text-center  text-gray-50 md:text-lg lg:text-2xl font-bold"
               >
                 ثبت نام

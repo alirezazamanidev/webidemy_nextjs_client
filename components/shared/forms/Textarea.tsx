@@ -7,8 +7,9 @@ interface TextAreaProps {
   name: string;
   lable?: string;
   rows?: number;
+  disabled?: boolean;
   cols?: number;
-  placeholder?:string
+  placeholder?: string;
 
   inputClassName?: string;
   lableClassName?: string;
@@ -24,6 +25,7 @@ const Textarea: FC<TextAreaProps> = ({
   inputClassName,
   errorClassName,
   lableClassName,
+  disabled,
 }) => {
   return (
     <>
@@ -37,6 +39,7 @@ const Textarea: FC<TextAreaProps> = ({
           {({ field, meta }: FieldProps) => (
             <textarea
               id={name}
+              disabled={disabled}
               rows={rows}
               cols={cols}
               placeholder={placeholder}
@@ -45,8 +48,6 @@ const Textarea: FC<TextAreaProps> = ({
             />
           )}
         </Field>
-
-      
       </div>
     </>
   );

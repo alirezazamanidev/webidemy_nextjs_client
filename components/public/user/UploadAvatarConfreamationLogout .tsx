@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import Modal from "../../shared/modals/modal";
 import * as yup from "yup";
 import { useRef } from "react";
-import Image from "next/image";
+import ShowImage from "next/image";
 import { Form, Formik } from "formik";
 import Loading from "react-loading";
+import { toast } from "react-toastify";
 interface props {
   handleCancel: () => void;
   handleTrue: (values: any) => void;
@@ -18,21 +19,42 @@ export default function UploadAvatarConfreamation({
 }: props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [urlAvatarImage, setUrlAvatarImage] = useState<string>("");
+
   const uploadAvatarValidationSchema = yup.object().shape({
-    // avatar: yup
-    //   .mixed()
-    //   .required("وارد کردن تصویر برای دوره الزامیست")
-    //   .test(
-    //     "fileFormat",
-    //     "پسوند تصویر از پسوند های تصاویر نیست!",
-    //     (value: any) => {
-    //       return (
-    //         value &&
-    //         ["image/png", "image/jpg", "image/jpeg"].includes(value.type)
-    //       );
-    //     }
-    //   ),
+    avatar: yup
+      .mixed()
+      .required('وارد کردن تصویر برای پروفایل الزامیست')
+      .test('fileFormat', 'فرمت تصویر معتبر نیست', (value:any) => {
+        if (!value) {
+          return false; // تصویری انتخاب نشده است.
+        }
+  
+        const validFormats = ['image/png', 'image/jpg', 'image/jpeg'];
+        return validFormats.includes(value.type);
+      })
+      .test('fileSize', 'حجم تصویر باید حداکثر 1 مگابایت باشد', (value:any) => {
+        if (!value) {
+          return false; // تصویری انتخاب نشده است.
+        }
+  
+        return value.size <= 1024 * 1024; // حداکثر 1 مگابایت
+      })
+      .test('imageDimensions', 'ابعاد تصویر باید حداکثر 3000x3000 پیکسل باشد', (value:any) => {
+        if (!value) {
+          return false; // تصویری انتخاب نشده است.
+        }
+  
+        const img = new Image();
+        img.src = URL.createObjectURL(value);
+  
+        return new Promise((resolve) => {
+          img.onload = () => {
+            resolve(img.width <= 3000 && img.height <= 3000);
+          };
+        });
+      }),
   });
+  
   const getImageAvatar = (e: any) => {
     const imageFile = e.target.files[0];
     const urlImage = URL.createObjectURL(imageFile);
@@ -62,7 +84,7 @@ export default function UploadAvatarConfreamation({
                               <h3 className="text-xs text-gray-200 sm:text-sm font-bold transition-colors text-center">
                                 برای آپلود، بر روی کادر
                               </h3>
-                              <button className="flex justify-center items-center transition-all border-none text-blue-350 hover:text-gray-400 cursor-pointer text-xs md:text-sm">
+                              <button className="flex justify-center items-center transition-all border-none text-blue-350 hover:text-gray-400 cursor-pointer text-xs md:text-sm  outline-none focus:outline-none">
                                 <span>کلیک کنید</span>
                               </button>
                               <input
@@ -70,8 +92,15 @@ export default function UploadAvatarConfreamation({
                                 hidden
                                 onChange={(e: any) => {
                                   setFieldValue("avatar", e.target.files[0]);
+                                  if (Object.keys(errors).length === 0) {
+                                  
                                     getImageAvatar(e);
-                                
+                                    return;
+                                  }
+                                 setUrlAvatarImage('')
+                                  toast.error(
+                                    "فقط تصاویری با پسوند های ذکر شده میتوانید آپلود کنید!"
+                                  );
                                 }}
                                 ref={inputRef}
                               />
@@ -85,7 +114,7 @@ export default function UploadAvatarConfreamation({
                         </div>
                       ) : (
                         <div className=" w-full select-none">
-                          <Image
+                          <ShowImage
                             src={urlAvatarImage}
                             width={200}
                             height={300}
