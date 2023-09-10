@@ -140,13 +140,13 @@ export default function ContantSinglePageLayout({ course }: props) {
             id="aboutCourseButton"
           >
             <div>
-              <div className=" flex items-center mb-4">
+              <div className=" flex items-center mb-4 mr-3">
                 <span className="flex">
                   <span className="rounded-full  w-2 h-2 transition-all  bg-blue-750"></span>
                 </span>
                 <h2 className=" text-2xl text-blue-500 mr-2">توضیحات</h2>
               </div>
-              <p className=" text-gray-200 text-lg  mr-4">
+              <p className=" text-gray-200 text-base md:text-lg    leading-loose  mr-4">
                 {course?.description}
               </p>
             </div>

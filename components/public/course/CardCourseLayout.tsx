@@ -4,13 +4,15 @@ import separateWithComma, { TypeConditioncourseToFarsi } from "@/libs/utils";
 
 import { Course } from "@/libs/model/course";
 import Link from "next/link";
-
+import defaultPhotoAvatar from '@/public/images/photo/avatarDefalt.webp';
 import mePhoto from "@/public/images/me.jpeg";
 import ImageComponent from "@/components/shared/ImageComponent";
 interface props {
   course: Course;
 }
 export default function CardCourse({ course }: props) {
+  console.log(course);
+  
   return (
     <>
       <div className=" w-full h-full pt-14 pb-5 lg:pb-7  select-none  ">
@@ -45,16 +47,24 @@ export default function CardCourse({ course }: props) {
               {course?.title}
             </h3>
             <div className=" flex items-center    gap-2 text-base text-white transition-colors mt-5 w-full">
-              <Image
-                src={mePhoto}
+              {
+               course?.teacher?.avatar ?(
+                <ImageComponent url={course?.teacher?.avatar} width={50} height={50} alt={course?.teacher?.avatar} className="  object-cover rounded-full transition-all duration-500 opacity-100 w-[40px]  h-[40px]  border-2 border-white"/>
+
+               ):(
+                <Image
+                src={defaultPhotoAvatar}
                 alt="me"
                 width={50}
                 height={50}
                 className=" aspect-square object-cover rounded-full transition-all duration-500 opacity-100 w-10 h-10 border-2 border-solid border-white"
               />
+               )
+              }
+      
               <div className=" flex flex-col  gap-1">
                 <span className=" text-lg md:text-sm "> مدرس : </span>
-                <h4 className=" text-sm lg:text-lg">
+                <h4 className=" text-base lg:text-lg">
                   {course?.teacher?.fullname}
                 </h4>
               </div>

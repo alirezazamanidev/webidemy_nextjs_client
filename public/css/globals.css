@@ -55,3 +55,8 @@
 .dir-rtl {
   direction: rtl;
 }
+.Toastify__toast-theme--dark {
+   background: #0a011c;
+  color: #ece8e8;
+   border-radius: 15px;
+}

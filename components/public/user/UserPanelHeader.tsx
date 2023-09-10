@@ -37,12 +37,12 @@ export default function UserPanelHeaderLayout() {
     for (let value in values) {
       formData.append(value, values[value]);
     }
-    
+
     const res = await CallApi().post("/users/uploadAvatar", formData);
     await refeachToken();
     setShowUploadAvatarConfrimation(false);
     await refetch();
-  
+
     toast.success("تصویر پروفایل مورد نظر شما با موفقیت جایگزاری شد :))");
   };
   return (
@@ -117,6 +117,7 @@ export default function UserPanelHeaderLayout() {
               className="flex absolute bottom-0  right-16 md:right-34"
               dir="rtl"
             >
+          
               <div
                 onClick={() => setShowUploadAvatarConfrimation(true)}
                 className=" mr-10 shadow-md shadow-blue-250 bg-gray-800  text-blue-250  relative w-8 h-8 md:w-10 md:h-10 overflow-hidden transition-all flex items-center rounded-full select-none hover:w-full cursor-pointer"
@@ -169,14 +170,15 @@ export default function UserPanelHeaderLayout() {
                 dir="ltr"
                 className="text-ellipsis overflow-hidden w-fit text-lg md:text-xl lg:text-2xl text-gray-300 transition-all select-none cursor-pointer"
               >
-               <span>{user?.username}</span>
+                <span>{user?.username}</span>
               </p>
             </div>
             <h1 className="font-bold text-ellipsis overflow-hidden w-fit text-xl md:text-2xl lg:text-3xl text-gray-300 transition-all select-none cursor-pointer mt-1 lg:mt-2.5">
               {user?.fullname}
             </h1>
-            <p className=" text-gray-300  my-3 txet-base md:text-lg   leading-relaxed max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-full ">{user?.biography}</p>
-
+            <p className=" text-gray-300  my-3 txet-base md:text-lg   leading-relaxed max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-full ">
+              {user?.biography}
+            </p>
           </div>
         </div>
       </div>

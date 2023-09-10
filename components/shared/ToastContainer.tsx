@@ -17,6 +17,8 @@ export default function ToastContainerComponnent({ position, theme }: props) {
   return (
     <ToastContainer
     bodyClassName={myfont.className}
+    closeButton={false}
+  
       position={position}
       autoClose={5000}
       hideProgressBar={false}
