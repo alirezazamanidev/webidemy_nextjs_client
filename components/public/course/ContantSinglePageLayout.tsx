@@ -7,9 +7,9 @@ import SasonLayout from "./season/seasonLayout";
 import { Season } from "@/libs/model/seasson";
 interface props {
   course: Course;
+  
 }
 export default function ContantSinglePageLayout({ course }: props) {
-
   const [activeSection, setActiveSection] = useState("aboutCourseButton");
   const handleSetActive = (to: any) => {
     setActiveSection(to);
@@ -162,14 +162,15 @@ export default function ContantSinglePageLayout({ course }: props) {
                 </span>
                 <h2 className=" text-2xl text-blue-500 mr-2">فصل های دوره</h2>
               </div>
-              { course?.seasons?.length ===0 ?
-              (
-                <p className=" text-xl text-gray-300 mr-5">هنور فصلی قرار نگرفته است!</p>
-              ):course?.seasons?.map((season:Season)=>(
-                  <SasonLayout key={season._id} season={season}/>
-
+              {course?.seasons?.length === 0 ? (
+                <p className=" text-xl text-gray-300 mr-5">
+                  هنور فصلی قرار نگرفته است!
+                </p>
+              ) : (
+                course?.seasons?.map((season: Season) => (
+                  <SasonLayout key={season._id} season={season} />
                 ))
-              }
+              )}
             </div>
           </div>
           <div
@@ -187,7 +188,7 @@ export default function ContantSinglePageLayout({ course }: props) {
             </div>
           </div>
 
-          <CommentLayout />
+          <CommentLayout course={course}/>
         </div>
         <div className=" w-full xl:w-4/12 ">
           <div className=" grid grid-cols-2 md:grid-cols-4 xl:grid-cols-2   mr-0 xl:mr-8 mb-5 xl:mb-0 px-3 gap-6">

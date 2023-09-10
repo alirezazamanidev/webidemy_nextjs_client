@@ -23,7 +23,7 @@ export interface Course {
   seasons: Season[];
   viewCount: number;
   commentCount: number;
-
+  comments:Comment[]
   createdAt: Date;
   updatedAt: Date;
 }
