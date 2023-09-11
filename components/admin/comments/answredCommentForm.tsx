@@ -15,7 +15,6 @@ interface props {
   comment: Comment;
 }
 const AnswredCommentForm = ({ handleCancel, HandleSubmit, comment }: props) => {
-  const { user,loading } = useAuth();
   const answredCommentFormValidaionSchema = yup.object().shape({
     comment: yup
       .string()
@@ -23,7 +22,7 @@ const AnswredCommentForm = ({ handleCancel, HandleSubmit, comment }: props) => {
       .min(5, "فیلد مورد نظر نمیتواند کمتر از 5 کارکتر باشد")
       .max(200, "خدواکثر کارکتر های ورودی برای فیلد  ۲۰۰ عدد است"),
   });
-  if(loading) return <></>
+  
   return (
     <>
       <Modal show={true} setShow={handleCancel}>
@@ -74,7 +73,6 @@ const AnswredCommentForm = ({ handleCancel, HandleSubmit, comment }: props) => {
                 parent: comment?._id,
                 comment: "",
                 course: comment.course?._id,
-                user: user._id,
               }}
               onSubmit={HandleSubmit}
               validationSchema={answredCommentFormValidaionSchema}

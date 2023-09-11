@@ -7,6 +7,7 @@ import "@/public/css/globals.css";
 
 import localFont from "next/font/local";
 import { Provider } from "react-redux";
+import { useEffect } from "react";
 const myfont = localFont({
   src: "./../public/fonts/yekan/Yekan.woff2",
   style: "normal",
@@ -29,12 +30,6 @@ export default function RootLayout({
 
   return (
     <html lang="fa" dir="rtl" className={myfont.className}>
-      <link
-        rel="icon"
-        href="/webidemyLogo"
-        type="image/jpeg"
-        sizes="any"
-      />
       <body className=" bg-dark-700">
         <QueryClientProvider client={queryClient}>
           <ToastContainerComponnent position="top-center" theme="dark" />

@@ -6,14 +6,14 @@ import { useEffect, useState } from "react";
 import Loading from "react-loading";
 import EmptyIcon from "@/components/shared/EmptyIcon";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
-import { GetNotApprovedComments } from "@/libs/services/admin/comment";
+import { GetApprovedComments } from "@/libs/services/admin/comment";
 import CommentItemLayout from "./CommentItemLayout";
 
 export default function TableCommentApprovedLayout() {
   const [page, setPage] = useState<number>(1);
   const searchParams = useSearchParams();
 
-  const { data, isLoading, refetch } = GetNotApprovedComments(page, 12);
+  const { data, isLoading, refetch } = GetApprovedComments(page, 12);
 
   const querypage = searchParams.get("page");
   useEffect(() => {

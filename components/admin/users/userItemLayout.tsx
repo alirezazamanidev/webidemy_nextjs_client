@@ -15,6 +15,7 @@ import { AdminToggleUser, DeleteUser } from "@/libs/services/admin/user";
 import { AiOutlineUser } from "react-icons/ai";
 import WarningConfreamation from "@/components/shared/confreamtions/WarningConfreamation";
 import useAuth from "@/libs/hooks/useAuth";
+import AvatarUser from "@/components/shared/AvatarLayout";
 interface props {
   user: userType;
   userRefeach: <TPageData>(
@@ -70,22 +71,7 @@ export default function UserItemLayout({ user, userRefeach }: props) {
           )}
         </td>
         <td className="whitespace-nowrap  px-6 py-4 font-medium flex justify-center">
-          {user?.avatar === "" ? (
-            <Image
-              src={defaultAvatarUser}
-              className=" rounded-full object-cover"
-              width={50}
-              height={50}
-              alt={user?.username}
-            />
-          ) : (
-            <Image
-              width={300}
-              height={300}
-              alt={user?.username}
-              src={'dnfjfjI'}
-            />
-          )}
+         <AvatarUser url={user?.avatar} width={50} height={50} className=" object-cover rounded-full border-2 border-white"/>
         </td>
         <td className="whitespace-nowrap   py-4 ">
           <div className=" flex justify-center items-center gap-x-3">
@@ -95,7 +81,7 @@ export default function UserItemLayout({ user, userRefeach }: props) {
             <span>{user?.fullname}</span>
           </div>
         </td>
-        <td className="whitespace-nowrap  py-4">{user?.username}</td>
+        <td className="whitespace-nowrap  py-4 dir-ltr">{user?.username}</td>
         <td className="whitespace-nowrap  py-4">
           {user?.email ? (
             <p className=" text-gray-300">{user.email}</p>

@@ -1,6 +1,5 @@
 "use client";
 import DisclosureList from "../../shared/layouts/DisclosureList";
-import Image from "next/image";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { AiFillDashboard } from "react-icons/ai";
 import React from "react";
@@ -9,9 +8,10 @@ import { MdOutlineGolfCourse } from "react-icons/md";
 import { FaVideo } from "react-icons/fa";
 import { FaCommentAlt, FaUsers } from "react-icons/fa";
 import { MdPermContactCalendar } from "react-icons/md";
-import mePhoto from "@/public/images/me.jpeg";
 
 import { BiSolidCategoryAlt } from "react-icons/bi";
+import useAuth from "@/libs/hooks/useAuth";
+import AvatarUser from "@/components/shared/AvatarLayout";
 let list = [
   { label: "داشبرد اول", href: "/admin/dashboard_1" },
   { label: "داشبرد دوم", href: "/admin/dashboard_2" },
@@ -33,8 +33,8 @@ let videoList = [
   { label: "ایجاد جلسه جدید ", href: "/admin/episodes/create" },
 ];
 let commentList = [
-  { label: "نمایش کامنت ها", href: "/admin/comments" },
-  { label: "جواب دادن به کامنت ها", href: "/admin/comments/answer" },
+  { label: "کامت های تایید نشده", href: "/admin/comments" },
+  { label: "کامنت های تایید شده", href: "/admin/comments/approved" },
 ];
 let userslist = [
   { label: "نمایش  کاربران", href: "/admin/users" },
@@ -53,7 +53,7 @@ interface props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const SideBarLayout = ({ open, setOpen }: props) => {
-  // const user = useAppSelector(selectUser);
+  const {user}=useAuth();
 
   return (
     <>
@@ -88,15 +88,15 @@ const SideBarLayout = ({ open, setOpen }: props) => {
             </div>
             <div className="  flex flex-col items-center px-5 py-4">
               <div className=" flex justify-around items-center">
-                <Image
-                  className="  rounded-full object-cover"
-                  src={mePhoto}
-                  alt="avatar"
+                <AvatarUser
+                  className="  rounded-full object-cover border-2 border-white"
+                  url={user?.avatar}
+                
                   width={50}
                   height={50}
                 />
                 <span className="text-lg mr-3 text-gray-200 hover:text-white  cursor-pointer">
-                  {/* {user?.username} */}
+                  {user?.fullname}
                 </span>
               </div>
             </div>
@@ -178,18 +178,16 @@ const SideBarLayout = ({ open, setOpen }: props) => {
         </div>
         <div className="  flex flex-col items-center px-2 py-4">
           <div className=" flex justify-around items-center">
-            <Image
-              className="  rounded-full object-cover"
-              src={mePhoto}
-              alt="avatar"
-              width={50}
-              height={50}
-            />
-            <div className=" flex flex-col space-y-2 mr-3 justify-center">
-              <span className="  text-gray-200 hover:text-white  cursor-pointer">
-                علیرضا زمانی
-              </span>
-            </div>
+          <AvatarUser
+                  className="  rounded-full object-cover border-2 border-white"
+                  url={user?.avatar}
+                
+                  width={50}
+                  height={50}
+                />
+                <span className="text-lg mr-3 text-gray-200 hover:text-white  cursor-pointer">
+                  {user?.fullname}
+                </span>
           </div>
         </div>
 

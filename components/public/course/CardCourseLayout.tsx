@@ -12,8 +12,6 @@ interface props {
   course: Course;
 }
 export default function CardCourse({ course }: props) {
-  console.log(course);
-  
   return (
     <>
       <div className=" w-full h-full pt-14 pb-5 lg:pb-7  select-none  ">

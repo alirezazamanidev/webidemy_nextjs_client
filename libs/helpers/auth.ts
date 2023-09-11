@@ -1,8 +1,7 @@
 
 export const StoreCookieForLogin = async (at: string,rt:string) => {
-  console.log('login');
-  
-  await fetch(`https://webidemyyy.ir/api/login`, {
+
+  await fetch(`${process.env.NEXT_PUBLIC_URL_CLIENT}/api/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +12,7 @@ export const StoreCookieForLogin = async (at: string,rt:string) => {
 export const RemoveCookieForLogout = async () => {
 
   
-  await fetch(`https://webidemyyy.ir/api/logout`, {
+  await fetch(`${process.env.NEXT_PUBLIC_URL_CLIENT}/api/logout`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -23,6 +23,23 @@ export const GetNotApprovedComments = (page: number, limit: number) => {
   return { isLoading, data, refetch };
 };
 
+export const GetApprovedComments = (page: number, limit: number) => {
+  const { data, isLoading, refetch } = useQuery(
+    ["Show_notApprovedComment_adminPanel", page],
+    async () => {
+      const res = await CallApi().get(
+        `/admin/comments?page=${page}&item_count=${limit}`
+      );
+
+      return res?.data;
+    },
+    {
+      cacheTime: 1000 * 60 * 5,
+    }
+  );
+  return { isLoading, data, refetch };
+};
+
 export const DeleteComment = async (commentId: string) => {
   await CallApi().delete(`/admin/comments/${commentId}`);
 };
