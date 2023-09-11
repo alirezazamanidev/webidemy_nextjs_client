@@ -32,8 +32,10 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" className={myfont.className}>
       <body className=" bg-dark-700">
         <QueryClientProvider client={queryClient}>
-          <ToastContainerComponnent position="top-center" theme="dark" />
-          {children}
+          <Provider store={store}>
+            <ToastContainerComponnent position="top-center" theme="dark" />
+            {children}
+          </Provider>
           <ReactQueryDevtools initialIsOpen={true} position="top-left" />
         </QueryClientProvider>
       </body>

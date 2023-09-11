@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import AnswredCommentForm from "./answredCommentForm";
 import { CallApi } from "@/libs/helpers/callApi";
+import { useAppDispatch } from "@/libs/hooks";
 interface props {
   comment: Comment;
   commentRefeach: <TPageData>(
@@ -27,6 +28,7 @@ export default function CommentItemLayout({ comment, commentRefeach }: props) {
     useState<boolean>(false);
   const [showAnswerCommentForm, setShowAnswerCommentForm] =
     useState<boolean>(false);
+  
   const deleteHandle = async () => {
     try {
       await DeleteComment(comment._id);

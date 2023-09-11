@@ -4,8 +4,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "localhost",
-        port:'8000'
+        hostname: "api.webidemyyy.ir",
+        
       },
     ],
   },
