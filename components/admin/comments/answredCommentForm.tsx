@@ -73,7 +73,7 @@ const AnswredCommentForm = ({ handleCancel, HandleSubmit, comment }: props) => {
                 parent: comment?._id,
                 comment: "",
                 course: comment.course?._id,
-                user: user.id,
+                user: user._id,
               }}
               onSubmit={HandleSubmit}
               validationSchema={answredCommentFormValidaionSchema}

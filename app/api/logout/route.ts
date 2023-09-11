@@ -5,11 +5,11 @@ export async function GET(request: NextRequest) {
   const headers = new Headers();
   headers.append(
     "Set-Cookie",
-    `x-access-token=${null}; Path=/;   Max-Age=0; `
+    `x-access-token=${null}; Path=/; Domain=.webidemyyy.ir;  Max-Age=0; `
   );
   headers.append(
     "Set-Cookie",
-    `x-refresh-token=${null}; Path=/; Max-Age=0;  `
+    `x-refresh-token=${null}; Path=/; Domain=.webidemyyy.ir; Max-Age=0;`
   );
 
   return new Response("success logout!", {
