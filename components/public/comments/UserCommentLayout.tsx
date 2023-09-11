@@ -9,8 +9,6 @@ interface props {
   comment: Comment;
 }
 export default function UserCommentLayout({ comment }: props) {
-  console.log(comment);
-
   return (
     <div>
       <div className=" border border-dashed border-gray-400 mt-5 rounded-lg p-4 lg:p-7">

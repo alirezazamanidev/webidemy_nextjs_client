@@ -1,7 +1,7 @@
 "use client";
 import { FC, ChangeEvent } from "react";
 
-import { Field, ErrorMessage, FieldProps } from "formik";
+import { Field, FieldProps } from "formik";
 
 interface SelectboxOptionsInterFace {
   label?: string;

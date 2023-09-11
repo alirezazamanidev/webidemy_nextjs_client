@@ -28,9 +28,13 @@ export default function SingleCourseHeaderPage({ course }: props) {
               {course?.title}
             </h1>
             <div className="mt-4 flex justify-center lg:justify-start items-center">
-              <Link className="inline-block" href="#">
+              <Link
+                className="inline-block"
+                target='_blank'
+                href={`/courses?&category=${course?.category?.title}`}
+              >
                 <span className="inline-block select-none bg-gray-900 rounded-lg p-2 text-xs text-white text-center transition-colors dark:bg-dark-700">
-                  بک اند
+                  {course?.category?.title}
                 </span>
               </Link>
             </div>

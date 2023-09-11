@@ -5,6 +5,9 @@ import CommentLayout from "../comments/CommentLayout";
 import { Course } from "@/libs/model/course";
 import SasonLayout from "./season/seasonLayout";
 import { Season } from "@/libs/model/seasson";
+import AvatarUser from "@/components/shared/AvatarLayout";
+import Link from "next/link";
+import CardInfoTeacher from "../layouts/CardInfoTeacher";
 interface props {
   course: Course;
 }
@@ -13,6 +16,8 @@ export default function ContantSinglePageLayout({ course }: props) {
   const handleSetActive = (to: any) => {
     setActiveSection(to);
   };
+
+  console.log(course);
 
   return (
     <>
@@ -120,10 +125,16 @@ export default function ContantSinglePageLayout({ course }: props) {
                 onSetActive={handleSetActive}
                 className="flex justify-center w-fit items-center gap-2 group"
               >
-                  <span className={`flex ${activeSection === "commentsButton" ? 'opacity-100' :' opacity-0'}`}>
-                    <span className="rounded-full  w-2 h-2 transition-all  bg-blue-750"></span>
-                  </span>
-               
+                <span
+                  className={`flex ${
+                    activeSection === "commentsButton"
+                      ? "opacity-100"
+                      : " opacity-0"
+                  }`}
+                >
+                  <span className="rounded-full  w-2 h-2 transition-all  bg-blue-750"></span>
+                </span>
+
                 <button
                   className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${
                     activeSection === "commentsButton"
@@ -266,6 +277,8 @@ export default function ContantSinglePageLayout({ course }: props) {
               </p>
             </div>
           </div>
+          <CardInfoTeacher teacher={course?.teacher}/>
+         
         </div>
       </main>
     </>
