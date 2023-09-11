@@ -3,7 +3,9 @@ import axios from "axios";
 import { BadRequestException } from "../exceptions/BadRequestException";
 import { NotAcceptableExceptions } from "../exceptions/NotAcceptableExceptions";
 import { NotFoundException } from "../exceptions/NotFoundException";
+import useRefreshToken from "../hooks/useRefreshToken";
 export const CallApi = () => {
+  const refresh=useRefreshToken();
   
   const axiosInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_SERVER_BASE_API_URL,
@@ -20,7 +22,7 @@ export const CallApi = () => {
   );
   axiosInstance.interceptors.response.use((res)=>{
     return res;
-  },(err)=>{
+  },async(err)=>{
  
     const res = err.response;
     
@@ -32,6 +34,9 @@ export const CallApi = () => {
     }
     if (res.status === 406) {
       throw new NotAcceptableExceptions(res?.data?.errors?.message);
+    }
+    if(res.status===401){
+      await refresh();
     }
   
 

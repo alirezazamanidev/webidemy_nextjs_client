@@ -1,5 +1,6 @@
 
 export const StoreCookieForLogin = async (at: string,rt:string) => {
+  console.log('login');
   
   await fetch(`https://webidemyyy.ir/api/login`, {
     method: "POST",
