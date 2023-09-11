@@ -7,6 +7,7 @@ import Link from "next/link";
 import defaultPhotoAvatar from '@/public/images/photo/avatarDefalt.webp';
 import mePhoto from "@/public/images/me.jpeg";
 import ImageComponent from "@/components/shared/ImageComponent";
+import AvatarUser from "@/components/shared/AvatarLayout";
 interface props {
   course: Course;
 }
@@ -47,20 +48,9 @@ export default function CardCourse({ course }: props) {
               {course?.title}
             </h3>
             <div className=" flex items-center    gap-2 text-base text-white transition-colors mt-5 w-full">
-              {
-               course?.teacher?.avatar ?(
-                <ImageComponent url={course?.teacher?.avatar} width={50} height={50} alt={course?.teacher?.avatar} className="  object-cover rounded-full transition-all duration-500 opacity-100 w-[40px]  h-[40px]  border-2 border-white"/>
+     
+                <AvatarUser url={course?.teacher?.avatar} width={50} height={50} className="  object-cover rounded-full transition-all duration-500 opacity-100 w-[40px]  h-[40px]  border-2 border-white"/>
 
-               ):(
-                <Image
-                src={defaultPhotoAvatar}
-                alt="me"
-                width={50}
-                height={50}
-                className=" aspect-square object-cover rounded-full transition-all duration-500 opacity-100 w-10 h-10 border-2 border-solid border-white"
-              />
-               )
-              }
       
               <div className=" flex flex-col  gap-1">
                 <span className=" text-lg md:text-sm "> مدرس : </span>

@@ -1,3 +1,5 @@
+import { Course } from "./course";
+import { Episode } from "./episode";
 import { userType } from "./user";
 
 export interface Comment {
@@ -5,8 +7,9 @@ export interface Comment {
   user: userType;
   comment: string;
   parent: Comment;
-  episode?: string;
-  course?: string;
+  approved:boolean
+  episode?: Episode;
+  course?: Course;
   comments: Comment[];
   createdAt: Date;
   updateAt: Date;

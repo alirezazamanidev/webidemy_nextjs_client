@@ -15,6 +15,7 @@ export default function ContantSinglePageLayout({ course }: props) {
     setActiveSection(to);
   };
 
+
   return (
     <>
       <main className=" w-full flex flex-col-reverse xl:flex-row  mt-8 select-none">

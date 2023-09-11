@@ -17,12 +17,14 @@ export default function CommentLayout({ course }: props) {
   const [ShowCommentText, setShowCommentText] = useState<boolean>(false);
   const { user } = useAuth();
 
+  
 
   const commentformValidationSchema = yup.object().shape({
     comment: yup
       .string()
-      .required("افزودن متن نظر الزامیست")
-      .min(8, "متن نظر نمی تواند کمتر از 8 کارکتر باشد"),
+      .required("فیلد نظر نمی تواند خالی بماند")
+      .min(5, "فیلد مورد نظر نمیتواند کمتر از 5 کارکتر باشد")
+      .max(200, "خدواکثر کارکتر های ورودی برای فیلد  ۲۰۰ عدد است"),
   });
   const handleSetComment = async (values: any) => {
     const res = await CallApi().post("/comments/create", values);
@@ -30,6 +32,7 @@ export default function CommentLayout({ course }: props) {
       toast.success(
         "نظر شما با موفقیت ثبت شد و بعد از تایید در سایت قرار میگیرد:(("
       );
+      setShowCommentText(false);
     }
   };
   return (
@@ -107,11 +110,9 @@ export default function CommentLayout({ course }: props) {
               )}
             </Formik>
           )}
-          {
-            course?.comments?.map((comment:any)=>(
-              <UserCommentLayout key={comment._id} comment={comment}/>
-            ))
-          }
+          {course?.comments?.map((comment: any) => (
+            <UserCommentLayout key={comment._id} comment={comment} />
+          ))}
         </div>
       </div>
     </>
