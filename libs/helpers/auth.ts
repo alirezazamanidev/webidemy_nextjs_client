@@ -1,4 +1,4 @@
-'use client'
+
 export const StoreCookieForLogin = async (at: string,rt:string) => {
   
   await fetch(`https://webidemyyy.ir/api/login`, {
