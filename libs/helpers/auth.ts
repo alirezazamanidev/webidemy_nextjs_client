@@ -1,5 +1,5 @@
+'use client'
 export const StoreCookieForLogin = async (at: string,rt:string) => {
-  console.log(process.env.NEXT_PUBLIC_URL_CLIENT);
   
   await fetch(`${process.env.NEXT_PUBLIC_URL_CLIENT}/api/login`, {
     method: "POST",
