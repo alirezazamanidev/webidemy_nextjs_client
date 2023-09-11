@@ -7,14 +7,12 @@ import SasonLayout from "./season/seasonLayout";
 import { Season } from "@/libs/model/seasson";
 interface props {
   course: Course;
-  
 }
 export default function ContantSinglePageLayout({ course }: props) {
   const [activeSection, setActiveSection] = useState("aboutCourseButton");
   const handleSetActive = (to: any) => {
     setActiveSection(to);
   };
-
 
   return (
     <>
@@ -62,11 +60,15 @@ export default function ContantSinglePageLayout({ course }: props) {
                 onSetActive={handleSetActive}
                 className="flex justify-center w-fit items-center gap-2 group"
               >
-                {activeSection === "courseChaptersButton" && (
-                  <span className="flex">
-                    <span className="rounded-full  w-2 h-2 transition-all  bg-blue-750"></span>
-                  </span>
-                )}
+                <span
+                  className={`flex ${
+                    activeSection === "courseChaptersButton"
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                >
+                  <span className="rounded-full  w-2 h-2 transition-all  bg-blue-750"></span>
+                </span>
 
                 <button
                   className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${
@@ -118,12 +120,10 @@ export default function ContantSinglePageLayout({ course }: props) {
                 onSetActive={handleSetActive}
                 className="flex justify-center w-fit items-center gap-2 group"
               >
-                {activeSection === "commentsButton" && (
-                  <span className="flex">
+                  <span className={`flex ${activeSection === "commentsButton" ? 'opacity-100' :' opacity-0'}`}>
                     <span className="rounded-full  w-2 h-2 transition-all  bg-blue-750"></span>
                   </span>
-                )}
-
+               
                 <button
                   className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${
                     activeSection === "commentsButton"
@@ -189,7 +189,7 @@ export default function ContantSinglePageLayout({ course }: props) {
             </div>
           </div>
 
-          <CommentLayout course={course}/>
+          <CommentLayout course={course} />
         </div>
         <div className=" w-full xl:w-4/12 ">
           <div className=" grid grid-cols-2 md:grid-cols-4 xl:grid-cols-2   mr-0 xl:mr-8 mb-5 xl:mb-0 px-3 gap-6">
