@@ -3,6 +3,8 @@ import { ChangeEvent } from "react";
 interface props {
   label?: string;
   name: string;
+  ref?:any;
+  hidden?:boolean
   disabled?: boolean;
   id?:string;
   placeholder?: string;
@@ -15,6 +17,8 @@ export default function Input({
   name,
   label,
   id,
+  hidden=false,
+  ref,
   disabled,
   placeholder,
   className,
@@ -38,6 +42,8 @@ export default function Input({
             type={`${type}`}
             disabled={disabled}
             id={id}
+            ref={ref}
+            hidden={hidden}
             className={className}
             placeholder={placeholder}
           />

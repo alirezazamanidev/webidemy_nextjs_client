@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import Modal from "../../shared/modals/modal";
-import * as yup from "yup";
 import { useRef } from "react";
 import ShowImage from "next/image";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import Loading from "react-loading";
 import { toast } from "react-toastify";
+import * as yup from "yup";
 interface props {
   handleCancel: () => void;
   handleTrue: (values: any) => void;
@@ -20,46 +20,72 @@ export default function UploadAvatarConfreamation({
   const inputRef = useRef<HTMLInputElement>(null);
   const [urlAvatarImage, setUrlAvatarImage] = useState<string>("");
 
-  const uploadAvatarValidationSchema = yup.object().shape({
-    avatar: yup
-      .mixed()
-      .required('وارد کردن تصویر برای پروفایل الزامیست')
-      .test('fileFormat', 'فرمت تصویر معتبر نیست', (value:any) => {
-        if (!value) {
-          return false; // تصویری انتخاب نشده است.
-        }
-  
-        const validFormats = ['image/png', 'image/jpg', 'image/jpeg'];
-        return validFormats.includes(value.type);
-      })
-      .test('fileSize', 'حجم تصویر باید حداکثر 1 مگابایت باشد', (value:any) => {
-        if (!value) {
-          return false; // تصویری انتخاب نشده است.
-        }
-  
-        return value.size <= 1024 * 1024; // حداکثر 1 مگابایت
-      })
-      .test('imageDimensions', 'ابعاد تصویر باید حداکثر 3000x3000 پیکسل باشد', (value:any) => {
-        if (!value) {
-          return false; // تصویری انتخاب نشده است.
-        }
-  
-        const img = new Image();
-        img.src = URL.createObjectURL(value);
-  
-        return new Promise((resolve) => {
-          img.onload = () => {
-            resolve(img.width <= 3000 && img.height <= 3000);
-          };
-        });
-      }),
-  });
-  
   const getImageAvatar = (e: any) => {
     const imageFile = e.target.files[0];
     const urlImage = URL.createObjectURL(imageFile);
     setUrlAvatarImage(urlImage);
   };
+  const uploadAvatarValidationSchema = yup.object().shape({
+    avatar: yup
+      .mixed()
+      .test("fileFormat", "فرمت تصویر معتبر نیست", (value: any) => {
+        if (!value) {
+          return false; // تصویری انتخاب نشده است.
+        }
+
+        const validFormats = ["image/png", "image/jpg", "image/jpeg"];
+        const status = validFormats.includes(value.type);
+        if (!status) {
+          toast.error("فرمت فایل از فرمت های مجاز تصویر  نیست!");
+          setUrlAvatarImage("");
+          return false;
+        }
+        return true;
+      })
+      .test(
+        "fileSize",
+        "حجم تصویر باید حداکثر 1 مگابایت باشد",
+        (value: any) => {
+          if (!value) {
+            return false; // تصویری انتخاب نشده است.
+          }
+
+          const status = value.size <= 1024 * 1024; // حداکثر 1 مگابایت
+          if (!status) {
+            toast.error("حجم تصویر باید حدواکثر 1  مگابایت باشد!");
+            setUrlAvatarImage("");
+            return false;
+          }
+          return true;
+        }
+      )
+      .test(
+        "imageDimensions",
+        "ابعاد تصویر باید حداکثر 3000x3000 پیکسل باشد",
+        (value: any) => {
+          if (!value) {
+            return false; // تصویری انتخاب نشده است.
+          }
+
+          const img = new Image();
+          img.src = URL.createObjectURL(value);
+
+          const status = new Promise((resolve) => {
+            img.onload = () => {
+              resolve(img.width <= 3000 && img.height <= 3000);
+            };
+          });
+
+          if (!status) {
+            toast.error("ابعداد تصویر با توجه به ابعداد ذکر شده همخوانی ندارد");
+            setUrlAvatarImage("");
+            return false;
+          }
+          return true;
+        }
+      ),
+  });
+
   return (
     <>
       <Modal show={true} setShow={handleCancel}>
@@ -87,21 +113,16 @@ export default function UploadAvatarConfreamation({
                               <button className="flex justify-center items-center transition-all border-none text-blue-350 hover:text-gray-400 cursor-pointer text-xs md:text-sm  outline-none focus:outline-none">
                                 <span>کلیک کنید</span>
                               </button>
+
                               <input
                                 type="file"
-                                hidden
+                                name="avatar"
                                 onChange={(e: any) => {
-                                  setFieldValue("avatar", e.target.files[0]);
-                                  if (Object.keys(errors).length === 0) {
-                                  
-                                    getImageAvatar(e);
-                                    return;
-                                  }
-                                 setUrlAvatarImage('')
-                                  toast.error(
-                                    "فقط تصاویری با پسوند های ذکر شده میتوانید آپلود کنید!"
-                                  );
+                                  const inputfile = e.target.files[0];
+                                  setFieldValue("avatar", inputfile);
+                                  getImageAvatar(e);
                                 }}
+                                hidden={true}
                                 ref={inputRef}
                               />
                             </div>
