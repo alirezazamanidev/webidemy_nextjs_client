@@ -13,8 +13,8 @@ export const useSearchInfinite = ({
   url,
   text = "",
   limit = 8,
-  category,
-  sort,
+  category='all',
+  sort='default',
   key,
 }: optionProps) => {
   const { data, isFetchingNextPage, isLoading, hasNextPage, fetchNextPage } =

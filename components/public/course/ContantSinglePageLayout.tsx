@@ -8,6 +8,8 @@ import { Season } from "@/libs/model/seasson";
 import AvatarUser from "@/components/shared/AvatarLayout";
 import Link from "next/link";
 import CardInfoTeacher from "../layouts/CardInfoTeacher";
+import { GetComments } from "@/libs/services/home/comments";
+import Loading from "react-loading";
 interface props {
   course: Course;
 }
@@ -16,8 +18,6 @@ export default function ContantSinglePageLayout({ course }: props) {
   const handleSetActive = (to: any) => {
     setActiveSection(to);
   };
-
-  console.log(course);
 
   return (
     <>
@@ -277,8 +277,7 @@ export default function ContantSinglePageLayout({ course }: props) {
               </p>
             </div>
           </div>
-          <CardInfoTeacher teacher={course?.teacher}/>
-         
+          <CardInfoTeacher teacher={course?.teacher} />
         </div>
       </main>
     </>

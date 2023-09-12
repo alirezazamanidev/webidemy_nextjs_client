@@ -13,7 +13,6 @@ export default function PaginateItem({
   pages: number;
   url: string;
 }) {
-  
   const router = useRouter();
 
   return (
@@ -22,7 +21,9 @@ export default function PaginateItem({
         <Stack spacing={3} className=" mt-3">
           <Pagination
             count={pages}
-            onChange={(e,page:number) => router.push(`${url}?page=${page}`)}
+            onChange={(e, page: number) =>
+              router.push(`${url}?page=${page}`, { scroll: false })
+            }
             renderItem={(item) => (
               <PaginationItem
                 slots={{ previous: IoIosArrowForward, next: IoIosArrowBack }}
