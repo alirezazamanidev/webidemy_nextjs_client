@@ -10,15 +10,16 @@ import ImageComponent from "@/components/shared/ImageComponent";
 import { GetUserOrders } from "@/libs/services/cart/cart";
 import LoGoPath from "@/public/images/photo/WEBIDEMI-600x600.png";
 import Image from "next/image";
+import LoadingLayout from "@/components/shared/Loading";
 export default function NavbarLayouts() {
   const [openSideBar, setOpenSidebar] = useState<boolean>(false);
   const pathname = usePathname();
   const { user, loading: userLoading } = useAuth();
-  const { data } = GetUserOrders();
+  const { data ,isLoading} = GetUserOrders();
   let statusshowLoginBtn =
     pathname === "/login" || pathname === "/login/verfiy" ? true : false;
 
-
+    if(isLoading) return <LoadingLayout/>
   return (
     <>
       <nav className="container mx-auto mt-10 px-5">
