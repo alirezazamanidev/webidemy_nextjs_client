@@ -9,7 +9,9 @@ export const GetUserOrders = () => {
       return res.data;
     },
     {
+      retry: false,
       cacheTime: 0,
+      refetchOnMount: false,
       refetchOnWindowFocus: false,
       retryOnMount: false,
     }

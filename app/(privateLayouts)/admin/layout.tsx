@@ -21,12 +21,27 @@ export default function AdminLayout({
       router.push("/");
     }
   }, [user, error,router]);
+  
 
   return (
-    <div className="lg:mr-[250px] h-screen ">
-      <NavbarLayout />
-
-      {children}
-    </div>
+    <>
+    
+    {
+      loading ? (
+        <LoadingLayout/>
+      ):(
+        <div className="lg:mr-[250px] h-screen ">
+        <NavbarLayout />
+  
+        {children}
+      </div>
+      )
+    }
+    
+    
+    
+    </>
+   
+  
   );
 }

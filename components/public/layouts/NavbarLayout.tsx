@@ -18,8 +18,6 @@ export default function NavbarLayouts() {
   const { data ,isLoading} = GetUserOrders();
   let statusshowLoginBtn =
     pathname === "/login" || pathname === "/login/verfiy" ? true : false;
-
-    if(isLoading) return <LoadingLayout/>
   return (
     <>
       <nav className="container mx-auto mt-10 px-5">

@@ -15,10 +15,7 @@ export default function useAuth() {
       refetchOnWindowFocus: false,
       refetchIntervalInBackground: true,
       cacheTime:0,
-      onError: async (err: any) => {
-        if (err.response.status === 401) {
-        }
-      },
+      
     }
   );
 
