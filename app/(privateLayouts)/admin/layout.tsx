@@ -11,16 +11,16 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, error, loading } = useAuth();
-  const router = useRouter();
-  useEffect(() => {
-    if (error) {
-      router.push("/login");
-    }
-    if (user?.admin===false) {
-      router.push("/");
-    }
-  }, [user, error,router]);
+  // const { user, error, loading } = useAuth();
+  // const router = useRouter();
+  // useEffect(() => {
+  //   if (error) {
+  //     router.push("/login");
+  //   }
+  //   if (user?.admin===false) {
+  //     router.push("/");
+  //   }
+  // }, [user, error,router]);
 
   return (
     <div className="lg:mr-[250px] h-screen ">
