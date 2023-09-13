@@ -71,7 +71,7 @@ export default function UserItemLayout({ user, userRefeach }: props) {
           )}
         </td>
         <td className="whitespace-nowrap  px-6 py-4 font-medium flex justify-center">
-         <AvatarUser url={user?.avatar} width={50} height={50} className=" object-cover rounded-full border-2 border-white"/>
+         <AvatarUser url={user?.avatar} width={50} height={50} className=" object-cover w-16 h-16 rounded-full border-2 border-white"/>
         </td>
         <td className="whitespace-nowrap   py-4 ">
           <div className=" flex justify-center items-center gap-x-3">

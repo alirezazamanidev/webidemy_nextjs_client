@@ -1,14 +1,18 @@
 "use client";
 import { Transition } from "@headlessui/react";
+import Image from "next/image";
 import Link from "next/link";
 import React, { SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import LoGoPath from "@/public/images/photo/WEBIDEMI-600x600.png";
+import { HiShoppingCart } from "react-icons/hi";
 
 interface props {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
+  orderLength: number;
 }
-export default function SideBarLayout({ open, setOpen }: props) {
+export default function SideBarLayout({ open, setOpen, orderLength }: props) {
   return (
     <>
       <Transition
@@ -38,116 +42,129 @@ export default function SideBarLayout({ open, setOpen }: props) {
           leaveFrom="translate-x-0"
           leaveTo="translate-x-full"
         >
-          <div className=" flex   items-center justify-center  ">
-            <AiOutlineClose
-              onClick={() => setOpen(false)}
-              className=" text-gray-100 text-4xl absolute top-4 cursor-pointer  right-4"
-            />
-            <h2 className="  mt-20 text-2xl text-gray-300 hover:text-gray-200 duration-200 font-bold ">
-              Webidemy
-            </h2>
-            
+          <div className=" ">
+
+          <Link
+            className=" justify-center  flex relative  -left-6 top-6 items-center w-9 min-w-9 lg:w-12 lg:min-w-12 min-h-9 h-9 lg:min-h-12 lg:h-12 rounded-full transition-colors bg-gray-1010  text-3xl p-2 text-gray-300"
+            href="/cart"
+          >
+            {orderLength !== 0 && (
+              <span className=" absolute   w-4 h-4 md:w-5 lg:w-6 md:h-5 lg:h-6 p-2 flex justify-center items-center  bg-red-700 text-gray-100 text-xs -right-3 rounded-full bottom-0">
+                {orderLength}
+              </span>
+            )}
+            <HiShoppingCart />
+          </Link>
           </div>
-          <nav className="pt-7 px-4">
-              <ul className="flex text-gray-100 justify-center md:items-center gap-3 md:gap-5 lg:gap-8 xl:gap-10 flex-col">
-                <li className="flex">
-                  <Link
-                    className="flex justify-center items-center gap-4"
-                    href="/"
+          <div className=" flex   items-center justify-center  pt-10 ">
+            <Image
+              src={LoGoPath}
+              alt="logo"
+              width={70}
+              height={70}
+              className=" object-cover  scale-75 md:scale-90 lg:scale-100 "
+            />
+          </div>
+          <nav className="pt-7 px-4 mt-10">
+            <ul className="flex text-gray-100 justify-center md:items-center gap-3 md:gap-5 lg:gap-8 xl:gap-10 flex-col">
+              <li className="flex">
+                <Link
+                  className="flex justify-center items-center gap-4"
+                  href="/"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="inline-block md:hidden w-5 h-5"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="inline-block md:hidden w-5 h-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                      ></path>
-                    </svg>
-                    <span className="p-2 text-base lg:text-2xl text-center relative after:h-0.5 after:absolute after:bottom-0 after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-gray-300 after:w-0 Hover:after:opacity-0 after:transition-all after:opacity-100 font-bold">
-                      خانه
-                    </span>
-                  </Link>
-                </li>
-                <li className="flex">
-                  <Link
-                    className="flex justify-center items-center gap-4"
-                    href="/courses"
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                    ></path>
+                  </svg>
+                  <span className="p-2 text-base lg:text-2xl text-center relative after:h-0.5 after:absolute after:bottom-0 after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-gray-300 after:w-0 Hover:after:opacity-0 after:transition-all after:opacity-100 font-bold">
+                    خانه
+                  </span>
+                </Link>
+              </li>
+              <li className="flex">
+                <Link
+                  className="flex justify-center items-center gap-4"
+                  href="/courses"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="inline-block md:hidden w-5 h-5"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="inline-block md:hidden w-5 h-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
-                      ></path>
-                    </svg>
-                    <span className="p-2 text-base lg:text-2xl text-center relative after:h-0.5 after:absolute after:bottom-0 after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-cnBlack-20 dark:after:bg-gray-300 after:w-0 after:opacity-0 after:transition-all hover:after:w-1/2 hover:after:opacity-100">
-                      دوره ها
-                    </span>
-                  </Link>
-                </li>
-                <li className="flex">
-                  <Link
-                    className="flex justify-center items-center gap-4"
-                    href="/blogs"
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
+                    ></path>
+                  </svg>
+                  <span className="p-2 text-base lg:text-2xl text-center relative after:h-0.5 after:absolute after:bottom-0 after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-cnBlack-20 dark:after:bg-gray-300 after:w-0 after:opacity-0 after:transition-all hover:after:w-1/2 hover:after:opacity-100">
+                    دوره ها
+                  </span>
+                </Link>
+              </li>
+              <li className="flex">
+                <Link
+                  className="flex justify-center items-center gap-4"
+                  href="/blogs"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="inline-block md:hidden w-5 h-5"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      className="inline-block md:hidden w-5 h-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-                      ></path>
-                    </svg>
-                    <span className="p-2 text-base lg:text-2xl text-center relative after:h-0.5 after:absolute after:bottom-0 after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-cnBlack-20 dark:after:bg-gray-300 after:w-0 after:opacity-0 after:transition-all hover:after:w-1/2 hover:after:opacity-100">
-                      مقالات
-                    </span>
-                  </Link>
-                </li>
-                <li className="flex">
-                  <Link
-                    className="flex justify-center items-center gap-4"
-                    href="/podcasts"
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                    ></path>
+                  </svg>
+                  <span className="p-2 text-base lg:text-2xl text-center relative after:h-0.5 after:absolute after:bottom-0 after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-cnBlack-20 dark:after:bg-gray-300 after:w-0 after:opacity-0 after:transition-all hover:after:w-1/2 hover:after:opacity-100">
+                    مقالات
+                  </span>
+                </Link>
+              </li>
+              <li className="flex">
+                <Link
+                  className="flex justify-center items-center gap-4"
+                  href="/podcasts"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="inline-block md:hidden w-5 h-5"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      className="inline-block md:hidden w-5 h-5"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"
-                      ></path>
-                    </svg>
-                    <span className="p-2 text-base lg:text-2xl text-center relative after:h-0.5 after:absolute after:bottom-0 after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-cnBlack-20 dark:after:bg-gray-300 after:w-0 after:opacity-0 after:transition-all hover:after:w-1/2 hover:after:opacity-100">
-                      پادکست ها
-                    </span>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"
+                    ></path>
+                  </svg>
+                  <span className="p-2 text-base lg:text-2xl text-center relative after:h-0.5 after:absolute after:bottom-0 after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-cnBlack-20 dark:after:bg-gray-300 after:w-0 after:opacity-0 after:transition-all hover:after:w-1/2 hover:after:opacity-100">
+                    پادکست ها
+                  </span>
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </Transition.Child>
       </Transition>
     </>

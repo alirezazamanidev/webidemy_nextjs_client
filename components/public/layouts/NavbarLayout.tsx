@@ -7,28 +7,39 @@ import useAuth from "@/libs/hooks/useAuth";
 import { usePathname } from "next/navigation";
 import { HiShoppingCart } from "react-icons/hi";
 import ImageComponent from "@/components/shared/ImageComponent";
-
+import { GetUserOrders } from "@/libs/services/cart/cart";
+import LoGoPath from "@/public/images/photo/WEBIDEMI-600x600.png";
+import Image from "next/image";
 export default function NavbarLayouts() {
   const [openSideBar, setOpenSidebar] = useState<boolean>(false);
   const pathname = usePathname();
   const { user, loading: userLoading } = useAuth();
+  const { data } = GetUserOrders();
   let statusshowLoginBtn =
     pathname === "/login" || pathname === "/login/verfiy" ? true : false;
 
-  let pathForRedirect = user ? `${user?.username}` : "/login";
+
   return (
     <>
       <nav className="container mx-auto mt-10 px-5">
-        <SideBarLayout open={openSideBar} setOpen={setOpenSidebar} />
+        <SideBarLayout
+          open={openSideBar}
+          setOpen={setOpenSidebar}
+          orderLength={data?.length}
+        />
 
         <div className=" flex items-center justify-between">
           <AiOutlineMenu
-            className=" w-6 h-6 cursor-pointer text-white  block lg:hidden"
+            className=" w-8 h-8 cursor-pointer text-white  block lg:hidden"
             onClick={(e: any) => setOpenSidebar(true)}
           />
-          <h2 className=" text-3xl lg:text-4xl  font-bold tracking-tighter text-gray-50 hover:bg-gray-400 duration-200">
-            Webidemy
-          </h2>
+          <Image
+            src={LoGoPath}
+            alt="logo"
+            width={70}
+            height={70}
+            className=" object-cover  scale-75 md:scale-90 lg:scale-100 "
+          />
           <ul className="  hidden lg:flex items-center  space-x-10 space-x-reverse  text-2xl lg:text-3xl  text-gray-300   cursor-pointer">
             <Link href="/" className=" group">
               <span
@@ -105,7 +116,7 @@ export default function NavbarLayouts() {
                 {user?.avatar ? (
                   <ImageComponent
                     url={user?.avatar}
-                    className="aspect-square object-cover rounded-full transition-all duration-500 opacity-100 w-6 h-6 lg:w-7 lg:h-7"
+                    className="aspect-square object-cover rounded-full transition-all duration-500 opacity-100  lg:w-7 lg:h-7"
                     width={30}
                     height={30}
                     alt={user?.fullname}
@@ -128,9 +139,17 @@ export default function NavbarLayouts() {
                 )}
               </Link>
               <Link
-                className="justify-center items-center w-9 min-w-9 lg:w-12 lg:min-w-12 min-h-9 h-9 lg:min-h-12 lg:h-12 rounded-full transition-colors bg-dark-600 flex text-3xl p-2 text-gray-300"
-                href="/login"
+                className="justify-center hidden lg:flex relative items-center w-9 min-w-9 lg:w-12 lg:min-w-12 min-h-9 h-9 lg:min-h-12 lg:h-12 rounded-full transition-colors bg-dark-600  text-3xl p-2 text-gray-300"
+                href="/cart"
               >
+                {data?.length !== 0 && (
+                  <span
+                    hidden={data?.length === 0 ? true : false}
+                    className=" absolute   w-4 h-4 md:w-5 lg:w-6 md:h-5 lg:h-6 p-2 flex justify-center items-center  bg-red-700 text-gray-100 text-xs -right-3 rounded-full bottom-0"
+                  >
+                    {data?.length}
+                  </span>
+                )}
                 <HiShoppingCart />
               </Link>
             </section>

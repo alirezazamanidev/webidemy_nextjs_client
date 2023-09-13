@@ -89,7 +89,7 @@ const SideBarLayout = ({ open, setOpen }: props) => {
             <div className="  flex flex-col items-center px-5 py-4">
               <div className=" flex justify-around items-center">
                 <AvatarUser
-                  className="  rounded-full object-cover border-2 border-white"
+                  className="  rounded-full object-cover border-2 border-white w-20 h-20"
                   url={user?.avatar}
                 
                   width={50}
@@ -179,7 +179,7 @@ const SideBarLayout = ({ open, setOpen }: props) => {
         <div className="  flex flex-col items-center px-2 py-4">
           <div className=" flex justify-around items-center">
           <AvatarUser
-                  className="  rounded-full object-cover border-2 border-white"
+                  className="  rounded-full object-cover border-2 border-white w-20 h-20"
                   url={user?.avatar}
                 
                   width={50}

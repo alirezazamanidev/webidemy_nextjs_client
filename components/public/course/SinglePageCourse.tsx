@@ -1,15 +1,37 @@
 "use client";
 
 import ImageComponent from "@/components/shared/ImageComponent";
+import { BadRequestException } from "@/libs/exceptions/BadRequestException";
+import ValidationException from "@/libs/exceptions/ValidationException";
+import { CallApi } from "@/libs/helpers/callApi";
+import useAuth from "@/libs/hooks/useAuth";
 import { Course } from "@/libs/model/course";
-import separateWithComma from "@/libs/utils";
+import { AddOneOrder, GetUserOrders } from "@/libs/services/cart/cart";
+import separateWithComma, { TypeConditioncourseToFarsi } from "@/libs/utils";
 import Image from "next/image";
 import Link from "next/link";
-
+import { toast } from "react-toastify";
 interface props {
   course: Course;
 }
 export default function SingleCourseHeaderPage({ course }: props) {
+  const disbaleBTn = course.condition === "stopـselling" ? true : false;
+  const {refetch}=GetUserOrders();
+  const handleAddTocart = async (e: any) => {
+    e.preventDefault();
+    try {
+      await AddOneOrder(course?._id);
+      await refetch()
+      toast.success('دوره مورد نظر به سبد خرید شما افزوده شد!')
+    }catch(err){
+      if(err instanceof BadRequestException){
+        toast.error(err?.message)
+      }
+      
+
+    }
+   
+  };
   return (
     <>
       <div className=" bg-dark-600   grid  grid-cols-1 lg:grid-cols-2 rounded-2xl select-none p-4 lg:p-7 ">
@@ -30,7 +52,7 @@ export default function SingleCourseHeaderPage({ course }: props) {
             <div className="mt-4 flex justify-center lg:justify-start items-center">
               <Link
                 className="inline-block"
-                target='_blank'
+                target="_blank"
                 href={`/courses?sort=default&category=${course?.category?.title}`}
               >
                 <span className="inline-block select-none bg-gray-900 rounded-lg p-2 text-xs text-white text-center transition-colors dark:bg-dark-700">
@@ -43,8 +65,14 @@ export default function SingleCourseHeaderPage({ course }: props) {
             </p>
           </div>
           <div className=" mt-4 lg:mt-0 flex flex-col sm:flex-row  justify-between items-center">
-            <button className=" mb-3 sm:mb-0  inline-block text-xl lg:text-2xl  bg-gradient-to-r from-blue-750 to-blue-250 px-8 py-4 rounded-lg text-gray-50">
-              خرید دوره
+            <button
+              onClick={handleAddTocart}
+              disabled={disbaleBTn}
+              className=" mb-3 sm:mb-0  inline-block text-xl lg:text-2xl  bg-gradient-to-r  disabled:opacity-50 from-blue-750 to-blue-250 px-8 py-4 rounded-lg text-gray-50"
+            >
+              {disbaleBTn
+                ? TypeConditioncourseToFarsi(course?.condition)
+                : "خرید دوره"}
             </button>
             <span className=" flex items-center">
               <span className=" text-white text-xl">
