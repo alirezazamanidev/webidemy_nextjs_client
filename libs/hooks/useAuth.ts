@@ -2,20 +2,21 @@ import { CallApi } from "../helpers/callApi";
 import { useQuery } from "react-query";
 import Cookies from "universal-cookie";
 import { StoreCookieForLogin } from "../helpers/auth";
+import useAxiosPrivate from "./useAxiosPrivate";
 export default function useAuth() {
+  const axiosxiosPrivate=useAxiosPrivate();
   const { data, isLoading, error, isError, refetch } = useQuery(
     "profile-user",
     () => {
-      return CallApi().get("auth/profile");
+      return axiosxiosPrivate.get("auth/profile");
     },
     {
-      retry: false,
-      retryOnMount: false,
-      // refetchOnMount: false,
       refetchOnWindowFocus: false,
-      refetchIntervalInBackground: true,
-      cacheTime:0,
-      
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retryOnMount: false,
+      retry: false,
+      staleTime: 5 * 1000,
     }
   );
 

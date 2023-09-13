@@ -36,7 +36,7 @@ export default function OrderCardLayout({ order, orderRefech }: props) {
       <div className=" hidden">
       {showDeleteConfreamtion && (
         <DeleteConfreamationV2
-          title="آیا از حذف دوره از سبد خریبد خود اطمینان دارید"
+          title="آیا از حذف دوره از سبد خرید خود اطمینان دارید ؟"
           handleCancel={() => setShowDeleteConfreamtion(false)}
           handleTrue={HandleDeleteOne}
         />

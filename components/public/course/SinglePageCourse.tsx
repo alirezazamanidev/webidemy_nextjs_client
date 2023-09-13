@@ -25,8 +25,11 @@ export default function SingleCourseHeaderPage({ course }: props) {
       toast.success('دوره مورد نظر به سبد خرید شما افزوده شد!')
     }catch(err){
       if(err instanceof BadRequestException){
-        toast.error(err?.message)
+        toast.error(err?.message);
+        return
       }
+      toast.error('برای خرید دوره ابتدا باید وارد حساب کاربری خود شوید')
+      
       
 
     }
