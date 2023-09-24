@@ -15,6 +15,7 @@ export default function VerifyCodePage() {
   const router = useRouter();
   const verifyPhoneToken = useAppSelector(selectverifyToken);
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const clearVerifyPhoneToken = () => {
     dispatch(updateVerfiyPhoneToken(undefined));
   };
@@ -26,7 +27,7 @@ export default function VerifyCodePage() {
     return () => {
       clearVerifyPhoneToken();
     };
-  }, [verifyPhoneToken,router]);
+  }, [verifyPhoneToken,clearVerifyPhoneToken,router]);
 
   return (
     <>
