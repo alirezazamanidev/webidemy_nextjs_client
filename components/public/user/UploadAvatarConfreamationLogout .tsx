@@ -155,6 +155,7 @@ export default function UploadAvatarConfreamation({
                           />
                         ) : (
                           <button
+                            disabled={urlAvatarImage ? false : true}
                             type="submit"
                             className={`border-solid border-2 rounded-lg transition-all group border-blue-350 text-white bg-blue-350 ${
                               urlAvatarImage

@@ -1,6 +1,8 @@
 "use client";
 import LoginForm from "@/libs/forms/auth/LoginForm";
 import RegisterForm from "@/libs/forms/auth/RegisterForm";
+import { useAppDispatch } from "@/libs/hooks";
+import { updateVerfiyPhoneToken } from "@/libs/store/auth/auth.slice";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -8,7 +10,10 @@ import { useState } from "react";
 export default function LoginPage() {
   const router = useRouter();
   const [pagePath, setPagePath] = useState("login");
-  
+  const dispatch = useAppDispatch();
+  const setVerifyPhoneToken = (token: string) => {
+    dispatch(updateVerfiyPhoneToken(token));
+  };
   return (
     <>
       <div className=" mt-4">
@@ -41,9 +46,9 @@ export default function LoginPage() {
             <div className=" relative">
               <div className=" w-full">
                 {pagePath === "login" ? (
-                  <LoginForm router={router} />
+                  <LoginForm router={router} setToken={setVerifyPhoneToken} />
                 ) : (
-                  <RegisterForm router={router} />
+                  <RegisterForm router={router} setToken={setVerifyPhoneToken} />
                 )}
               </div>
             </div>

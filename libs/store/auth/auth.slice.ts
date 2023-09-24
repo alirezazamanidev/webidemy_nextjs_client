@@ -3,15 +3,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../";
 // Define a type for the slice state
 interface AuthState {
-  value: number;
-  sendNotification: boolean;
-  userIdForNotification: string;
+  verifyPhoneToken?: string;
 }
 
 const initialState: AuthState = {
-  value: 0,
-  sendNotification: false,
-  userIdForNotification: "",
+  verifyPhoneToken: undefined,
 };
 
 export const authSlice = createSlice({
@@ -19,20 +15,19 @@ export const authSlice = createSlice({
 
   initialState,
   reducers: {
-    updateSendNotification: (
+    updateVerfiyPhoneToken: (
       state,
-      action: PayloadAction<{ status: boolean; userId: string }>
+      action: PayloadAction<string | undefined>
     ) => {
-      state.sendNotification = action.payload.status;
-      state.userIdForNotification = action.payload.userId;
+      state.verifyPhoneToken = action.payload;
     },
   },
 });
 
-export const { updateSendNotification } = authSlice.actions;
+export const { updateVerfiyPhoneToken } = authSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectNotiStattus = (state: RootState) =>
-  state.auth.sendNotification;
+export const selectverifyToken = (state: RootState) =>
+  state.auth.verifyPhoneToken;
 
 export default authSlice.reducer;

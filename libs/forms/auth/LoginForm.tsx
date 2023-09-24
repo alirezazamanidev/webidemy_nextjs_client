@@ -11,6 +11,7 @@ import { StoreCookieForLogin } from "@/libs/helpers/auth";
 
 interface LoginFormProps {
   router: AppRouterInstance;
+  setToken: (token: string) => void;
 }
 
 const regexPhone = /^(09[0-9]\d{8}|0903\d{7})$/;
@@ -28,14 +29,15 @@ const LoginForm = withFormik<LoginFormProps, LoginFormValuesInterFace>({
   handleSubmit: async (valuse, { props }) => {
     try {
       const res = await CallApi().post("auth/local/signIn", valuse);
+     
+      if (res.status == 203) {
+        toast.error("کد تایید هنوز منقضی نشده است!");
+        return;
+      }
       if (res.status === 200) {
-        await props.router.push("/");
-        await StoreCookieForLogin(
-          res.data?.access_token,
-          res?.data?.refresh_token
-        );
-        toast.success(" ورود با موفقیت انجام شد :))");
-        props.router.refresh();
+        props.setToken(res.data?.data?.verifyPhoneToken);
+        await props.router.push("/login/verify");
+        toast.success("کد تایید با موفقیت ارسال شد!");
         return;
       }
     } catch (err) {

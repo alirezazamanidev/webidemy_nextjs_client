@@ -5,3 +5,8 @@ export interface RegisterFormValuesInterFace {
   export interface LoginFormValuesInterFace {
     phone: string;
   }
+
+export interface verfiyPhoneFormValuesInterface {
+  code: string;
+  token?: string;
+}

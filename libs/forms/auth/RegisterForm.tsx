@@ -8,6 +8,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 interface RegisterFormProps {
+  setToken: (token: string) => void;
   router: AppRouterInstance;
 }
 const regexPhone = /^(09[0-9]\d{8}|0903\d{7})$/;
@@ -32,12 +33,14 @@ const RegisterForm = withFormik<RegisterFormProps, RegisterFormValuesInterFace>(
     handleSubmit: async (valuse, { props }) => {
       try {
         const res = await CallApi().post("auth/local/signUp", valuse);
-        
+        if (res.status == 203) {
+          toast.error("کد تایید هنوز منقضی نشده است!");
+          return;
+        }
         if (res.status === 201) {
-    
-          await StoreCookieForLogin(res?.data?.access_token,res?.data?.refresh_token)
-          await props.router.push("/");
-          toast.success("ثبت نام با موفقیت انجام شد :))");
+          props.setToken(res.data?.data?.verifyPhoneToken);
+          await props.router.push("/login/verify");
+          toast.success("کد تایید با موفقیت ارسال شد!");
           return;
         }
       } catch (err) {
