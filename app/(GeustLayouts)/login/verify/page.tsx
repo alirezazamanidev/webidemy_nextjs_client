@@ -15,19 +15,19 @@ export default function VerifyCodePage() {
   const router = useRouter();
   const verifyPhoneToken = useAppSelector(selectverifyToken);
   const dispatch = useAppDispatch();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const clearVerifyPhoneToken = () => {
-    dispatch(updateVerfiyPhoneToken(undefined));
-  };
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // const clearVerifyPhoneToken = () => {
+  //   dispatch(updateVerfiyPhoneToken(undefined));
+  // };
 
-  useEffect(() => {
-    if (!verifyPhoneToken) {
-      router.push("/login");
-    }
-    return () => {
-      clearVerifyPhoneToken();
-    };
-  }, [verifyPhoneToken,clearVerifyPhoneToken,router]);
+  // useEffect(() => {
+  //   if (!verifyPhoneToken) {
+  //     router.push("/login");
+  //   }
+  //   return () => {
+  //     clearVerifyPhoneToken();
+  //   };
+  // }, [verifyPhoneToken,clearVerifyPhoneToken,router]);
 
   return (
     <>
@@ -40,7 +40,7 @@ export default function VerifyCodePage() {
                 <VerifyPhoneForm
                   router={router}
                   token={verifyPhoneToken}
-                  clearToken={clearVerifyPhoneToken}
+            
                 />
               </div>
             </div>

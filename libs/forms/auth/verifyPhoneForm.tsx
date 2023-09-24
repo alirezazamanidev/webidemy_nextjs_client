@@ -13,7 +13,6 @@ import * as yup from "yup";
 interface verifyPhoneFormProps {
   router: AppRouterInstance;
   token?: string;
-  clearToken: () => void;
 }
 const verifyPhoneFormValidationSchema = yup.object().shape({
   code: yup.string().required(),
@@ -38,7 +37,6 @@ const VerifyPhoneForm = withFormik<
           res?.data?.refresh_token
           );
           
-          await props.clearToken();
         toast.success("ورود با موفقیت انجام شد :)");
       }
     } catch (err) {
