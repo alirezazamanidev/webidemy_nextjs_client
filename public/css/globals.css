@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  background: rgba(12, 8, 30, 0.85);
+  /* backdrop-filter: blur(20px); */
+}
 .selected-tab {
-  border: none; /* حذف بوردر */
-  /* سایر تنظیمات دلخواه شما */
+  border: none;
 }
 
 .MuiPaginationItem-root {
@@ -27,8 +31,6 @@
   margin: 0 -10px;
 }
 
-
-
 .hideSB::-webkit-scrollbar {
   width: 0em;
   display: none;
@@ -42,7 +44,6 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  
 }
 
 .hideSB::-webkit-scrollbar-thumb {
@@ -56,7 +57,7 @@
   direction: rtl;
 }
 .Toastify__toast-theme--dark {
-   background: #0a011c;
+  background: #0a011c;
   color: #ece8e8;
-   border-radius: 15px;
+  border-radius: 15px;
 }

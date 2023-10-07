@@ -9,7 +9,7 @@ import localFont from "next/font/local";
 import { Provider } from "react-redux";
 import { useEffect } from "react";
 const myfont = localFont({
-  src: "./../public/fonts/yekan/Yekan.woff2",
+  src: "./../public/fonts/yekan-plus/BYekan+ Bold.ttf",
   style: "normal",
   weight: "normal",
 });
@@ -30,13 +30,13 @@ export default function RootLayout({
 
   return (
     <html lang="fa" dir="rtl" className={myfont.className}>
-      <body className=" bg-dark-700">
+      <body >
         <QueryClientProvider client={queryClient}>
           <Provider store={store}>
             <ToastContainerComponnent position="top-center" theme="dark" />
             {children}
           </Provider>
-          <ReactQueryDevtools initialIsOpen={true} position="top-left" />
+          <ReactQueryDevtools initialIsOpen={true} position='bottom-left' />
         </QueryClientProvider>
       </body>
     </html>

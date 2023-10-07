@@ -1,6 +1,6 @@
 'use client'
 
-import NavbarLayouts from "@/components/public/layouts/NavbarLayout";
+import NavbarLayout from "@/components/public/layouts/NavbarLayout";
 import LoadingLayout from "@/components/shared/Loading";
 import useAuth from "@/libs/hooks/useAuth";
 
@@ -16,7 +16,7 @@ import useAuth from "@/libs/hooks/useAuth";
   return (
     <main className="">
       
-      <NavbarLayouts />
+      <NavbarLayout/>
       {children}
     </main>
   );

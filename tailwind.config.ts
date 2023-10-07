@@ -7,11 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "hero-photo":
-          "url('https://codenight.ir/assets/images/topSectionBackground.svg')",
-      },
       colors: {
+        gray: {
+          350: "#AEAEAE",
+          650: "#5E5E5E",
+          950:"#1A1628"
+        },
         green: {
           550: "#28a745",
         },
@@ -19,14 +20,12 @@ module.exports = {
           350: "#fce9e9",
         },
         dark: {
-          700: "#01072c",
-
-          600: "#1c1f38",
+          400: "rgba(12, 8, 30, 0.85)",
         },
         blue: {
           450: "#17a2b8",
           550: "#0923b8",
-          350:'#0d99ff',
+          350: "#0d99ff",
           650: "#17a2b8",
           720: "#148a9d",
           750: "#022cef",
@@ -35,13 +34,8 @@ module.exports = {
         },
         orange: {
           750: "#e65626",
-          250: "#fcbe28",
+          450: "#FFA200",
         },
-        gray:{
-          1010:'#061b33',
-          650:'#35384d',
-          550:'#35384d'
-        }
       },
     },
   },
