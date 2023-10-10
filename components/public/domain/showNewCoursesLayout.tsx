@@ -7,6 +7,7 @@ import { Course } from "@/libs/model/course";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 interface props {
   courses: Course[];
 }

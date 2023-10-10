@@ -1,68 +1,49 @@
-'use client'
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import headerImageLeft from "@/public/images/header/darkTopSectionLeft.webp";
-import JsPhotoPath from "@/public/images/photo/LJj1XTD4xWmeyAWSrTo8NDAIm3fIcoQvFwCCDZGe.webp";
-import headerImageRight from "@/public/images/header/darkTopSectionRight.webp";
-import webphotoPath from "@/public/images/photo/web.webp";
-import laravelPhotoPath from "@/public/images/photo/laravel.webp";
-import reactPhotoPath from "@/public/images/photo/react.webp";
-import nodePhotoPath from "@/public/images/photo/node.webp";
-import vuePhotoPath from "@/public/images/photo/vue.webp";
-import wordPressPhotoPath from "@/public/images/photo/wordpress.webp";
-import fluterPhotoPathj from "@/public/images/photo/fluter.webp";
-import { Link as LinkScroll } from "react-scroll";
-import useAuth from "@/libs/hooks/useAuth";
+import heroImagePath from "@/public/images/hero.png";
 export default function HeadersMainPage() {
-
-  const {user}=useAuth();
   return (
     <>
-      <header className=" container mx-auto px-5 mt-20 xl:mt-24 select-none  w-full">
-        <div className="  w-full flex  flex-col-reverse  md:flex-row  justify-between items-center ">
-          <div className=" w-3/12 hidden lg:block">
-            <Image
-              width={700}
-              height={400}
-              src={headerImageRight}
-              className=" object-cover "
-              alt="computer"
-            />
-          </div>
-          <div className=" flex flex-col items-center md:items-start lg:items-center justify-center w-full  md:w-6/12  mt-6 ml-0 md:ml-8 lg:ml-0 md:mt-0 text-center md:text-right lg:text-center ">
-            <div className=" flex  flex-col items-center md:items-start  justify-center lg:items-center">
-              <h2 className=" text-gray-200 text-4xl  lg:text-5xl font-extrabold max-w-md lg:max-w-xl ">
-                صفر تا صد برنامه نویسی با وبیدمی
-              </h2>
-              <h5 className=" text-gray-400  text-2xl sm:text-3xl font-semibold mt-5 ">
-                خیلی راحت یاد بگیر :))
-              </h5>
+      <header className=" container mx-auto px-5 pb-20 mt-10 md:mt-14 xl:mt-8 select-none  w-full">
+        <div className="  w-full flex  flex-col-reverse  md:flex-row  justify-between md:items-center ">
+          <div className="w-full md:w-6/12 flex flex-col items-center md:items-start lg:items-center justify-center   mt-4 ml-0 md:ml-8 lg:ml-0 md:mt-0 text-center md:text-right lg:text-center ">
+            <div className=" w-full text-center md:text-right mr-0 ">
+              <div className=" text-4xl sm:text-6xl md:text-4xl lg:text-5xl xl:text-6xl text-gray-350 space-y-3  font-extrabold">
+                <h2>کافیه شروع کنی!</h2>
+                <h2>مهارت کسب کن!</h2>
+                <h2>تا به درامد برسی!</h2>
+              </div>
+
+              <p className=" text-gray-350 text-xl  lg:text-2xl   font-normal mt-10">
+                سایت جامع آموزش برنامه نویسی و طراحی وب سایت
+              </p>
             </div>
-            <div className=" flex w-full lg:w-5/6 justify-between items-center space-x-4 space-x-reverse mt-10 lg:mt-24 mb-14">
-              <button className=" bg-gradient-to-r from-blue-750 to-blue-250 w-1/2  py-3 lg:py-4 rounded-lg  text-gray-50 md:text-lg lg:text-2xl font-bold">
-                چی یاد بگیرم ؟
+            <div className=" flex w-full   items-center justify-center md:justify-start space-x-4 space-x-reverse mt-10 lg:mt-16 mb-14">
+              <button className=" bg-orange-450 font-bold rounded-[16px] backdrop-blur-lg text-[20px] sm:text-[26px] md:text-[28px] xl:text-[32px]  text-white px-10 py-4 flex justify-center items-center">
+                شروع
               </button>
               <Link
-                href={user ? `/${user.username}` :'/login'}
-                className=" bg-gradient-to-r from-orange-750 to-orange-250 w-1/2 py-3 lg:py-4  rounded-lg hover:shadow-xl hover:shadow-inherit  text-center  text-gray-50 md:text-lg lg:text-2xl font-bold"
+                href={"/signup"}
+                className=" bg-gray-950 w-1/2 sm:w-2/5 md:w-1/2  border border-gray-600 border-opacity-75 py-3 lg:py-4  rounded-lg hover:shadow-xl  hover:shadow-inherit  text-center  font-bold text-orange-450 text-[20px] sm:text-[26px] md:text-[28px] xl:text-[32px] backdrop-blur-lg"
               >
                 ثبت نام
               </Link>
             </div>
           </div>
-          <div className=" w-full md:w-6/12 lg:w-3/12 flex justify-center">
+          <div className=" w-full md:w-6/12 ">
             <Image
-              width={700}
-              height={400}
-              src={headerImageLeft}
-              className=" w-full object-center object-cover "
-              alt="computer"
+              width={648}
+              height={648}
+              src={heroImagePath}
+              className="  scale-90 sm:scale-110  md:scale-125 lg:scale-105 xl:scale-90  w-full"
+              alt="hero"
             />
           </div>
         </div>
       </header>
 
-      <nav className=" bg-hero-photo bg-bottom  mt-24 w-full select-none px-5   ">
+      {/* <nav className=" bg-hero-photo bg-bottom  mt-24 w-full select-none px-5   ">
         <div className=" container mx-auto  flex  justify-between items-center  space-x-5   space-x-reverse   ">
           <div className="   group cursor-pointer flex flex-col  items-center space-y-14 ">
             <div className=" filter  rounded-md   transition duration-200 transform  group-hover:-translate-y-5">
@@ -222,7 +203,7 @@ export default function HeadersMainPage() {
             ></path>
           </svg>
         </LinkScroll>
-      </nav>
+      </nav> */}
     </>
   );
 }

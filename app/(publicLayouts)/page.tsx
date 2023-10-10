@@ -27,7 +27,7 @@ export default async function HomePage() {
   return (
     <>
       <div>
-        {/* <HeadersMainPage /> */}
+        <HeadersMainPage />
         {/* <ShowNewCourseLayout courses={data?.courses}/> */}
         
       </div>
