@@ -99,7 +99,7 @@ export default function HeadersMainPage() {
             <span className=" text-gray-75  text-[22px] font-bold">
               همه جا یاد بگی
             </span>
-            <p className=" text-gray-275 text-[18px] md:max-w-[305px] relative md:absolute ">
+            <p className=" text-gray-275 text-[18px] md:max-w-[305px]  relative md:absolute ">
               فرقی نداره با چه دستگاهی هستی یا کجا هستی وقتی با ما باشی یاد
               میگیری
             </p>

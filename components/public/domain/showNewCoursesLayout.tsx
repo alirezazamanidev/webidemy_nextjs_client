@@ -1,12 +1,11 @@
 "use client";
 
 import CardCourse from "../course/CardCourseLayout";
-import Image from "next/image";
-import titleCircleRed from "@/public/images/titleCircleRed.png";
 import { Course } from "@/libs/model/course";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
 
 interface props {
   courses: Course[];
@@ -15,7 +14,7 @@ export default function ShowNewCourseLayout({ courses }: props) {
   const settings = {
     autoplay: true,
     autoplaySpeed: 4000,
-    slidesToShow:4,
+    slidesToShow: 4,
     arrows: false,
     draggable: true,
     slidesToScroll: 1,
@@ -45,26 +44,22 @@ export default function ShowNewCourseLayout({ courses }: props) {
   };
   return (
     <>
-
-      <div id="showNewCourses" className=" container  mx-auto select-none">
-        <div className=" flex items-center mt-36 mb-10">
-          <Image
-            src={titleCircleRed}
-            width={100}
-            height={100}
-            alt="titleCircleRed"
-          />
-          <h2 className="text-2xl text-gray-200 sm:text-2xl lg:text-4xl font-black">
-            جدید ترین دوره های وبیدمی
+      <div id="showNewCourses" className=" container   mx-auto select-none h-screen">
+        <div className=" flex items-center  justify-between  mt-[14rem] mb-10 mx-5">
+  
+          <h2 className="text-2xl  text-gray-275 sm:text-3xl lg:text-4xl font-bold">
+       جدید ترین دوره ها
           </h2>
+          <Link href='/courses' className=" text-gray-275 text-xl md:text-2xl lg:text-3xl font-normal">دیدن همه</Link>
         </div>
         <Slider {...settings}>
-         {
-          courses.map(course=>(
-            <CardCourse key={course?._id} course={course}/>
-          ))
-         }  
-         
+          <CardCourse />
+          <CardCourse />
+          <CardCourse />
+          <CardCourse />
+          <CardCourse />
+          <CardCourse />
+          <CardCourse />
         </Slider>
       </div>
     </>

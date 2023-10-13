@@ -1,84 +1,63 @@
-'use client'
+"use client";
 import Image from "next/image";
 import separateWithComma, { TypeConditioncourseToFarsi } from "@/libs/utils";
-
-import { Course } from "@/libs/model/course";
+import PlayImagePath from '@/public/svg/icons/play.svg'
+import clockImagePath from '@/public/svg/icons/clock.svg';
+import headImagePath from '@/public/svg/icons/head.svg'
+import PythonImagePath from "@/public/images/python.png";
 import Link from "next/link";
-import defaultPhotoAvatar from '@/public/images/photo/avatarDefalt.webp';
-import mePhoto from "@/public/images/me.jpeg";
-import ImageComponent from "@/components/shared/ImageComponent";
-import AvatarUser from "@/components/shared/AvatarLayout";
-interface props {
-  course: Course;
-}
-export default function CardCourse({ course }: props) {
+import plusImagePath from '@/public/svg/icons/plus.svg'
+export default function CardCourse() {
   return (
     <>
-      <div className=" w-full h-full pt-14 pb-5 lg:pb-7  select-none  ">
-        <div
-          className={` transition-all   bg-gray-800   rounded-xl h-full  flex flex-col relative group`}
-          style={{
-            background: `linear-gradient(to left top, ${course?.gradientColorCard?.fromColor}, ${course?.gradientColorCard?.toColor}`,
-          }}
-        >
-          <div
-            className="absolute inset-0 rounded-xl  opacity-0 group-hover:opacity-100 transition-all duration-1000"
-            style={{
-              background: `linear-gradient(to left top, ${course?.gradientColorCard?.toColor}, ${course?.gradientColorCard?.fromColor}`,
-            }}
-          ></div>
-          <Link
-            href={`courses/${course?.slug}`}
-            className=" w-full h-full  px-4 lg:px-5 relative flex flex-col"
-          >
-            <div className=" w-full flex relative -mt-14">
-              <div className=" relative w-full">
-                <ImageComponent
-                  url={course?.photos["720"]}
-                  width={640}
-                  height={450}
-                  className=" aspect-video flex w-full justify-center object-cover rounded-xl transition-all duration-500  "
-                  alt={course?.title}
-                />
-              </div>
-            </div>
-            <h3 className="text-2xl text-right lg:text-2xl font-bold mt-5 text-white transition-colors w-full">
-              {course?.title}
-            </h3>
-            <div className=" flex items-center    gap-2 text-base text-white transition-colors mt-5 w-full">
-     
-                <AvatarUser url={course?.teacher?.avatar} width={50} height={50} className="  object-cover rounded-full transition-all duration-500 opacity-100 w-[40px]  h-[40px]  border-2 border-white"/>
-
-      
-              <div className=" flex flex-col  gap-1">
-                <span className=" text-lg md:text-sm "> مدرس : </span>
-                <h4 className=" text-base lg:text-lg">
-                  {course?.teacher?.fullname}
-                </h4>
-              </div>
-            </div>
-            <div className="flex flex-col   gap-1 mt-4 mb-6 lg:mb-8">
-              <span className="text-white text-right text-lg lg:text-base">
-                قیمت دوره :
-              </span>
-              <div className="flex gap-5">
-                <span className="flex  justify-center items-center gap-2">
-                  <span className="text-base lg:text-lg font-bold text-white transition-colors">
-                    {separateWithComma(course?.price)}
-                  </span>
-                  <span className="text-white transition-colors text-sm font-bold">
-                    تومان
-                  </span>
-                </span>
-              </div>
-            </div>
-            <div className="mt-auto -mb-5 lg:-mb-7 flex py-3 lg:py-4 px-8 lg:px-10 bg-gray-900 rounded-lg text-white text-sm lg:text-base w-fit mx-auto shadow-cnShadow500">
-              <p className="text-center">
-                {TypeConditioncourseToFarsi(course?.condition)}
-              </p>
-            </div>
-          </Link>
+      <div className="  relative  bg-gray-850 backdrop-blur-lg rounded-[10px] border  border-gray-500 border-opacity-80">
+        <div className="  bg-gray-900  border border-gray-675 mt-[35px]  mx-10 sm:mx-20   border-opacity-80  py-3 rounded-lg flex  justify-center items-center">
+          <Image
+            src={PythonImagePath}
+            width={200}
+            height={150}
+            alt="image"
+            className=""
+          />
         </div>
+        <div className=" mt-4 mx-8">
+          <h2 className=" text-2xl text-gray-275">
+            آموزش مقدماتی تا پیشرفته پایتون
+          </h2>
+
+          <div className=" mt-3 flex  items-center justify-between">
+          <div className=" bg-gray-950 p-3  text-gray-300 flex flex-col items-center rounded-lg">
+              <Image width={33} height={33} src={clockImagePath} alt="icon" />
+              <span className=" text-lg">40</span>
+              <span className="text-lg">ساعت</span>
+            </div>
+          <div className=" bg-gray-950 p-3  text-gray-300 flex flex-col items-center rounded-lg">
+              <Image width={48} height={28} src={headImagePath} alt="icon" />
+              <span className=" text-lg">105</span>
+              <span className="text-lg">نفر</span>
+            </div>
+            <div className=" bg-gray-950 text-lg p-3 text-gray-300 flex flex-col items-center justify-center rounded-lg">
+              <span className=" ">2,000,000</span>
+              <span>تومان</span>
+            </div>
+        
+          </div>
+     
+ 
+
+        </div>
+
+        <div className="  flex items-center  mx-8  justify-between   my-5 ">
+            <Link href={'#'} className=" text-[20px]  bg-gray-950 px-4 py-3 flex   items-center  gap-2">
+              <span className=" text-orange-450">ثبت نام</span>
+              <Image src={plusImagePath} alt="icon" width={18} height={21}/>
+            </Link>
+            <Link href={'#'} className=" text-[20px] bg-gray-950 px-4 py-3 text-gray-350 flex  gap-2 items-center ">
+              <span>مشاهده دوره</span>
+              <Image src={PlayImagePath} alt="icon" width={18} height={21}/>
+            </Link>
+
+          </div>
       </div>
     </>
   );

@@ -24,11 +24,11 @@ body {
 }
 
 .slick-slide > div {
-  margin: 0 10px;
+  margin: 0 20px;
   direction: rtl;
 }
 .slick-list {
-  margin: 0 -10px;
+  margin: 0 -20px;
 }
 
 .hideSB::-webkit-scrollbar {
