@@ -5,10 +5,17 @@ import BasketSVGPath from '@/public/svg/icons/basket.svg';
 import UserSVGPath from '@/public/svg/icons/users.svg';
 import LoginSVGPath from '@/public/svg/icons/login.svg'
 import {BiMenuAltRight} from 'react-icons/bi'
+import { useState } from "react";
+import useAuth from "@/libs/hooks/useAuth";
+import SideBarLayout from "./SideBarLayout";
 export default function NavbarLayout() {
+  const [showSideBar,setShowSideBar]=useState(false);
+  const {user}=useAuth();
+  
   return (
     <>
       <nav className=" pt-10 pb-8  select-none px-5">
+        <SideBarLayout setOpen={setShowSideBar} open={showSideBar} />
         <div className=" container mx-auto flex  items-center  justify-between">
         <BiMenuAltRight className=" text-gray-50 text-4xl mr-3 block  sm:hidden"/>
           <div className=" flex items-center gap-3  sm:hidden  ">
@@ -23,7 +30,9 @@ export default function NavbarLayout() {
           </div>
           
     <div className=" hidden sm:flex  items-center gap-4">
-    <BiMenuAltRight className=" text-gray-50 text-4xl mr-3 block  xl:hidden"/>
+      <button onClick={()=>setShowSideBar(true)}>
+      <BiMenuAltRight className=" text-gray-50 text-4xl mr-3 block  xl:hidden"/>
+      </button>
           <div className=" flex items-center gap-3   ">
             <Image
               src={LogoPath}
