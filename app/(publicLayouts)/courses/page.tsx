@@ -13,18 +13,18 @@ import Loading from "react-loading";
 
 interface props {
   searchParams: {
-    page: number | undefined
+    page: number | undefined,
+    sort:string | undefined
   }
 }
-export default async function CoursesPage({ searchParams: { page } }: props) {
-  const coursesListData = await GetAllCourses({ page: page ?? 1, pre_page: 8 });
+export default async function CoursesPage({ searchParams: { page,sort } }: props) {
+  const coursesListData = await GetAllCourses({ page: page ?? 1, pre_page: 8,sort:sort ?? '' });
 
   return (
     <>
       <main className=" mt-20">
         <div className=" container mx-auto">
-          <SearchBarLayout />
-          {/* content courses */}
+          
           <CoursesListLayout coursesData={coursesListData} />
         </div>
       </main>
