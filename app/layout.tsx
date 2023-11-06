@@ -7,7 +7,6 @@ import "@/public/css/globals.css";
 
 import localFont from "next/font/local";
 import { Provider } from "react-redux";
-import { useEffect } from "react";
 const myfont = localFont({
   src: "./../public/fonts/yekan/Yekan.woff2",
   style: "normal",

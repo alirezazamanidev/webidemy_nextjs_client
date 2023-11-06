@@ -1,11 +1,8 @@
 'use client'
-import Image from "next/image";
 import separateWithComma, { TypeConditioncourseToFarsi } from "@/libs/utils";
 
 import { Course } from "@/libs/model/course";
 import Link from "next/link";
-import defaultPhotoAvatar from '@/public/images/photo/avatarDefalt.webp';
-import mePhoto from "@/public/images/me.jpeg";
 import ImageComponent from "@/components/shared/ImageComponent";
 import AvatarUser from "@/components/shared/AvatarLayout";
 interface props {
@@ -18,13 +15,13 @@ export default function CardCourse({ course }: props) {
         <div
           className={` transition-all   bg-gray-800   rounded-xl h-full  flex flex-col relative group`}
           style={{
-            background: `linear-gradient(to left top, ${course?.gradientColorCard?.fromColor}, ${course?.gradientColorCard?.toColor}`,
+            background: `linear-gradient(to left top, ${course?.GradientCardCourse?.fromColor}, ${course?.GradientCardCourse?.toColor}`,
           }}
         >
           <div
             className="absolute inset-0 rounded-xl  opacity-0 group-hover:opacity-100 transition-all duration-1000"
             style={{
-              background: `linear-gradient(to left top, ${course?.gradientColorCard?.toColor}, ${course?.gradientColorCard?.fromColor}`,
+              background: `linear-gradient(to left top, ${course?.GradientCardCourse?.toColor}, ${course?.GradientCardCourse?.fromColor}`,
             }}
           ></div>
           <Link

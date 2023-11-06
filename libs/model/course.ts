@@ -14,7 +14,7 @@ export interface Course {
   description: string;
   tags: string;
   photos: any;
-  gradientColorCard: {
+  GradientCardCourse: {
     fromColor: string;
     toColor: string;
   };
