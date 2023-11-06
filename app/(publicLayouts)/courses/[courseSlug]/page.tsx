@@ -1,24 +1,7 @@
 
-
-import { Course } from "@/libs/model/course";
-import { redirect } from "next/navigation";
-
 import SingleCourseHeaderPage from "@/components/public/course/SinglePageCourse";
 import ContantSinglePageLayout from "@/components/public/course/ContantSinglePageLayout";
-const GetSingleCourse= async(courseSlug: string)=> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/courses/${courseSlug}`,{
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache:'no-store'
-  
-  });
-
-  
-  if (res.status === 400) redirect("/not-found");
-  return res.json();
-}
+import { GetSingleCourse } from "@/libs/services/home/course";
 
 export default async function SingelCourse({
   params: { courseSlug },
