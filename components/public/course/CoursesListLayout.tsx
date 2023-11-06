@@ -26,8 +26,9 @@ export default function CoursesListLayout({ coursesData }: props) {
 
     const [courseList, setCourseList] = useState<Course[]>(coursesData.data ?? []);
     const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1));
-    const [sort, setSort] = useQueryState('sort', parseAsString.withDefault(filterItem[0].value))
+    const [sort, setSort] = useQueryState('sort', parseAsString.withDefault(filterItem[0].value));
     const [selectedItem, setSelectedItem] = useState(filterItem[0]);
+    const [category,setCategory]=useQueryState('category',parseAsString.withDefault('all'));
 
     const [selectedItemCategires, setSelectedItemCategories] = useState({
         value: "all",
@@ -36,9 +37,10 @@ export default function CoursesListLayout({ coursesData }: props) {
 
     useEffect(() => {
         setSort(selectedItem.value);
+        setCategory(selectedItemCategires.value);
         getCoursesListByChangeQuery();
 
-    }, [page, sort, selectedItem])
+    }, [page, sort,category, selectedItem,selectedItemCategires])
 
     const onPageChangeHandler = ({ selected }: { selected: number }) => {
         setPage(selected + 1);
@@ -50,7 +52,7 @@ export default function CoursesListLayout({ coursesData }: props) {
 
 
     const getCoursesListByChangeQuery = async () => {
-        let coursesData = await GetAllCourses({ page, pre_page: 8, sort });
+        let coursesData = await GetAllCourses({ page, pre_page: 8, sort ,category});
         setCourseList(coursesData.data);
     }
     return (
@@ -106,10 +108,11 @@ export default function CoursesListLayout({ coursesData }: props) {
                         </Listbox>
                     </div>
                     <div className=" relative">
-                        {/* <Listbox
+                        <Listbox
               value={selectedItemCategires}
               onChange={(value) => {
                 if (value) {
+                    setSelectedItemCategories(value)
                 }
               }}
             >
@@ -161,7 +164,7 @@ export default function CoursesListLayout({ coursesData }: props) {
                   </Listbox.Option>
                 ))}
               </Listbox.Options>
-            </Listbox> */}
+            </Listbox>
                     </div>
                 </div>
                 <SearchBarLayout />
