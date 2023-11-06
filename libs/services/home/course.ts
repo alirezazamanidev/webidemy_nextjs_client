@@ -27,3 +27,9 @@ export async function GetSingleCourse(courseSlug: string) {
   if (res.status === 400) redirect("/not-found");
   return res.json();
 }
+export async function GetAllCourses({ page = 1, pre_page = 8 }: { page: number, pre_page: number }) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/courses/filter?page=${page}&pre_page=${pre_page}`);
+
+
+  return res.json();
+}

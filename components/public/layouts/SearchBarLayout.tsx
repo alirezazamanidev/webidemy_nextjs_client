@@ -178,12 +178,12 @@ export default function SearchBarLayout() {
                 </svg>
               </span>
             </div>
-            <div
+            {/* <div
               className={` ${
                 searchText.length > 0 ? "block" : "hidden"
               } absolute w-full z-50 mt-2 rounded-xl shadow-lg bg-dark-600 text-3xl text-gray-100 p-4 lg:p-7`}
             >
-              {isLoading ? (
+              {false ? (
                 <div className=" w-full h-full flex justify-center items-center">
                   <Loading type="bubbles" color="#fff" />
                 </div>
@@ -213,7 +213,7 @@ export default function SearchBarLayout() {
                   )}
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </>
