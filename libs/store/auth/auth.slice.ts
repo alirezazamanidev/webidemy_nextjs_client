@@ -8,11 +8,14 @@ import { AxiosResponse } from "axios";
 interface AuthState {
   verifyPhoneToken?: string;
   userMutate?: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<AxiosResponse<any, any>, unknown>>
+
+  phoneUser:string;
 }
 
 const initialState: AuthState = {
   verifyPhoneToken: undefined,
-  userMutate: undefined
+  userMutate: undefined,
+  phoneUser:''
 };
 
 export const authSlice = createSlice({
@@ -30,13 +33,21 @@ export const authSlice = createSlice({
     
       state.userMutate = action.payload;
 
+    },
+    setPhoneUser:(state,action:PayloadAction<string>)=>{
+
+      state.phoneUser=action.payload;
     }
   },
+
+
 });
 
-export const { updateVerfiyPhoneToken, setUserMutater } = authSlice.actions;
+export const { updateVerfiyPhoneToken, setUserMutater,setPhoneUser } = authSlice.actions;
 
 export const selectverifyToken = (state: RootState) =>
   state.auth.verifyPhoneToken;
 export const getUserMutate = (state: RootState) => state.auth.userMutate;
+export const getphoneUser = (state: RootState) => state.auth.phoneUser;
+
 export default authSlice.reducer;

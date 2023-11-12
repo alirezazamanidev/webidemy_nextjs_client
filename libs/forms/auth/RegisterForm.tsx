@@ -10,6 +10,8 @@ import * as yup from "yup";
 interface RegisterFormProps {
   setToken: (token: string) => void;
   router: AppRouterInstance;
+  setPhone:(phone:string)=>void
+
 }
 const regexPhone = /^(09[0-9]\d{8}|0903\d{7})$/;
 
@@ -31,6 +33,7 @@ const RegisterForm = withFormik<RegisterFormProps, RegisterFormValuesInterFace>(
     }),
     validationSchema: RegisterFormValidationSchema,
     handleSubmit: async (valuse, { props }) => {
+      props.setPhone(valuse.phone)
       try {
         const res = await CallApi().post("auth/local/signUp", valuse);
         if (res.status == 203) {

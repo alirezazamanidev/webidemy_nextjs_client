@@ -11,6 +11,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 interface LoginFormProps {
   router: AppRouterInstance;
   setToken: (token: string) => void;
+  setPhone:(phone:string)=>void
 }
 
 const regexPhone = /^(09[0-9]\d{8}|0903\d{7})$/;
@@ -26,6 +27,8 @@ const LoginForm = withFormik<LoginFormProps, LoginFormValuesInterFace>({
   }),
   validationSchema: LoginFormValidationSchema,
   handleSubmit: async (valuse, { props }) => {
+    props.setPhone(valuse.phone);
+
     try {
       const res = await CallApi().post("auth/local/signIn", valuse);
      

@@ -6,15 +6,15 @@ import {
   selectverifyToken,
   updateVerfiyPhoneToken,
 } from "@/libs/store/auth/auth.slice";
-
+import Countdown from 'react-countdown';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function VerifyCodePage() {
   const router = useRouter();
   const verifyPhoneToken = useAppSelector(selectverifyToken);
-  const dispatch=useAppDispatch();
-  const userMutater=useAppSelector(getUserMutate);
+  const dispatch = useAppDispatch();
+  const userMutater = useAppSelector(getUserMutate);
   const clearVerifyPhoneToken = () => {
     dispatch(updateVerfiyPhoneToken(undefined));
   };
@@ -26,7 +26,7 @@ export default function VerifyCodePage() {
     return () => {
       clearVerifyPhoneToken();
     };
-  }, [verifyPhoneToken,router]);
+  }, [verifyPhoneToken, router]);
 
   return (
     <>
@@ -37,7 +37,7 @@ export default function VerifyCodePage() {
             <div className=" relative">
               <div className=" w-full">
                 <VerifyPhoneForm
-                userMutater={userMutater}
+                  userMutater={userMutater}
                   router={router}
                   token={verifyPhoneToken}
                   clearToken={clearVerifyPhoneToken}

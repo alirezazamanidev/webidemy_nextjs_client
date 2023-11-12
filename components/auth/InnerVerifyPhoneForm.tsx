@@ -2,7 +2,12 @@
 import { Form, FormikProps, FormikValues, ErrorMessage } from "formik";
 import Loading from "react-loading";
 
-import React, {  useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Countdown from "react-countdown";
+import sendCodeForauth from "@/libs/services/home/auth";
+import { useAppSelector } from "@/libs/hooks";
+import { getphoneUser } from "@/libs/store/auth/auth.slice";
+import { toast } from "react-toastify";
 
 let currentOtpIndex: number = 0;
 export default function InneVerifyPhoneForm({
@@ -10,9 +15,10 @@ export default function InneVerifyPhoneForm({
   isSubmitting,
 }: FormikProps<any>) {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
+  const [showBtnSendCode, setShowBtnSendCode] = useState(false);
   const [activeotpIndex, setactiveotpIndex] = useState<number>(0);
   const [Statusdisabled, setStatusDisabled] = useState<boolean>(true);
-
+  const phoneUser = useAppSelector(getphoneUser);
   const inputRef = useRef<HTMLInputElement>(null);
   const handleOnchange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
@@ -21,7 +27,7 @@ export default function InneVerifyPhoneForm({
     if (!value) setactiveotpIndex(currentOtpIndex - 1);
     else setactiveotpIndex(currentOtpIndex + 1);
     setOtp(newOtp);
-   
+
 
     const valueInput = newOtp.join("");
     setFieldValue("code", valueInput);
@@ -34,11 +40,21 @@ export default function InneVerifyPhoneForm({
     if (key === "Backspace") setactiveotpIndex(currentOtpIndex - 1);
   };
   useEffect(() => {
-   if(otp.join("").length===6)setStatusDisabled(false);
-   else setStatusDisabled(true);
-    
+    if (otp.join("").length === 6) setStatusDisabled(false);
+    else setStatusDisabled(true);
+
     inputRef.current?.focus();
-  }, [activeotpIndex,otp]);
+  }, [activeotpIndex, otp]);
+
+
+  const HandleSendCode = async (e: any) => {
+    e.preventDefault();
+    await sendCodeForauth({ phone: phoneUser })
+    setShowBtnSendCode(false);
+    toast.success("کد تایید با موفقیت ارسال شد!");
+    
+  }
+ 
 
   return (
     <>
@@ -66,18 +82,31 @@ export default function InneVerifyPhoneForm({
             className="  my-3 dir-rtl text-right mx-2  text-sm md:text-lg lg:text-xl  text-red-500"
           />
         </div>
+
+        <div className=" my-10 flex justify-center">
+          {
+            showBtnSendCode ? (
+              <button onClick={HandleSendCode} className=" text-gray-400">ارسال مجدد رمز یک بار مصرف</button>
+            ) : (
+              <span className=" flex items-center gap-2">
+                <p className=" text-gray-300"> ارسال کد تایید دیگر (</p>
+                <Countdown date={Date.now() + (1000 * 60 * 3)} onComplete={() => setShowBtnSendCode(true)} className=" text-white " />
+                <p className=" text-gray-300">)</p>
+              </span>
+            )
+          }
+        </div>
+
         <button
           disabled={Statusdisabled}
           type="submit"
-          className={` bg-gradient-to-r ${
-            Statusdisabled
-              ? " from-blue-850 to-blue-550 cursor-default  hover:ring-0 opacity-60 text-gray-400 "
-              : " from-blue-750 cursor-pointer hover:ring-8 to-blue-250 opacity-100 text-white"
-          }  relative select-none flex justify-center items-center transition-all rounded-lg px-5 md:px-7 py-3 md:py-4 gap-4 text-base lg:text-xl  ring-cnBlue-15/30   mt-8 sm:mt-10 lg:mt-12 w-full ${
-            isSubmitting
+          className={` bg-gradient-to-r ${Statusdisabled
+            ? " from-blue-850 to-blue-550 cursor-default  hover:ring-0 opacity-60 text-gray-400 "
+            : " from-blue-750 cursor-pointer hover:ring-8 to-blue-250 opacity-100 text-white"
+            }  relative select-none flex justify-center items-center transition-all rounded-lg px-5 md:px-7 py-3 md:py-4 gap-4 text-base lg:text-xl  ring-cnBlue-15/30   mt-8 sm:mt-10 lg:mt-12 w-full ${isSubmitting
               ? " from-blue-900 to-blue-600 hover:ring-0 cursor-wait opacity-75 "
               : "from-blue-750 to-blue-250   opacity-100"
-          }   `}
+            }   `}
         >
           {isSubmitting ? (
             <span className=" pt-0 ">
