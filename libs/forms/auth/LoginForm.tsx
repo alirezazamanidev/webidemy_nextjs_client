@@ -4,10 +4,9 @@ import { LoginFormValuesInterFace } from "@/libs/contracts/auth";
 import { BadRequestException } from "@/libs/exceptions/BadRequestException";
 import { CallApi } from "@/libs/helpers/callApi";
 import { withFormik } from "formik";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import * as yup from "yup";
 import { toast } from "react-toastify";
-import { StoreCookieForLogin } from "@/libs/helpers/auth";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 interface LoginFormProps {
   router: AppRouterInstance;

@@ -1,9 +1,8 @@
 "use client";
-import LoginForm from "@/libs/forms/auth/LoginForm";
-import RegisterForm from "@/libs/forms/auth/RegisterForm";
 import VerifyPhoneForm from "@/libs/forms/auth/verifyPhoneForm";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 import {
+  getUserMutate,
   selectverifyToken,
   updateVerfiyPhoneToken,
 } from "@/libs/store/auth/auth.slice";
@@ -14,20 +13,20 @@ import { useEffect } from "react";
 export default function VerifyCodePage() {
   const router = useRouter();
   const verifyPhoneToken = useAppSelector(selectverifyToken);
-  const dispatch = useAppDispatch();
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // const clearVerifyPhoneToken = () => {
-  //   dispatch(updateVerfiyPhoneToken(undefined));
-  // };
+  const dispatch=useAppDispatch();
+  const userMutater=useAppSelector(getUserMutate);
+  const clearVerifyPhoneToken = () => {
+    dispatch(updateVerfiyPhoneToken(undefined));
+  };
 
-  // useEffect(() => {
-  //   if (!verifyPhoneToken) {
-  //     router.push("/login");
-  //   }
-  //   return () => {
-  //     clearVerifyPhoneToken();
-  //   };
-  // }, [verifyPhoneToken,clearVerifyPhoneToken,router]);
+  useEffect(() => {
+    if (!verifyPhoneToken) {
+      router.push("/login");
+    }
+    return () => {
+      clearVerifyPhoneToken();
+    };
+  }, [verifyPhoneToken,router]);
 
   return (
     <>
@@ -38,9 +37,10 @@ export default function VerifyCodePage() {
             <div className=" relative">
               <div className=" w-full">
                 <VerifyPhoneForm
+                userMutater={userMutater}
                   router={router}
                   token={verifyPhoneToken}
-            
+                  clearToken={clearVerifyPhoneToken}
                 />
               </div>
             </div>

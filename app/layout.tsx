@@ -7,6 +7,7 @@ import "@/public/css/globals.css";
 
 import localFont from "next/font/local";
 import { Provider } from "react-redux";
+
 const myfont = localFont({
   src: "./../public/fonts/yekan/Yekan.woff2",
   style: "normal",
@@ -18,6 +19,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -26,6 +29,7 @@ export default function RootLayout({
       },
     },
   });
+
 
   return (
     <html lang="fa" dir="rtl" className={myfont.className}>

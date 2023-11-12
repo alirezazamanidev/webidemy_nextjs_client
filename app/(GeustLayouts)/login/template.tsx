@@ -5,10 +5,10 @@ import { ReactNode, useEffect } from "react";
 
 export default function Template({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const { user, } = useAuth();
+  const { user } = useAuth();
   useEffect(() => {
     if (user) {
-      router.push(user.username);
+      router.push('/');
     }
   }, [user, router]);
   return <>{children}</>;

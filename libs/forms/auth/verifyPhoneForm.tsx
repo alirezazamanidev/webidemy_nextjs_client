@@ -4,15 +4,19 @@ import { NotAcceptableExceptions } from "@/libs/exceptions/NotAcceptableExceptio
 import { NotFoundException } from "@/libs/exceptions/NotFoundException";
 import { StoreCookieForLogin } from "@/libs/helpers/auth";
 import { CallApi } from "@/libs/helpers/callApi";
+import { AxiosResponse } from "axios";
 
 import { withFormik } from "formik";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
-import { toast } from "react-toastify";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 
+import { toast } from "react-toastify";
 import * as yup from "yup";
 interface verifyPhoneFormProps {
   router: AppRouterInstance;
+  clearToken: () => void;
   token?: string;
+  userMutater?:   <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<AxiosResponse<any, any>, unknown>>
 }
 const verifyPhoneFormValidationSchema = yup.object().shape({
   code: yup.string().required(),
@@ -31,12 +35,15 @@ const VerifyPhoneForm = withFormik<
       const res = await CallApi().post("/auth/activationCode", valuse);
 
       if (res?.status === 200) {
-       await props.router?.push("/");
         await StoreCookieForLogin(
           res?.data?.access_token,
           res?.data?.refresh_token
-          );
-          
+        );
+        if (props.userMutater) {
+          await props.userMutater();
+        }
+        await props.router?.push("/");
+        await props.clearToken();
         toast.success("ورود با موفقیت انجام شد :)");
       }
     } catch (err) {

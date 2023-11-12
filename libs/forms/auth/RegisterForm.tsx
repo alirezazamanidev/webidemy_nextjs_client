@@ -4,7 +4,7 @@ import { BadRequestException } from "@/libs/exceptions/BadRequestException";
 import { StoreCookieForLogin } from "@/libs/helpers/auth";
 import { CallApi } from "@/libs/helpers/callApi";
 import { withFormik } from "formik";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 interface RegisterFormProps {
