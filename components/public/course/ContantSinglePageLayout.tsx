@@ -5,12 +5,9 @@ import CommentLayout from "../comments/CommentLayout";
 import { Course } from "@/libs/model/course";
 import SasonLayout from "./season/seasonLayout";
 import { Season } from "@/libs/model/seasson";
-import AvatarUser from "@/components/shared/AvatarLayout";
-import Link from "next/link";
 import CardInfoTeacher from "../layouts/CardInfoTeacher";
-import { GetComments } from "@/libs/services/home/comments";
-import Loading from "react-loading";
-import UserCommentLayout from "../comments/UserCommentLayout";
+import Highlight from 'react-highlight'
+
 interface props {
   course: Course;
 }
@@ -19,6 +16,8 @@ export default function ContantSinglePageLayout({ course }: props) {
   const handleSetActive = (to: any) => {
     setActiveSection(to);
   };
+
+
 
   return (
     <>
@@ -37,21 +36,19 @@ export default function ContantSinglePageLayout({ course }: props) {
                 className="flex justify-center w-fit items-center group "
               >
                 <span
-                  className={` flex  ml-3 ${
-                    activeSection === "aboutCourseButton"
+                  className={` flex  ml-3 ${activeSection === "aboutCourseButton"
                       ? " opacity-100"
                       : "opacity-0"
-                  }`}
+                    }`}
                 >
                   <span className="rounded-full  w-2 h-2 transition-all  bg-blue-750"></span>
                 </span>
 
                 <button
-                  className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${
-                    activeSection === "aboutCourseButton"
+                  className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${activeSection === "aboutCourseButton"
                       ? "text-blue-500"
                       : "text-gray-300"
-                  } text-lg md:text-xl`}
+                    } text-lg md:text-xl`}
                 >
                   توضیحات
                 </button>
@@ -67,21 +64,19 @@ export default function ContantSinglePageLayout({ course }: props) {
                 className="flex justify-center w-fit items-center gap-2 group"
               >
                 <span
-                  className={`flex ${
-                    activeSection === "courseChaptersButton"
+                  className={`flex ${activeSection === "courseChaptersButton"
                       ? "opacity-100"
                       : "opacity-0"
-                  }`}
+                    }`}
                 >
                   <span className="rounded-full  w-2 h-2 transition-all  bg-blue-750"></span>
                 </span>
 
                 <button
-                  className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${
-                    activeSection === "courseChaptersButton"
+                  className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${activeSection === "courseChaptersButton"
                       ? "text-blue-500"
                       : " text-gray-300"
-                  }  text-lg md:text-xl`}
+                    }  text-lg md:text-xl`}
                 >
                   فصل های دوره
                 </button>
@@ -97,21 +92,19 @@ export default function ContantSinglePageLayout({ course }: props) {
                 className="flex justify-center w-fit items-center gap-2 group"
               >
                 <span
-                  className={`flex ${
-                    activeSection === "courseFaqButton"
+                  className={`flex ${activeSection === "courseFaqButton"
                       ? " opacity-100"
                       : "opacity-0"
-                  }`}
+                    }`}
                 >
                   <span className="rounded-full  w-2 h-2 transition-all  bg-blue-750"></span>
                 </span>
 
                 <button
-                  className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${
-                    activeSection === "courseFaqButton"
+                  className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${activeSection === "courseFaqButton"
                       ? "text-blue-500"
                       : "text-gray-300"
-                  }  text-lg md:text-xl`}
+                    }  text-lg md:text-xl`}
                 >
                   سوالات متداول
                 </button>
@@ -127,21 +120,19 @@ export default function ContantSinglePageLayout({ course }: props) {
                 className="flex justify-center w-fit items-center gap-2 group"
               >
                 <span
-                  className={`flex ${
-                    activeSection === "commentsButton"
+                  className={`flex ${activeSection === "commentsButton"
                       ? "opacity-100"
                       : " opacity-0"
-                  }`}
+                    }`}
                 >
                   <span className="rounded-full  w-2 h-2 transition-all  bg-blue-750"></span>
                 </span>
 
                 <button
-                  className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${
-                    activeSection === "commentsButton"
+                  className={`transition-all whitespace-nowrap group-hover:text-blue-500 ${activeSection === "commentsButton"
                       ? "text-blue-500"
                       : "text-gray-300"
-                  }  text-lg md:text-xl`}
+                    }  text-lg md:text-xl`}
                 >
                   دیدگاه ها و پرسش ها
                 </button>
@@ -159,9 +150,9 @@ export default function ContantSinglePageLayout({ course }: props) {
                 </span>
                 <h2 className=" text-2xl text-blue-500 mr-2">توضیحات</h2>
               </div>
-              <p className=" text-gray-200 text-base md:text-lg    leading-loose  mr-4">
-                {course?.description}
-              </p>
+              <Highlight  className=' text-gray-300' innerHTML={true}>
+                { course?.description}
+              </Highlight>
             </div>
           </div>
           <div
@@ -201,10 +192,10 @@ export default function ContantSinglePageLayout({ course }: props) {
             </div>
           </div>
 
-          <CommentLayout subject={{course:course._id}} />
+          <CommentLayout subject={{ course: course._id }} />
           <div className=" space-y-2">
-         
-            </div>
+
+          </div>
         </div>
         <div className=" w-full xl:w-4/12 ">
           <div className=" grid grid-cols-2 md:grid-cols-4 xl:grid-cols-2   mr-0 xl:mr-8 mb-5 xl:mb-0 px-3 gap-6">
