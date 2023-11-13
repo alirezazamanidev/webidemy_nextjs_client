@@ -10,6 +10,7 @@ import Link from "next/link";
 import CardInfoTeacher from "../layouts/CardInfoTeacher";
 import { GetComments } from "@/libs/services/home/comments";
 import Loading from "react-loading";
+import UserCommentLayout from "../comments/UserCommentLayout";
 interface props {
   course: Course;
 }
@@ -200,7 +201,10 @@ export default function ContantSinglePageLayout({ course }: props) {
             </div>
           </div>
 
-          <CommentLayout course={course} />
+          <CommentLayout subject={{course:course._id}} />
+          <div className=" space-y-2">
+         
+            </div>
         </div>
         <div className=" w-full xl:w-4/12 ">
           <div className=" grid grid-cols-2 md:grid-cols-4 xl:grid-cols-2   mr-0 xl:mr-8 mb-5 xl:mb-0 px-3 gap-6">

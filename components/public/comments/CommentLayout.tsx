@@ -12,27 +12,19 @@ import { Comment } from "@/libs/model/comment";
 import { GetComments } from "@/libs/services/home/comments";
 import PaginateItem from "@/components/shared/layouts/PaginateItem";
 import { useSearchParams } from "next/navigation";
-
+import {useQueryState,parseAsInteger} from 'next-usequerystate'
+import { Episode } from "@/libs/model/episode";
 interface props {
-  course?: Course;
+  subject:{
+    course?:string,
+    episode?:string
+  }
 }
-export default function CommentLayout({ course }: props) {
+export default function CommentLayout({ subject }: props) {
   const [ShowCommentText, setShowCommentText] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(1);
-  const searchParams = useSearchParams();
+  
+  
   const { user } = useAuth();
-  const querypage = searchParams.get("page");
-  useEffect(() => {
-    if (querypage) {
-      setPage(parseInt(querypage));
-    }
-  }, [querypage]);
-  const { data, isLoading } = GetComments({
-    course: course?._id,
-    page,
-    limit: 20,
-  });
-
   const commentformValidationSchema = yup.object().shape({
     comment: yup
       .string()
@@ -82,7 +74,7 @@ export default function CommentLayout({ course }: props) {
         <div>
           {ShowCommentText && (
             <Formik
-              initialValues={{ comment: "", course: course?._id }}
+              initialValues={{ comment: "",...subject }}
               validationSchema={commentformValidationSchema}
               onSubmit={handleSetComment}
             >
@@ -124,30 +116,8 @@ export default function CommentLayout({ course }: props) {
               )}
             </Formik>
           )}
+              <UserCommentLayout subject={subject} />
 
-          {isLoading ? (
-            <div className=" w-full flex  flex-col gap-3  items-center mt-10 lg:mt-5">
-              <span className=" text-gray-400 text-base sm:text-lg md:text-lg lg:text-xl">
-                در حال دریافت کامنت ها ...
-              </span>
-              <Loading
-                type="spinningBubbles"
-                color="#fff"
-                width={40}
-                height={40}
-                className=" scale-100 md:scale-110 lg:scale-120 mt-3"
-              />
-            </div>
-          ) : (
-            <div className=" space-y-2">
-              <UserCommentLayout comments={data?.data} />
-              <PaginateItem
-                page={data?.page}
-                pages={data?.pages}
-                url={`/courses/${course?.slug}`}
-              />
-            </div>
-          )}
         </div>
       </div>
     </>

@@ -20,6 +20,7 @@ export async function GetSingleCourse(courseSlug: string) {
     headers: {
       "Content-Type": "application/json",
     },
+    cache:'no-store'
 
 
   });

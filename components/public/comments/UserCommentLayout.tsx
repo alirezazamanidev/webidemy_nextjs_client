@@ -5,13 +5,40 @@ import { Comment } from "@/libs/model/comment";
 import ImageComponent from "@/components/shared/ImageComponent";
 import { DateFromNow } from "@/libs/utils/date";
 import AvatarUser from "@/components/shared/AvatarLayout";
+import { GetComments } from "@/libs/services/home/comments";
+import {useQueryState,parseAsInteger} from 'next-usequerystate'
+import ReactCustomPaginate from "@/components/shared/layouts/PaginateItem";
+import Loading from "react-loading";
 interface props {
-  comments: Comment[];
+  subject:{
+    course?:string,
+    episode?:string
+  }
 }
-export default function UserCommentLayout({ comments }: props) {
+export default function UserCommentLayout({ subject }: props) {
+  const [page, setPage] = useQueryState('page',parseAsInteger.withDefault(1));
+  const {data:comments,isLoading}=GetComments({...subject,page,limit:20});
+
+  const onPageChangeHandler=({selected} : { selected : number })=>{
+    setPage(selected+1);
+  }
   return (
     <>
-      {comments?.length === 0 ? (
+
+    {isLoading ? (
+            <div className=" w-full flex  flex-col gap-3  items-center mt-10 lg:mt-5 mb-6">
+              <span className=" text-gray-400 text-base sm:text-lg md:text-lg lg:text-xl">
+                در حال دریافت کامنت ها ...
+              </span>
+              <Loading
+                type="spinningBubbles"
+                color="#fff"
+                width={40}
+                height={40}
+                className=" scale-100 md:scale-110 lg:scale-120 mt-3"
+              />
+            </div>
+          ) : comments?.data.length === 0 ? (
         <div className=" flex w-full flex-col   justify-center  items-center mt-10 lg:mt-5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +53,7 @@ export default function UserCommentLayout({ comments }: props) {
           </span>
         </div>
       ) : (
-        comments?.map((comment) => (
+        comments?.data?.map((comment:Comment) => (
           <div key={comment._id}>
             <div className=" border border-dashed border-gray-400 mt-5 rounded-lg p-4 lg:p-7">
               <div className=" flex items-center  justify-start">
@@ -85,7 +112,12 @@ export default function UserCommentLayout({ comments }: props) {
             ))}
           </div>
         ))
-      )}
+        )}
+        <ReactCustomPaginate page={page} pageCount={comments?.pages ?? 1} onPageChangeHandler={onPageChangeHandler}/>
+
+      
+
+
     </>
   );
 }
