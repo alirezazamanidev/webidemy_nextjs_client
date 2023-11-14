@@ -38,7 +38,7 @@ export default function UserPanelHeaderLayout() {
       formData.append(value, values[value]);
     }
 
-    const res = await CallApi().post("/users/uploadAvatar", formData);
+    await CallApi().post("/users/uploadAvatar", formData);
     await refeachToken();
     setShowUploadAvatarConfrimation(false);
     await refetch();

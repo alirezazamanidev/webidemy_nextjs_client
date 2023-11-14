@@ -15,10 +15,8 @@ export default function InneVerifyPhoneForm({
   isSubmitting,
 }: FormikProps<any>) {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
-  const [showBtnSendCode, setShowBtnSendCode] = useState(false);
   const [activeotpIndex, setactiveotpIndex] = useState<number>(0);
   const [Statusdisabled, setStatusDisabled] = useState<boolean>(true);
-  const phoneUser = useAppSelector(getphoneUser);
   const inputRef = useRef<HTMLInputElement>(null);
   const handleOnchange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
@@ -47,13 +45,7 @@ export default function InneVerifyPhoneForm({
   }, [activeotpIndex, otp]);
 
 
-  const HandleSendCode = async (e: any) => {
-    e.preventDefault();
-    await sendCodeForauth({ phone: phoneUser })
-    setShowBtnSendCode(false);
-    toast.success("کد تایید با موفقیت ارسال شد!");
-    
-  }
+ 
  
 
   return (
@@ -83,20 +75,7 @@ export default function InneVerifyPhoneForm({
           />
         </div>
 
-        <div className=" my-10 flex justify-center">
-          {
-            showBtnSendCode ? (
-              <button onClick={HandleSendCode} className=" text-gray-400">ارسال مجدد رمز یک بار مصرف</button>
-            ) : (
-              <span className=" flex items-center gap-2">
-                <p className=" text-gray-300"> ارسال کد تایید دیگر (</p>
-                <Countdown date={Date.now() + (1000 * 60 * 3)} onComplete={() => setShowBtnSendCode(true)} className=" text-white " />
-                <p className=" text-gray-300">)</p>
-              </span>
-            )
-          }
-        </div>
-
+      
         <button
           disabled={Statusdisabled}
           type="submit"
@@ -123,6 +102,7 @@ export default function InneVerifyPhoneForm({
           )}
         </button>
       </Form>
+   
     </>
   );
 }
