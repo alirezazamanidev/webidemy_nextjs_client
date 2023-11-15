@@ -53,7 +53,7 @@ export default function ShowNewCourseLayout({ courses }: props) {
             height={100}
             alt="titleCircleRed"
           />
-          <h2 className="text-2xl text-gray-200 sm:text-2xl lg:text-4xl font-black">
+          <h2 className="text-2xl text-gray-200 sm:text-2xl lg:text-3xl font-black">
             جدید ترین دوره های وبیدمی
           </h2>
         </div>
