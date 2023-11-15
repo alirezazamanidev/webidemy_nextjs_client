@@ -3,10 +3,11 @@
 import CardCourse from "../course/CardCourseLayout";
 import Image from "next/image";
 import titleCirclePink from '@/public/images/photo/titleCirclePink.webp';
+import CardBlog from "../blog/CardBlogLayout";
 interface props {
-  
+
 }
-export default function ShowNewBlogsLayout({  }: props) {
+export default function ShowNewBlogsLayout({ }: props) {
 
   return (
     <>
@@ -23,7 +24,12 @@ export default function ShowNewBlogsLayout({  }: props) {
             جدید ترین مقالات
           </h2>
         </div>
-       
+        <div className=" flex  items-center gap-4">
+          <CardBlog />
+          <CardBlog />
+          <CardBlog />
+          <CardBlog />
+        </div>
       </div>
     </>
   );
