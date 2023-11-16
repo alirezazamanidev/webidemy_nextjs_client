@@ -1,34 +1,35 @@
 'use client'
-
-import { Course } from "@/libs/model/course";
 import Link from "next/link";
 import promiseJsPhoto from '@/public/images/photo/promiseJs.webp'
 import Image from "next/image";
 import mePhoto from '@/public/images/me.jpeg'
+import { Blog } from "@/libs/model/blog";
+import ImageComponent from "@/components/shared/ImageComponent";
+import AvatarUser from "@/components/shared/AvatarLayout";
 interface props {
-
+  blog:Blog
 }
 
-export default function CardCourse({ }: props) {
+export default function CardCourse({blog }: props) {
   return (
     <>
-      <div className="w-full h-full pb-5 lg:pb-6 relative">
+      <div className="w-full h-full  pb-5 lg:pb-6 relative">
         <div className="w-full  transition-all flex flex-col relative group bg-gray-900 rounded-xl" style={{
-          background: `linear-gradient(to left top, rgb(15, 3, 12), rgb(173, 34, 101)`,
+          background: `linear-gradient(to left top, ${blog?.GradientCardBlog?.fromColor}, ${blog?.GradientCardBlog?.toColor}`,
         }}>
           <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-1000" style={{
-            background: `linear-gradient(to left top, rgb(15, 3, 12), rgb(173, 34, 101)`,
+            background: `linear-gradient(to left top, ${blog?.GradientCardBlog?.toColor}, ${blog?.GradientCardBlog?.fromColor}`,
           }}></div>
-          <Link href='' className="p-7 lg:p-8 pb-16  lg:pb-20 relative h-full flex flex-col">
-            <Image src={promiseJsPhoto} alt='alt' loading="lazy" width={650} height={450} className="aspect-video w-full object-cover rounded-md inline-block mb-6 lg:mb-7 transition-all duration-500 opacity-100" style={{ color: 'transparent;' }} />
+          <Link href={`/blogs/${blog?.slug}`} className="p-7 lg:p-8 pb-16  lg:pb-20 relative h-full flex flex-col">
+            <ImageComponent url={blog?.photos['360']} alt={blog?.title} width={650} height={450} className="aspect-video w-full object-cover rounded-md inline-block mb-6 lg:mb-7 transition-all duration-500 opacity-100" />
 
-            <h3 className="text-base lg:text-xl font-bold text-white transition-colors inline-block text-center leading-relaxed lg:leading-relaxed mb-6 lg:mb-7">آشنایی با Promise.all در جاوااسکریپت</h3>
-            <div className="grid grid-cols-3 w-full gap-3 text-white text-xs"><div className="flex flex-col items-center text-center"><span>نویسنده</span><span className="font-bold whitespace-nowrap text-ellipsis overflow-hidden w-full">عرفان یوسفی</span></div><div className="flex flex-col items-center text-center"><span>زمان مطالعه</span><span className="font-bold whitespace-nowrap text-ellipsis overflow-hidden w-full">6 دقیقه</span></div><div className="flex flex-col items-center text-center"><span>دسته بندی</span><span className="font-bold whitespace-nowrap text-ellipsis overflow-hidden w-full">عمومی</span></div></div>
+            <h3 className="text-base lg:text-xl font-bold text-white transition-colors inline-block text-center leading-relaxed lg:leading-relaxed mb-6 lg:mb-7">{blog?.title}</h3>
+            <div className="grid grid-cols-3 w-full gap-3 text-white text-xs"><div className="flex flex-col items-center text-center"><span>نویسنده</span><span className="font-bold whitespace-nowrap text-ellipsis overflow-hidden w-full">{blog?.author?.fullname}</span></div><div className="flex flex-col items-center text-center"><span>زمان مطالعه</span><span className="font-bold whitespace-nowrap text-ellipsis overflow-hidden w-full">{blog?.studyTime}</span></div><div className="flex flex-col items-center text-center"><span>دسته بندی</span><span className="font-bold whitespace-nowrap text-ellipsis overflow-hidden w-full">{blog?.category.title}</span></div></div>
           </Link>
 
 
         </div>
-        <Image src={mePhoto} alt="alt" draggable="false" loading="lazy" width={80} height={80} decoding="async" data-nimg="1" className="aspect-square flex-none rounded-full object-cover duration-500 opacity-100 w-10 h-10 lg:w-12 lg:h-12 border-2 border-solid absolute right-7 lg:right-8 bottom-0 transition-allborder-gray-400" style={{ color: 'transparent;' }} />
+        <AvatarUser url={blog?.author?.avatar} alt={blog?.author?.fullname} width={80} height={80}  className="aspect-square flex-none rounded-full object-cover duration-500 opacity-100 w-10 h-10 lg:w-12 lg:h-12 border-2 border-solid absolute right-7 lg:right-8 bottom-0 transition-allborder-gray-400" />
         <div className="flex justify-center items-center gap-1.5 rounded-full absolute left-7 lg:left-8 bottom-0">
           <span className="flex justify-center items-center rounded-full group/save-icon shadow-lg  w-10 h-10 xl:w-12 xl:h-12 bg-dark-600 mq1170transition-all cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 xl:w-6 xl:h-6  text-blue-600 group-hover/save-icon:fill-cnBlue-15/50 ">
