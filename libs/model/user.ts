@@ -9,7 +9,7 @@ export interface userType {
   phone: string;
   avatar: string;
   biography:string;
-  savedBloglist:Blog[]
+  savedBlogList:Blog[]
   active: boolean;
   isVip: boolean;
   vipTime: Date;

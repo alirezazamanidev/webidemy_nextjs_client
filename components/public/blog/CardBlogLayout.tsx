@@ -36,17 +36,15 @@ export default function CardCourse({ blog }: props) {
 
   }
 
-  useEffect(() => {
-    if (user?.savedBlogList.includes(blog._id)) {
-      setHasStatusSavedBlog(true);
-
+  useEffect(()=>{
+    if(user?.savedBlogList.includes(blog?._id)){
+      setHasStatusSavedBlog(true)
     }
-    else {
-      setHasStatusSavedBlog(false);
-    }
+  },[user])
 
-  }, [user])
 
+ 
+  
   return (
     <>
       <div className="w-full h-full  pb-5 lg:pb-6 relative">

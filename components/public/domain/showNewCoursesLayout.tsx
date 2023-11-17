@@ -7,10 +7,14 @@ import { Course } from "@/libs/model/course";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import useAuth from "@/libs/hooks/useAuth";
 interface props {
   courses: Course[];
 }
 export default function ShowNewCourseLayout({ courses }: props) {
+
+  
+  
   const settings = {
     autoplay: true,
     autoplaySpeed: 4000,

@@ -33,6 +33,8 @@ export default function SingleCourseHeaderPage({ course }: props) {
       
 
     }
+  
+    
    
   };
   return (

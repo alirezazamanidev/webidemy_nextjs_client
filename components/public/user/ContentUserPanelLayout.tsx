@@ -16,6 +16,9 @@ export default function ContentUserPanel() {
     await refetch();
   };
 
+  console.log(user?.savedBlogList);
+  
+
   useEffect(() => {
     if (user) {
       router.push(user.username);
