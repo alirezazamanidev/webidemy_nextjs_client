@@ -6,11 +6,47 @@ import mePhoto from '@/public/images/me.jpeg'
 import { Blog } from "@/libs/model/blog";
 import ImageComponent from "@/components/shared/ImageComponent";
 import AvatarUser from "@/components/shared/AvatarLayout";
+import { SavedBlog } from "@/libs/services/home/blog";
+import { toast } from "react-toastify";
+import useAuth from "@/libs/hooks/useAuth";
+import useRefreshToken from "@/libs/hooks/useRefreshToken";
+import { useEffect, useState } from "react";
 interface props {
-  blog:Blog
+  blog: Blog
 }
 
-export default function CardCourse({blog }: props) {
+export default function CardCourse({ blog }: props) {
+  const [hasStatusSavedBlog, setHasStatusSavedBlog] = useState(false);
+  const { user, refetch } = useAuth();
+  const refreshToken = useRefreshToken();
+
+  const handleToogleSavedBlog = async (e: any) => {
+    e.preventDefault();
+    await SavedBlog(blog?._id);
+    if(hasStatusSavedBlog){
+      setHasStatusSavedBlog(false);
+      toast.success('سیو خارج شد !')
+
+    }else {
+      setHasStatusSavedBlog(true);
+      toast.success('سیو شد !')
+    }
+    await refreshToken();
+    await refetch();
+
+  }
+
+  useEffect(() => {
+    if (user?.savedBlogList.includes(blog._id)) {
+      setHasStatusSavedBlog(true);
+
+    }
+    else {
+      setHasStatusSavedBlog(false);
+    }
+
+  }, [user])
+
   return (
     <>
       <div className="w-full h-full  pb-5 lg:pb-6 relative">
@@ -29,10 +65,10 @@ export default function CardCourse({blog }: props) {
 
 
         </div>
-        <AvatarUser url={blog?.author?.avatar} alt={blog?.author?.fullname} width={80} height={80}  className="aspect-square flex-none rounded-full object-cover duration-500 opacity-100 w-10 h-10 lg:w-12 lg:h-12 border-2 border-solid absolute right-7 lg:right-8 bottom-0 transition-allborder-gray-400" />
+        <AvatarUser url={blog?.author?.avatar} alt={blog?.author?.fullname} width={80} height={80} className="aspect-square flex-none rounded-full object-cover duration-500 opacity-100 w-10 h-10 lg:w-12 lg:h-12 border-2 border-solid absolute right-7 lg:right-8 bottom-0 transition-allborder-gray-400" />
         <div className="flex justify-center items-center gap-1.5 rounded-full absolute left-7 lg:left-8 bottom-0">
-          <span className="flex justify-center items-center rounded-full group/save-icon shadow-lg  w-10 h-10 xl:w-12 xl:h-12 bg-dark-600 mq1170transition-all cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 xl:w-6 xl:h-6  text-blue-600 group-hover/save-icon:fill-cnBlue-15/50 ">
+          <span onClick={handleToogleSavedBlog} className="flex justify-center items-center rounded-full group/save-icon shadow-lg  w-10 h-10 xl:w-12 xl:h-12 bg-dark-600 mq1170transition-all cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`w-5 h-5 xl:w-6 xl:h-6  text-blue-600 ${hasStatusSavedBlog ? 'fill-blue-600' :''}   group-hover/save-icon:fill-blue-600 `}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z">
               </path>
             </svg>

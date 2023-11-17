@@ -1,3 +1,4 @@
+import { CallApi } from "@/libs/helpers/callApi";
 import { redirect } from "next/navigation";
 
 export async function GetBlogs() {
@@ -12,8 +13,10 @@ export async function GetBlogs() {
   if (!res.ok) throw new Error("The error for get data");
   return res.json();
 }
+export async function SavedBlog(blogId:string){
+  await CallApi().get(`/blogs/saved/${blogId}`)
 
-
+}
 export async function GetSingleCourse(courseSlug: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/courses/${courseSlug}`, {
     method: "GET",

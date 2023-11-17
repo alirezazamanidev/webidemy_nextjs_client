@@ -1,3 +1,4 @@
+import { Blog } from "./blog";
 import { Course } from "./course";
 
 export interface userType {
@@ -7,7 +8,8 @@ export interface userType {
   email: string;
   phone: string;
   avatar: string;
-  biography:string
+  biography:string;
+  savedBloglist:Blog[]
   active: boolean;
   isVip: boolean;
   vipTime: Date;
