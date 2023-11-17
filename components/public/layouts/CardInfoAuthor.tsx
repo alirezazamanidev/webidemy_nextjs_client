@@ -5,14 +5,14 @@ import Link from "next/link";
 import { useState } from "react";
 
 interface props {
-  teacher?: userType;
+  author?: userType;
 }
 
-export default function CardInfoTeacher({ teacher }: props) {
+export default function CardInfoAuthor({ author }: props) {
   const [openBtn, setOpenBtn] = useState<boolean>(false);
   return (
     <>
-      <div className="  p-4 lg:p-7 bg-dark-600 transition-all rounded-2xl mt-4 lg:mt-7 mr-0 xl:mr-10 mb-5 xl:mb-0  ">
+      <div className="  p-4 lg:p-7 bg-dark-600 transition-all rounded-2xl mt-4 lg:mt-7 mr-0  mb-5 xl:mb-0  ">
         <div className="relative">
           <div
             className="overflow-hidden relative mb-5 lg:mb-7 "
@@ -26,13 +26,13 @@ export default function CardInfoTeacher({ teacher }: props) {
                       width={120}
                       height={120}
                       className="aspect-square object-cover rounded-full transition-all duration-500 opacity-100 w-14 h-14 md:w-16 md:h-16 xl:w-20 xl:h-20 select-none"
-                      url={teacher?.avatar}
+                      url={author?.avatar}
                     />
                   </Link>
                   <div className="font-bold text-center mt-3 flex justify-center items-center gap-1">
                     <p className="transition-colors select-none text-gray-200 text-lg">
                       <Link target="_blank" href="/">
-                        {teacher?.fullname}
+                        {author?.fullname}
                       </Link>
                     </p>
                     <svg
@@ -55,7 +55,7 @@ export default function CardInfoTeacher({ teacher }: props) {
                   </p>
                 </div>
                 <p className="mt-0 text-gray-300 lg:mt-1 xl:mt-3 text-sm select-none transition-colors leading-loose">
-                  {teacher?.biography}
+                  {author?.biography}
                 </p>
               </div>
             </div>

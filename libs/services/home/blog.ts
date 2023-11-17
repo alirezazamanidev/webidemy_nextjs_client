@@ -20,15 +20,13 @@ export async function SavedBlog(blogId:string){
 export async function ToogleLikedBlog(blogID:string){
   await CallApi().put(`/blogs/liked/${blogID}`);
 }
-export async function GetSingleCourse(courseSlug: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/courses/${courseSlug}`, {
+export async function GetSingleBlog(BlogSlug: string) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/blogs/${BlogSlug}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
     cache:'no-store'
-
-
   });
 
 
