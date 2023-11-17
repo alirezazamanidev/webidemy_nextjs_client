@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import useAuth from "@/libs/hooks/useAuth";
 import useRefreshToken from "@/libs/hooks/useRefreshToken";
 import { useEffect, useState } from "react";
+import UnauthorizedException from "@/libs/exceptions/UnauthorizedException";
 interface props {
   blog: Blog
   ShowBookMarkLabel?:boolean
@@ -23,17 +24,27 @@ export default function CardBlog({ blog,ShowBookMarkLabel=true }: props) {
 
   const handleToogleSavedBlog = async (e: any) => {
     e.preventDefault();
-    await SavedBlog(blog?._id);
-    if(hasStatusSavedBlog){
-      setHasStatusSavedBlog(false);
-      toast.success('سیو خارج شد !')
+    try {
+      await SavedBlog(blog?._id);
+      if(hasStatusSavedBlog){
+        setHasStatusSavedBlog(false);
+        toast.success('سیو خارج شد !')
+  
+      }else {
+        setHasStatusSavedBlog(true);
+        toast.success('سیو شد !')
+      }
+      await refreshToken();
+      await refetch();
+    }catch(err:any){
+      
+      if(err.response.status===401){
+        toast.error('لطفا وارد حساب کاربری خود شوید')
 
-    }else {
-      setHasStatusSavedBlog(true);
-      toast.success('سیو شد !')
+      }
+      
+      
     }
-    await refreshToken();
-    await refetch();
 
   }
 
