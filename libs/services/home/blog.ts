@@ -17,6 +17,9 @@ export async function SavedBlog(blogId:string){
   await CallApi().get(`/blogs/saved/${blogId}`)
 
 }
+export async function ToogleLikedBlog(blogID:string){
+  await CallApi().put(`/blogs/liked/${blogID}`);
+}
 export async function GetSingleCourse(courseSlug: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/courses/${courseSlug}`, {
     method: "GET",

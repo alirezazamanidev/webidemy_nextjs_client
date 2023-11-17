@@ -6,6 +6,7 @@ export interface Blog {
   isPublished: boolean;
   category: Category;
   author: userType;
+  likedUserList:string[]
   
   title: string;
   slug: string;
