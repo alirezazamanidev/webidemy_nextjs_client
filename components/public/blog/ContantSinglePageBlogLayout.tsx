@@ -36,7 +36,7 @@ export default function ContantSinglePageBlogLayout({ blog,showBigPage }: props)
         <CardInfoAuthor author={blog?.author}/>
        </div>
        { 
-       !showBigPage && <CommentLayout subject={{course:blog._id}}/>
+       !showBigPage && <CommentLayout subject={{blog:blog._id}}/>
        }
       
       </main>

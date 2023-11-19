@@ -1,23 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useAuth from "@/libs/hooks/useAuth";
-import { Course } from "@/libs/model/course";
-import { ErrorMessage, Form, Formik, FormikProps } from "formik";
+
+import { ErrorMessage, Form, Formik } from "formik";
 import Loading from "react-loading";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { CallApi } from "@/libs/helpers/callApi";
 import UserCommentLayout from "./UserCommentLayout";
-import { Comment } from "@/libs/model/comment";
-import { GetComments } from "@/libs/services/home/comments";
-import PaginateItem from "@/components/shared/layouts/PaginateItem";
-import { useSearchParams } from "next/navigation";
-import {useQueryState,parseAsInteger} from 'next-usequerystate'
-import { Episode } from "@/libs/model/episode";
+
 interface props {
   subject:{
     course?:string,
-    episode?:string
+    episode?:string,
+    blog?:string
   }
 }
 export default function CommentLayout({ subject }: props) {
