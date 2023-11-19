@@ -12,7 +12,7 @@ export default function CardInfoAuthor({ author }: props) {
   const [openBtn, setOpenBtn] = useState<boolean>(false);
   return (
     <>
-      <div className="  p-4 lg:p-7 bg-dark-600 transition-all rounded-2xl mt-4 lg:mt-7 mr-0  mb-5 xl:mb-0  ">
+      <div className="  p-4 lg:p-7 w-full bg-dark-600 transition-all rounded-2xl mt-4 lg:mt-7 mx-auto lg:mr-0  mb-5 xl:mb-0  ">
         <div className="relative">
           <div
             className="overflow-hidden relative mb-5 lg:mb-7 "
@@ -51,7 +51,7 @@ export default function CardInfoAuthor({ author }: props) {
                     </svg>
                   </div>
                   <p className="text-xs md:text-sm text-center mt-1 xl:mt-3 text-gray-400 transition-colors select-none">
-                    مدرس دوره
+                      نویسنده مقاله
                   </p>
                 </div>
                 <p className="mt-0 text-gray-300 lg:mt-1 xl:mt-3 text-sm select-none transition-colors leading-loose">

@@ -2,23 +2,21 @@
 import CommentLayout from "../comments/CommentLayout";
 import { FaRegClock } from "react-icons/fa6";
 import { Blog } from "@/libs/model/blog";
-import CodeBlock from "@/components/shared/codeBlock";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { useState } from "react";
+import CardInfoAuthor from "../layouts/CardInfoAuthor";
+
 interface props {
   blog:Blog;
+  showBigPage:boolean
 }
-export default function ContantSinglePageBlogLayout({ blog }: props) {
-  const code = `function helloWorld() {
-    console.log("Hello, world!");
-   }`;
- 
+export default function ContantSinglePageBlogLayout({ blog,showBigPage }: props) {
+
   return (
     <>
       <main className=" w-full ">
-       
         <div className="bg-dark-600 p-4 lg:p-7">
           <div className=" flex items-center justify-between">
-            <p className=" text-gray-400 text-lg flex items-center gap-2">
+            <p className=" text-gray-400 text-base flex items-center gap-2">
               <FaRegClock className=' ' />
             <span>زمان مطالعه :</span>
             <span>{blog?.studyTime}</span>
@@ -34,8 +32,13 @@ export default function ContantSinglePageBlogLayout({ blog }: props) {
           
         </div>
        
-          <CommentLayout subject={{ course: blog._id }} />
-
+       <div className=" block  lg:hidden">
+        <CardInfoAuthor author={blog?.author}/>
+       </div>
+       { 
+       !showBigPage && <CommentLayout subject={{course:blog._id}}/>
+       }
+      
       </main>
     </>
   );
