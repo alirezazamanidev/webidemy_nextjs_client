@@ -25,7 +25,7 @@ export default function SingleBlogPage({ blog }: props) {
 
       <div className={`relative grid   grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-7`}>
 
-        <div className={`${showBigPage ? 'col-span-4' : 'col-span-3'}`}>
+        <div className={`${showBigPage ? 'col-span-4' : 'col-span-3'} mx-4`}>
           <div className="w-full p-4 rounded-lg lg:p-7 relative overflow-hidden" style={{
             background: `linear-gradient(to left top, ${blog?.GradientCardBlog?.fromColor}, ${blog?.GradientCardBlog?.toColor}`,
           }}>

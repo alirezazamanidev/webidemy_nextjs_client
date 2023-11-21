@@ -19,7 +19,6 @@ export default function CardBlogSearchLayout({ blog }: props) {
         <div
         >
           <div
-          
             className=" w-20 h-12 inset-0 rounded-xl  flex justify-center items-center transition-all duration-1000" style={{
               background: `linear-gradient(to left top, ${blog?.GradientCardBlog?.toColor}, ${blog?.GradientCardBlog?.fromColor}`
             }}

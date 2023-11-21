@@ -7,7 +7,8 @@ export interface Blog {
   category: Category;
   author: userType;
   likedUserList:string[]
-  
+  likeCount:number;
+  bookMarkedCount:number;
   title: string;
   slug: string;
   comments: Comment[];
