@@ -63,7 +63,8 @@ export default function NavbarLayouts() {
               </span>
             </Link>
             <li className=" group">
-              <span
+              <Link 
+               href="/blogs"
                 className={`p-2 text-center relative after:h-0.5 after:absolute after:bottom-0  after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-gray-300    after:w-0 after:transition-all  group-hover:after:w-1/2 group-hover:after:opacity-100 ${
                   pathname === "/blogs"
                     ? " after:opacity-100 after:w-1/2"
@@ -71,7 +72,7 @@ export default function NavbarLayouts() {
                 }`}
               >
                 مقالات
-              </span>
+              </Link>
             </li>
             <li className=" group">
               <span className="p-2 text-center relative after:h-0.5 after:absolute after:bottom-0  after:left-1/2 after:rounded-sm after:-translate-x-1/2 after:bg-gray-300  after:opacity-0  after:w-0 after:transition-all  group-hover:after:w-1/2 group-hover:after:opacity-100 ">

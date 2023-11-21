@@ -4,9 +4,9 @@ import { GetAllCourses } from "@/libs/services/home/course";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Loading from "react-loading";
-import CardCourseSearchLayout from "../course/CardCourseForSearchLayout";
+import CardCourseSearchLayout from "./CardCourseForSearchLayout";
 
-export default function SearchBarLayout() {
+export default function SearchBarCourseLayout() {
   const [searchText, setSearchText] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [courseslist, setCourseList] = useState<Course[]>([]);

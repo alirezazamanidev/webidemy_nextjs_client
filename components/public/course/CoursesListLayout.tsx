@@ -11,7 +11,7 @@ import { Listbox } from "@headlessui/react"
 import { Getcategoryies } from "@/libs/services/home/public"
 import { Category } from "@/libs/model/category"
 import Loading from "react-loading"
-import SearchBarLayout from "../layouts/SearchBarLayout"
+import SearchBarCourseLayout from "./SearchBarCourseLayout"
 const filterItem = [
     { value: "default", name: "پیش فرض", unavailable: false },
     { value: "newest", name: "جدید ترین", unavailable: false },
@@ -167,7 +167,7 @@ export default function CoursesListLayout({ coursesData }: props) {
             </Listbox>
                     </div>
                 </div>
-                <SearchBarLayout />
+                <SearchBarCourseLayout />
             </div>
             {/* content courses */}
             <div className=" border-solid border-b pb-16 border-gray-700 my-10 ">

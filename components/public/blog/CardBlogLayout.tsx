@@ -90,9 +90,9 @@ export default function CardBlog({ blog, ShowBookMarkLabel = true }: props) {
           <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-1000" style={{
             background: `linear-gradient(to left top, ${blog?.GradientCardBlog?.toColor}, ${blog?.GradientCardBlog?.fromColor}`,
           }}></div>
-          <Link href={`/blogs/${blog?.slug}`} className="p-7 lg:p-8 pb-16 lg:pb-18 relative h-full flex flex-col">
+          <Link   href={`/blogs/${blog?.slug}`}  className="p-7 lg:p-8 pb-16 lg:pb-18 relative h-full flex flex-col">
             <ImageComponent url={blog?.photos['360']} alt={blog?.title} width={650} height={450} className="aspect-video w-full object-cover rounded-md inline-block mb-6 lg:mb-7 transition-all duration-500 opacity-100" />
-
+            
             <h3 className="text-base lg:text-xl font-bold text-white transition-colors inline-block text-center leading-relaxed lg:leading-relaxed mb-6 lg:mb-7">{blog?.title}</h3>
             <div className="grid grid-cols-3 w-full gap-3 text-white text-xs"><div className="flex flex-col items-center text-center"><span>نویسنده</span><span className="font-bold whitespace-nowrap text-ellipsis overflow-hidden w-full">{blog?.author?.fullname}</span></div><div className="flex flex-col items-center text-center"><span>زمان مطالعه</span><span className="font-bold whitespace-nowrap text-ellipsis overflow-hidden w-full">{blog?.studyTime}</span></div><div className="flex flex-col items-center text-center"><span>دسته بندی</span><span className="font-bold whitespace-nowrap text-ellipsis overflow-hidden w-full">{blog?.category.title}</span></div></div>
           </Link>
