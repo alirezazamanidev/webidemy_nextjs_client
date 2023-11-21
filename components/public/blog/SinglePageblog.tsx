@@ -34,7 +34,7 @@ export default function SingleBlogPage({ blog }: props) {
             }}></div>
             <ImageComponent url={blog.photos['1080']} alt={blog?.title} width={1700} height={170} className="w-full aspect-video object-cover rounded-lg relative transition-all duration-500 opacity-100" />
           </div>
-          <ContantSinglePageBlogLayout blog={blog} showBigPage={showBigPage} />
+          <ContantSinglePageBlogLayout blogData={blog} showBigPage={showBigPage} />
      
         </div>
         {

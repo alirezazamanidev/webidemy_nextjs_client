@@ -21,11 +21,7 @@ export async function ToogleLikedBlog(blogID:string){
   await CallApi().put(`/blogs/liked/${blogID}`);
 }
 export async function GetSingleBlog(BlogSlug: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/blogs/${BlogSlug}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/blogs/${BlogSlug}`,{
     cache:'no-store'
   });
 

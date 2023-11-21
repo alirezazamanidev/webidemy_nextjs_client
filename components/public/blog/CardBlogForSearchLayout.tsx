@@ -8,7 +8,6 @@ interface props {
 }
 
 export default function CardBlogSearchLayout({ blog }: props) {
-  console.log(blog);
 
   return (
     <>
