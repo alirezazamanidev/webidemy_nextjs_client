@@ -10,12 +10,11 @@ import ImageComponent from "@/components/shared/ImageComponent";
 import { GetUserOrders } from "@/libs/services/cart/cart";
 import LoGoPath from "@/public/images/photo/WEBIDEMI-600x600.png";
 import Image from "next/image";
-import LoadingLayout from "@/components/shared/Loading";
 export default function NavbarLayouts() {
   const [openSideBar, setOpenSidebar] = useState<boolean>(false);
   const pathname = usePathname();
-  const { user, loading: userLoading } = useAuth();
-  const { data ,isLoading} = GetUserOrders();
+  const { user } = useAuth();
+  const { data } = GetUserOrders();
   let statusshowLoginBtn =
     pathname === "/login" || pathname === "/login/verfiy" ? true : false;
   return (

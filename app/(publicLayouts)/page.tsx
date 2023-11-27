@@ -2,6 +2,7 @@
 import HeadersMainPage from "@/components/public/domain/HeaderLayouts";
 import ShowNewBlogsLayout from "@/components/public/domain/showNewBlogsLayout copy";
 import ShowNewCourseLayout from "@/components/public/domain/showNewCoursesLayout";
+import FooterLayout from "@/components/public/layouts/FooterLayout";
 import { GetBlogs } from "@/libs/services/home/blog";
 import { GetCourses } from "@/libs/services/home/course";
 import { Metadata } from "next";
@@ -22,6 +23,7 @@ export default async function HomePage() {
         <HeadersMainPage />
         <ShowNewCourseLayout courses={Coursedata?.courses}/>
         <ShowNewBlogsLayout blogs={blogsData.blogs}/>
+        <FooterLayout/>
       </div>
     </>
   );
