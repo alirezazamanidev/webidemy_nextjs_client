@@ -36,14 +36,17 @@ const RegisterForm = withFormik<RegisterFormProps, RegisterFormValuesInterFace>(
       props.setPhone(valuse.phone)
       try {
         const res = await CallApi().post("auth/local/signUp", valuse);
-        if (res.status == 203) {
-          toast.error("کد تایید هنوز منقضی نشده است!");
-          return;
-        }
+        // if (res.status == 203) {
+        //   toast.error("کد تایید هنوز منقضی نشده است!");
+        //   return;
+        // }
         if (res.status === 201) {
-          props.setToken(res.data?.data?.verifyPhoneToken);
-          await props.router.push("/login/verify");
-          toast.success("کد تایید با موفقیت ارسال شد!");
+          await StoreCookieForLogin(
+            res?.data?.access_token,
+            res?.data?.refresh_token
+          );
+          await props.router.push("/");
+          toast.success('عضویت با موفقیت انجام شد:))')
           return;
         }
       } catch (err) {

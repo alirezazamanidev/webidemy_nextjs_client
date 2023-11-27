@@ -1,7 +1,4 @@
 
-import SingleCourseHeaderPage from "@/components/public/course/SinglePageCourse";
-import ContantSinglePageLayout from "@/components/public/course/ContantSinglePageLayout";
-import { GetSingleCourse } from "@/libs/services/home/course";
 import SingleBlogPage from "@/components/public/blog/SinglePageblog";
 import { GetSingleBlog } from "@/libs/services/home/blog";
 
