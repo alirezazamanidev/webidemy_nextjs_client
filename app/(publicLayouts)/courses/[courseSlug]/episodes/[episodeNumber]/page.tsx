@@ -1,3 +1,4 @@
+import { GetSingleEpisode } from "@/libs/services/home/episode";
 
 
 interface props {
@@ -6,12 +7,11 @@ interface props {
         episodeNumber:string;
     }
 }
-export default function SingleEpisodePage({params:{courseSlug,episodeNumber}}:props){
-    
-    
+export default async function SingleEpisodePage({params:{courseSlug,episodeNumber}}:props){
+    const data=await GetSingleEpisode(courseSlug,episodeNumber);
     return (
         <>
-        <h2>episode page</h2>
+        
         
         </>
     )
