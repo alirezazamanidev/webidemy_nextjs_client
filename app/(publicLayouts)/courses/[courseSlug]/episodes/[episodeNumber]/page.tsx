@@ -1,3 +1,4 @@
+import HeaderSingleEpisode from "@/components/public/episode/HeaderSingleEpisode";
 import { GetSingleEpisode } from "@/libs/services/home/episode";
 
 
@@ -11,7 +12,9 @@ export default async function SingleEpisodePage({params:{courseSlug,episodeNumbe
     const data=await GetSingleEpisode(courseSlug,episodeNumber);
     return (
         <>
-        
+        <section className=" container mx-auto my-10 ">
+            <HeaderSingleEpisode episode={data}/>
+        </section>
         
         </>
     )

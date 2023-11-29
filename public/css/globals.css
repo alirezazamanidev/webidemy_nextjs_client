@@ -12,12 +12,6 @@
   direction: ltr !important;
 }
 
-.react-player {
-  width: 1500px;
-
-  top: 0;
-  left: 0;
-}
 
 .slick-slide > div {
   margin: 0 10px;
