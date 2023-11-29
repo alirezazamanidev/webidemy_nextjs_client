@@ -13,6 +13,7 @@ export default function PlayerLayout({videoUrl,width,height,hasControls=true}:pr
      width={width}
      height={height}
      controls={hasControls}
+     style={{borderRadius:'20px'}}
     />
     </>
   )

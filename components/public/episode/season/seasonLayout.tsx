@@ -15,7 +15,7 @@ export default function SeasonLayout({ season }: props) {
     <Disclosure>
       {({ open }) => (
         <>
-          <Disclosure.Button className=" text-xl my-1 text-gray-300 flex justify-between items-center w-full bg-gray-750 px-6 py-3  rounded-lg">
+          <Disclosure.Button className=" text-lg lg:text-xl my-1 text-gray-300 flex justify-between items-center w-full bg-gray-750 px-6 py-3  rounded-lg">
             {season?.title}
             <svg
               className={`transition text-gray-200         duration-500 ${open ? "rotate-0 transform" : " rotate-90"
