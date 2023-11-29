@@ -4,6 +4,8 @@ import Link from "next/link";
 import { AiFillEye } from "react-icons/ai";
 import { GoClockFill } from "react-icons/go";
 import { useParams } from 'next/navigation'
+import { canAccess } from "@/libs/utils/access.tools";
+import { RiLock2Fill } from "react-icons/ri";
 interface props {
   episode: Episode;
 }
@@ -15,8 +17,15 @@ export default function EpisodeItemLayout({ episode }: props) {
   return (
     <>
       <Link href={`/courses/${params.courseSlug}/episodes/${episode?.number}`} className={` p-3 my-2 text-base ${statusHasEpisode ? 'bg-gray-500' :'bg-gray-750'} mr-5 rounded-lg flex items-center`}>
-        <div className=" ml-3">
-          <span className=" text-gray-400 ">{episode.number}</span>
+        <div className=" ml-3 flex items-center gap-3">
+        {
+            canAccess(episode?.type) ?(
+              <span className=" text-gray-400 text-xl">{episode.number}</span>
+              
+            ):<span className=" text-red-600">
+              <RiLock2Fill  className=" text-xl"/>
+            </span>
+          }
           <span className=" mr-1">|</span>
         </div>
         <div className=" flex items-center  justify-around   w-full">

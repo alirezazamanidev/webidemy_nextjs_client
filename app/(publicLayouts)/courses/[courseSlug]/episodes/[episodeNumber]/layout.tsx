@@ -16,7 +16,7 @@ export async function generateMetadata({
  
   return {
     title:`${data.episode.title} | ${data.episode.season.course.title}`,
-    description:data.episode.title
+    description:data.episode.body
   };
 }
 export default function SingleCourseInfoLayout({
