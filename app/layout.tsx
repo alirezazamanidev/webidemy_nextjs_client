@@ -7,6 +7,7 @@ import "@/public/css/globals.css";
 
 import localFont from "next/font/local";
 import { Provider } from "react-redux";
+import FooterLayout from "@/components/public/layouts/FooterLayout";
 
 const myfont = localFont({
   src: "./../public/fonts/yekan/Yekan.woff2",
@@ -40,6 +41,7 @@ export default function RootLayout({
             {children}
           </Provider>
           <ReactQueryDevtools initialIsOpen={true} position="top-left" />
+        <FooterLayout/>
         </QueryClientProvider>
       </body>
     </html>

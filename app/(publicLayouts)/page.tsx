@@ -23,7 +23,7 @@ export default async function HomePage() {
         <HeadersMainPage />
         <ShowNewCourseLayout courses={Coursedata?.courses}/>
         <ShowNewBlogsLayout blogs={blogsData.blogs}/>
-        <FooterLayout/>
+    
       </div>
     </>
   );
