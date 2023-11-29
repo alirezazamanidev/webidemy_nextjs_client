@@ -11,11 +11,12 @@ interface props {
 }
 export default async function SingleEpisodePage({params:{courseSlug,episodeNumber}}:props){
     const data=await GetSingleEpisode(courseSlug,episodeNumber);
+    
     return (
         <>
         <section className=" container mx-auto my-10 ">
-            <HeaderSingleEpisode episode={data}/>
-            <ContantSingleEpisodePageLayout episode={data}/>
+            <HeaderSingleEpisode episode={data.episode}/>
+            <ContantSingleEpisodePageLayout episode={data.episode}/>
         </section>
         
         </>
