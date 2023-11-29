@@ -4,8 +4,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "api.webidemyyy.ir",
+        protocol: "http",
+        hostname: "localhost",
       },
     ],
   },

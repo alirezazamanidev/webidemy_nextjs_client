@@ -14,7 +14,7 @@ export default function SasonLayout({season}:props) {
     <Disclosure>
       {({ open }) => (
         <>
-          <Disclosure.Button className=" text-xl my-4 text-gray-300 flex justify-between items-center w-full bg-gray-1010 px-6 py-5 rounded-lg">
+          <Disclosure.Button className=" text-xl my-4 text-gray-300 flex justify-between items-center w-full bg-gray-750 px-6 py-5 rounded-lg">
             {season?.title}
             <svg
               className={`transition text-gray-200         duration-500 ${
@@ -41,7 +41,7 @@ export default function SasonLayout({season}:props) {
           
              {
                 season?.episodes?.length===0 ?(
-                    <div className="p-3 my-2 bg-gray-1010 mr-10 rounded-lg flex items-center">
+                    <div className="p-2 my-1 mr-10 rounded-lg flex items-center">
                         <p className=" text-gray-300">هنوز جلسه ای قرار نگرفته  است</p>
 
                     </div>

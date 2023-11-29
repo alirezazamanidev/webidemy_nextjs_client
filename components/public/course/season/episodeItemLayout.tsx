@@ -1,13 +1,18 @@
+'use client'
 import { Episode } from "@/libs/model/episode";
+import Link from "next/link";
 import { AiFillEye } from "react-icons/ai";
 import { GoClockFill } from "react-icons/go";
+import { useParams } from 'next/navigation'
 interface props {
   episode: Episode;
 }
 export default function EpisodeItemLayout({ episode }: props) {
+  const params = useParams()
+
   return (
     <>
-      <div className=" p-3 my-2 bg-gray-1010 mr-10 rounded-lg flex items-center">
+      <div className=" p-3 my-2 bg-gray-750 mr-10 rounded-lg flex items-center">
         <div className=" ml-5">
           <span className=" text-gray-400 text-xl">{episode.number}</span>
           <span className=" mr-5">|</span>
@@ -20,10 +25,10 @@ export default function EpisodeItemLayout({ episode }: props) {
             <span className=" mr-2">{episode?.time}</span>
           </span>
 
-          <span className=" flex  items-center text-gray-300 text-lg bg-gray-900 px-3 py-2  rounded-lg">
+          <Link href={`${params.courseSlug}/episodes/${episode?.number}`} className=" flex  items-center text-gray-300 text-lg bg-gray-900 px-3 py-2  rounded-lg">
             <AiFillEye />
             <p className=" mr-2">مشاهده</p>
-          </span>
+          </Link>
         </div>
       </div>
     </>

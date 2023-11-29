@@ -2,14 +2,11 @@
 
 import ImageComponent from "@/components/shared/ImageComponent";
 import { BadRequestException } from "@/libs/exceptions/BadRequestException";
-import ValidationException from "@/libs/exceptions/ValidationException";
-import { CallApi } from "@/libs/helpers/callApi";
-import useAuth from "@/libs/hooks/useAuth";
 import { Course } from "@/libs/model/course";
 import { AddOneOrder, GetUserOrders } from "@/libs/services/cart/cart";
 import separateWithComma, { TypeConditioncourseToFarsi } from "@/libs/utils";
-import Image from "next/image";
 import Link from "next/link";
+import { useQueryState } from "next-usequerystate";
 import { toast } from "react-toastify";
 interface props {
   course: Course;
@@ -35,6 +32,12 @@ export default function SingleCourseHeaderPage({ course }: props) {
     }
    
   };
+  const [category,setCategory]=useQueryState('category');
+
+  const handleRedirectCategory=(e:any)=>{
+    e.preventDefault();
+    setCategory(course.category.title);
+  }
   return (
     <>
       <div className=" bg-dark-600   grid  grid-cols-1 lg:grid-cols-2 rounded-2xl select-none p-4 lg:p-7 ">
@@ -55,8 +58,8 @@ export default function SingleCourseHeaderPage({ course }: props) {
             <div className="mt-4 flex justify-center lg:justify-start items-center">
               <Link
                 className="inline-block"
-                target="_blank"
-                href={`/courses?sort=default&category=${course?.category?.title}`}
+                href={`/courses?category=${course?.category?.title}`}
+                target='_blank'
               >
                 <span className="inline-block select-none bg-gray-900 rounded-lg p-2 text-xs text-white text-center transition-colors dark:bg-dark-700">
                   {course?.category?.title}
