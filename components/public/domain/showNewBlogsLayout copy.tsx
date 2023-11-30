@@ -61,7 +61,7 @@ export default function ShowNewBlogsLayout({blogs }: props) {
      
         <Slider {...settings}>
          {
-          blogs.map(blog=>(
+          blogs?.map(blog=>(
             <CardBlog key={blog?._id} blog={blog}/>
           ))
          }  

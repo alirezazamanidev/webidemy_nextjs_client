@@ -63,7 +63,7 @@ export default function ShowNewCourseLayout({ courses }: props) {
         </div>
         <Slider {...settings}>
          {
-          courses.map(course=>(
+          courses?.map(course=>(
             <CardCourse key={course?._id} course={course}/>
           ))
          }  
