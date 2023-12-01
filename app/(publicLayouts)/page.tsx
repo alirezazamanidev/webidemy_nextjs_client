@@ -13,18 +13,18 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const Coursedata =  GetCourses();
-  const blogsData= GetBlogs();
+  const Coursedata = await GetCourses();
+  const blogsData=await GetBlogs();
 
-  let [courses,blogs]=await Promise.all([Coursedata,blogsData]);
+
   
   
   return (
     <>
       <div>
         <HeadersMainPage />
-        <ShowNewCourseLayout courses={courses?.courses}/>
-        <ShowNewBlogsLayout blogs={blogs.blogs}/>
+        <ShowNewCourseLayout courses={Coursedata?.courses}/>
+        <ShowNewBlogsLayout blogs={blogsData.blogs}/>
     
       </div>
     </>
