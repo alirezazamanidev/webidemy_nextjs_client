@@ -2,9 +2,11 @@ import { CallApi } from "@/libs/helpers/callApi";
 import { redirect } from "next/navigation";
 
 export async function GetBlogs() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/blogs`);
 
-
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/blogs`,{
+    cache:'no-store'
+  });
+  if(!res.ok) throw Error('how error')
   return res.json();
 }
 export async function SavedBlog(blogId:string){
