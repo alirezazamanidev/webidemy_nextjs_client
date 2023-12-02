@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "app.webidemyyy.ir",
+        hostname: "api.webidemyyy.ir",
       },
     ],
   },
