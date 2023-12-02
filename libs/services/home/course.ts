@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 
 export async function GetCourses() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/courses`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/courses`,{
+    cache:'no-store'
+  });
   
   if(!res.ok) throw new Error("Error get data!!")
   return res.json();
